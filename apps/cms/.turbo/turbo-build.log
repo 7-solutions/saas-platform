@@ -1,0 +1,971 @@
+
+> @saas-platform/cms@0.1.0 build /Users/tsaa/Workspace/devops/coder/cms/apps/cms
+> next build
+
+  [1m[38;2;173;127;168m▲ Next.js 14.2.30[39m[22m
+  - Experiments (use with caution):
+    · typedRoutes
+
+ [37m[1m [22m[39m Creating an optimized production build ...
+ ⚠ Compiled with warnings
+
+../../packages/ui/dist/components/auth/login-form.jsx
+Attempted import error: 'useForm' is not exported from 'react-hook-form' (imported as 'useForm').
+
+Import trace for requested module:
+../../packages/ui/dist/components/auth/login-form.jsx
+../../packages/ui/dist/components/auth/index.js
+../../packages/ui/dist/components/index.js
+../../packages/ui/dist/index.js
+./app/not-found.tsx
+
+../../packages/ui/dist/components/forms/form-field.jsx
+Attempted import error: 'Controller' is not exported from 'react-hook-form' (imported as 'Controller').
+
+Import trace for requested module:
+../../packages/ui/dist/components/forms/form-field.jsx
+../../packages/ui/dist/components/forms/index.js
+../../packages/ui/dist/components/index.js
+../../packages/ui/dist/index.js
+./app/not-found.tsx
+
+ [32m[1m✓[22m[39m Compiled successfully
+[?25l [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m ⚠ TypeScript project references are not fully supported. Attempting to build in incremental mode.
+[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m ⨯ ESLint: Failed to load config "@typescript-eslint/recommended" to extend from. Referenced from: /Users/tsaa/Workspace/devops/coder/cms/.eslintrc.js
+[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[?25h [37m[1m [22m[39m Linting and checking validity of types     [32m[1m✓[22m[39m Linting and checking validity of types 
+[?25l [37m[1m [22m[39m Collecting page data  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting page data  [36m..[39m[2K[1G[?25h [37m[1m [22m[39m Collecting page data     [32m[1m✓[22m[39m Collecting page data 
+[?25l [37m[1m [22m[39m Generating static pages (0/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (0/9)  [36m[=   ][39mError: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G[?25h [33m[1m⚠[22m[39m Sending SIGTERM signal to Next.js build worker due to timeout of 60 seconds. Subsequent errors may be a result of the worker exiting.
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G[?25h [33m[1m⚠[22m[39m Restarted static page generation for /dashboard because it took more than 60 seconds
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G[?25h [33m[1m⚠[22m[39m See more info here https://nextjs.org/docs/messages/static-page-generation-timeout
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G[?25h [33m[1m⚠[22m[39m Restarted static page generation for /dashboard/media because it took more than 60 seconds
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G[?25h [33m[1m⚠[22m[39m Restarted static page generation for /login because it took more than 60 seconds
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G[?25h [33m[1m⚠[22m[39m Restarted static page generation for /_not-found because it took more than 60 seconds
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G[?25h [33m[1m⚠[22m[39m Restarted static page generation for /dashboard/pages because it took more than 60 seconds
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G[?25h [33m[1m⚠[22m[39m Restarted static page generation for / because it took more than 60 seconds
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G[?25h [33m[1m⚠[22m[39m Restarted static page generation for /dashboard/pages/new because it took more than 60 seconds
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39mError: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G[?25h [33m[1m⚠[22m[39m Sending SIGTERM signal to Next.js build worker due to timeout of 60 seconds. Subsequent errors may be a result of the worker exiting.
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G[?25h [33m[1m⚠[22m[39m Restarted static page generation for /dashboard because it took more than 60 seconds
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G[?25h [33m[1m⚠[22m[39m Restarted static page generation for /dashboard/media because it took more than 60 seconds
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G[?25h [33m[1m⚠[22m[39m Restarted static page generation for /login because it took more than 60 seconds
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G[?25h [33m[1m⚠[22m[39m Restarted static page generation for /_not-found because it took more than 60 seconds
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G[?25h [33m[1m⚠[22m[39m Restarted static page generation for /dashboard/pages because it took more than 60 seconds
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G[?25h [33m[1m⚠[22m[39m Restarted static page generation for / because it took more than 60 seconds
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G[?25h [33m[1m⚠[22m[39m Restarted static page generation for /dashboard/pages/new because it took more than 60 seconds
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39mError: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:150373)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '1298346965'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {className: ..., onClick: function onClick, children: ...}
+                            ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:140440)
+    at Object.toJSON (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
+    at stringify (<anonymous>)
+    at eP (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
+    at eE (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
+    at Timeout._onTimeout (/Users/tsaa/Workspace/devops/coder/cms/node_modules/.pnpm/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349)
+    at listOnTimeout (node:internal/timers:608:17)
+    at process.processTimers (node:internal/timers:543:7) {
+  digest: '249198527'
+}
+[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[   =][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[  ==][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[ ===][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[====][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (2/9)  [36m[==  ][39m[2K[1G[?25h [33m[1m⚠[22m[39m Sending SIGTERM signal to Next.js build worker due to timeout of 60 seconds. Subsequent errors may be a result of the worker exiting.
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G[?25h
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G[?25h> Build error occurred
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[2K[1G[?25hError: Static page generation for /dashboard is still timing out after 3 attempts. See more info here https://nextjs.org/docs/messages/static-page-generation-timeout
+    at onRestart (/Users/tsaa/Workspace/devops/coder/cms/node_modules/[4m.pnpm[24m/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/[4mnext[24m/dist/build/index.js:292:27)
+    at /Users/tsaa/Workspace/devops/coder/cms/node_modules/[4m.pnpm[24m/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/[4mnext[24m/dist/lib/worker.js:104:40
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+    at async /Users/tsaa/Workspace/devops/coder/cms/node_modules/[4m.pnpm[24m/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/[4mnext[24m/dist/export/index.js:450:20
+    at async Span.traceAsyncFn (/Users/tsaa/Workspace/devops/coder/cms/node_modules/[4m.pnpm[24m/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/[4mnext[24m/dist/trace/trace.js:154:20)
+    at async /Users/tsaa/Workspace/devops/coder/cms/node_modules/[4m.pnpm[24m/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/[4mnext[24m/dist/export/index.js:448:24
+    at async Promise.all (index 2)
+    at async exportAppImpl (/Users/tsaa/Workspace/devops/coder/cms/node_modules/[4m.pnpm[24m/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/[4mnext[24m/dist/export/index.js:440:21)
+    at async /Users/tsaa/Workspace/devops/coder/cms/node_modules/[4m.pnpm[24m/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/[4mnext[24m/dist/export/index.js:623:16
+    at async Span.traceAsyncFn (/Users/tsaa/Workspace/devops/coder/cms/node_modules/[4m.pnpm[24m/next@14.2.30_react-dom@18.3.1_react@18.3.1/node_modules/[4mnext[24m/dist/trace/trace.js:154:20)
+[?25l [37m[1m [22m[39m Generating static pages (2/9)  [36m[    ][39m[?25h[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 1.[39m

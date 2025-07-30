@@ -1,0 +1,48 @@
+
+> @saas-platform/website@0.1.0 build /Users/tsaa/Workspace/devops/coder/cms/apps/website
+> next build
+
+  [1m[38;2;173;127;168m▲ Next.js 14.2.30[39m[22m
+  - Experiments (use with caution):
+    · typedRoutes
+
+ [37m[1m [22m[39m Creating an optimized production build ...
+ ⚠ Compiled with warnings
+
+../../packages/ui/dist/components/auth/login-form.jsx
+Attempted import error: 'useForm' is not exported from 'react-hook-form' (imported as 'useForm').
+
+Import trace for requested module:
+../../packages/ui/dist/components/auth/login-form.jsx
+../../packages/ui/dist/components/auth/index.js
+../../packages/ui/dist/components/index.js
+../../packages/ui/dist/index.js
+./app/not-found.tsx
+
+../../packages/ui/dist/components/forms/form-field.jsx
+Attempted import error: 'Controller' is not exported from 'react-hook-form' (imported as 'Controller').
+
+Import trace for requested module:
+../../packages/ui/dist/components/forms/form-field.jsx
+../../packages/ui/dist/components/forms/index.js
+../../packages/ui/dist/components/index.js
+../../packages/ui/dist/index.js
+./app/not-found.tsx
+
+ [32m[1m✓[22m[39m Compiled successfully
+[?25l [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m ⚠ TypeScript project references are not fully supported. Attempting to build in incremental mode.
+ ⨯ ESLint: Failed to load config "@typescript-eslint/recommended" to extend from. Referenced from: /Users/tsaa/Workspace/devops/coder/cms/.eslintrc.js
+[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39mFailed to compile.
+
+./lib/cms.ts:316:43
+Type error: Property 'listBlogPosts' does not exist on type 'ServerContentService'.
+
+[0m [90m 314 |[39m     }[33m;[39m[0m
+[0m [90m 315 |[39m[0m
+[0m[31m[1m>[22m[39m[90m 316 |[39m     [36mconst[39m response [33m=[39m [36mawait[39m contentService[33m.[39mlistBlogPosts(request)[33m;[39m[0m
+[0m [90m     |[39m                                           [31m[1m^[22m[39m[0m
+[0m [90m 317 |[39m[0m
+[0m [90m 318 |[39m     [36mif[39m (response[33m.[39merror) {[0m
+[0m [90m 319 |[39m       console[33m.[39merror([32m'Error fetching blog posts:'[39m[33m,[39m response[33m.[39merror)[33m;[39m[0m
+[2K[1G[?25hNext.js build worker exited with code: 1 and signal: null
+[?25l [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[?25h[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 1.[39m

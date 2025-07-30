@@ -1,0 +1,97 @@
+# Enable BuildKit for optimized builds
+x-buildkit: &buildkit
+  DOCKER_BUILDKIT: 1
+  BUILDKIT_PROGRESS: plain
+
+services:
+  # CouchDB Database
+  couchdb:
+    image: couchdb:3.3
+    container_name: saas-couchdb
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=password
+    ports:
+      - "5984:5984"
+    volumes:
+      - couchdb_data:/opt/couchdb/data
+    networks:
+      - saas-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5984/_up"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Go Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+      args:
+        <<: *buildkit
+    container_name: saas-backend
+    environment:
+      - COUCHDB_URL=http://couchdb:5984
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=password
+      - JWT_SECRET=your-jwt-secret-key
+      - PORT=8080
+      - METRICS_PORT=8081
+      - ALERT_WEBHOOK_URL=http://localhost:8080/api/v1/alerts/webhook
+      - LOG_LEVEL=INFO
+      - APP_VERSION=1.0.0
+    ports:
+      - "8080:8080"
+      - "9090:9090"  # gRPC port
+      - "8081:8081"  # Metrics port
+    depends_on:
+      couchdb:
+        condition: service_healthy
+    networks:
+      - saas-network
+
+  # Public Website (Next.js)
+  website:
+    build:
+      context: .
+      dockerfile: ./apps/website/Dockerfile.dev
+      args:
+        <<: *buildkit
+    container_name: saas-website
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
+      - NODE_ENV=development
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - saas-network
+
+  # CMS Dashboard (Next.js)
+  cms:
+    build:
+      context: .
+      dockerfile: ./apps/cms/Dockerfile.dev
+      args:
+        <<: *buildkit
+    container_name: saas-cms
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
+      - NEXTAUTH_URL=http://localhost:3001
+      - NEXTAUTH_SECRET=your-nextauth-secret
+      - NODE_ENV=development
+    ports:
+      - "3001:3000"
+    depends_on:
+      - backend
+    networks:
+      - saas-network
+
+volumes:
+  couchdb_data:
+
+networks:
+  saas-network:
+    driver: bridge

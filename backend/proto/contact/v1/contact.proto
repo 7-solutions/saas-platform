@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+package contact.v1;
+
+option go_package = "github.com/saas-startup-platform/backend/gen/contact/v1;contactv1";
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+// Contact service for managing contact form submissions
+service ContactService {
+  // Submit a contact form
+  rpc SubmitContactForm(SubmitContactFormRequest) returns (ContactSubmission) {
+    option (google.api.http) = {
+      post: "/api/v1/contact"
+      body: "*"
+    };
+  }
+
+  // List contact submissions (admin only)
+  rpc ListContactSubmissions(ListContactSubmissionsRequest) returns (ListContactSubmissionsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/contact/submissions"
+    };
+  }
+
+  // Get a specific contact submission (admin only)
+  rpc GetContactSubmission(GetContactSubmissionRequest) returns (ContactSubmission) {
+    option (google.api.http) = {
+      get: "/api/v1/contact/submissions/{id}"
+    };
+  }
+
+  // Mark contact submission as read (admin only)
+  rpc MarkContactSubmissionAsRead(MarkContactSubmissionAsReadRequest) returns (ContactSubmission) {
+    option (google.api.http) = {
+      put: "/api/v1/contact/submissions/{id}/read"
+      body: "*"
+    };
+  }
+
+  // Delete contact submission (admin only)
+  rpc DeleteContactSubmission(DeleteContactSubmissionRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/api/v1/contact/submissions/{id}"
+    };
+  }
+}
+
+// ContactSubmission represents a contact form submission
+message ContactSubmission {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  string company = 4;
+  string message = 5;
+  string ip_address = 6;
+  string user_agent = 7;
+  ContactStatus status = 8;
+  google.protobuf.Timestamp created_at = 9;
+  google.protobuf.Timestamp updated_at = 10;
+}
+
+// Contact submission status
+enum ContactStatus {
+  CONTACT_STATUS_UNSPECIFIED = 0;
+  CONTACT_STATUS_NEW = 1;
+  CONTACT_STATUS_READ = 2;
+  CONTACT_STATUS_REPLIED = 3;
+  CONTACT_STATUS_SPAM = 4;
+}
+
+// Request messages
+message SubmitContactFormRequest {
+  string name = 1;
+  string email = 2;
+  string company = 3;
+  string message = 4;
+  string captcha_token = 5; // For spam protection
+}
+
+message ListContactSubmissionsRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+  ContactStatus status = 3;
+  string search = 4;
+}
+
+message ListContactSubmissionsResponse {
+  repeated ContactSubmission submissions = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message GetContactSubmissionRequest {
+  string id = 1;
+}
+
+message MarkContactSubmissionAsReadRequest {
+  string id = 1;
+}
+
+message DeleteContactSubmissionRequest {
+  string id = 1;
+}

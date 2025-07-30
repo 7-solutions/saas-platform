@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package media.v1;
+
+option go_package = "github.com/saas-startup-platform/backend/gen/media/v1;mediav1";
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+// Media service for file upload and management
+service MediaService {
+  // Upload a file
+  rpc UploadFile(UploadFileRequest) returns (File) {
+    option (google.api.http) = {
+      post: "/api/v1/media/upload"
+      body: "*"
+    };
+  }
+
+  // Get file information
+  rpc GetFile(GetFileRequest) returns (File) {
+    option (google.api.http) = {
+      get: "/api/v1/media/{id}"
+    };
+  }
+
+  // Delete a file
+  rpc DeleteFile(DeleteFileRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/api/v1/media/{id}"
+    };
+  }
+
+  // List files with filtering
+  rpc ListFiles(ListFilesRequest) returns (ListFilesResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/media"
+    };
+  }
+
+  // Update file metadata
+  rpc UpdateFile(UpdateFileRequest) returns (File) {
+    option (google.api.http) = {
+      put: "/api/v1/media/{id}"
+      body: "*"
+    };
+  }
+}
+
+// File represents an uploaded media file
+message File {
+  string id = 1;
+  string filename = 2;
+  string original_name = 3;
+  string mime_type = 4;
+  int64 size = 5;
+  string url = 6;
+  string alt_text = 7;
+  string uploaded_by = 8;
+  google.protobuf.Timestamp created_at = 9;
+}
+
+// Request messages
+message UploadFileRequest {
+  bytes content = 1;
+  string filename = 2;
+  string mime_type = 3;
+  string alt_text = 4;
+}
+
+message GetFileRequest {
+  string id = 1;
+}
+
+message DeleteFileRequest {
+  string id = 1;
+}
+
+message ListFilesRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+  string mime_type_filter = 3;
+  string search = 4;
+}
+
+message ListFilesResponse {
+  repeated File files = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message UpdateFileRequest {
+  string id = 1;
+  string alt_text = 2;
+  string filename = 3;
+}

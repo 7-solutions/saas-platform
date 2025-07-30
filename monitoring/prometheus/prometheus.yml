@@ -1,0 +1,38 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "rules/*.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+scrape_configs:
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Backend API metrics
+  - job_name: 'saas-backend'
+    static_configs:
+      - targets: ['backend:8081']  # Metrics endpoint
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  # CouchDB metrics
+  - job_name: 'couchdb'
+    static_configs:
+      - targets: ['couchdb:5984']
+    metrics_path: '/_node/_local/_prometheus'
+    scrape_interval: 30s
+
+  # Node exporter for system metrics (if needed)
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+    scrape_interval: 30s

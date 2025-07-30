@@ -1,0 +1,4 @@
+
+> @saas-platform/shared@0.1.0 type-check /Users/tsaa/Workspace/devops/coder/cms/packages/shared
+> tsc --noEmit
+

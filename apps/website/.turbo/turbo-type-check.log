@@ -1,0 +1,4 @@
+
+> @saas-platform/website@0.1.0 type-check /Users/tsaa/Workspace/devops/coder/cms/apps/website
+> tsc --noEmit
+
