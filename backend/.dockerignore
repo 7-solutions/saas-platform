@@ -1,39 +1,79 @@
-# Binaries
+# Go binaries and build artifacts
 *.exe
 *.exe~
 *.dll
 *.so
 *.dylib
 main
+bin/
 
-# Test binary, built with `go test -c`
+# Test binaries and coverage
 *.test
-
-# Output of the go coverage tool
 *.out
+coverage.html
 
-# Go workspace file
+# Go workspace and vendor
 go.work
+go.work.sum
+vendor/
 
-# IDE files
+# Development and temporary files
+tmp/
+.air.toml.bak
+*.tmp
+
+# IDE and editor files
 .vscode
 .idea
+*.swp
+*.swo
+*~
 
 # OS files
 .DS_Store
 Thumbs.db
+.Spotlight-V100
+.Trashes
 
-# Git
+# Git and version control
 .git
 .gitignore
+.gitattributes
 
-# Development files
-tmp/
-vendor/
+# Documentation
+README.md
+*.md
+docs/
 
-# Logs
-*.log
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+
+# Docker
+Dockerfile*
+docker-compose*
 
 # Environment files
 .env
 .env.local
+.env.development
+.env.test
+.env.production
+
+# Logs
+*.log
+logs/
+
+# Third party dependencies (already in go.mod)
+third_party/
+
+# Generated protobuf files (will be regenerated)
+gen/
+
+# Scripts (not needed in container)
+scripts/
+
+# Test data and fixtures
+testdata/
+*_test.go

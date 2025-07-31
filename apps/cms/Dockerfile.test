@@ -1,0 +1,44 @@
+# Test-optimized Dockerfile for CMS App
+FROM node:22-alpine AS test
+
+# Install system dependencies needed for testing
+RUN apk add --no-cache \
+    libc6-compat \
+    dumb-init \
+    curl && \
+    # Enable corepack and prepare pnpm
+    corepack enable && \
+    corepack prepare pnpm@9.15.0 --activate
+
+# Set working directory
+WORKDIR /app
+
+# Copy package configuration files for optimal caching
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY apps/cms/package.json ./apps/cms/
+COPY packages/ui/package.json ./packages/ui/
+COPY packages/shared/package.json ./packages/shared/
+
+# Install dependencies with test-specific caching
+RUN --mount=type=cache,id=pnpm-store-cms-test,target=/root/.local/share/pnpm/store \
+    --mount=type=cache,id=pnpm-metadata-cms-test,target=/root/.cache/pnpm \
+    pnpm install --frozen-lockfile --prefer-offline
+
+# Copy source code
+COPY . .
+
+# Create coverage directory
+RUN mkdir -p coverage
+
+# Test environment variables (CMS-specific)
+ENV NODE_ENV=test \
+    NEXT_TELEMETRY_DISABLED=1 \
+    CI=true \
+    NEXTAUTH_URL=http://localhost:3000 \
+    NEXTAUTH_SECRET=test-nextauth-secret
+
+# Use dumb-init for proper signal handling
+ENTRYPOINT ["dumb-init", "--"]
+
+# Default command runs tests
+CMD ["pnpm", "--filter", "@saas-platform/cms", "test:docker"]

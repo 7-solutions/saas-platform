@@ -5,9 +5,9 @@ import { ContactForm } from '@/components/contact/ContactForm';
 
 // Mock the API client
 jest.mock('@saas-platform/shared', () => ({
-  useContactMutation: () => ({
-    mutate: jest.fn(),
-    isLoading: false,
+  useSubmitContactForm: () => ({
+    mutateAsync: jest.fn(),
+    isPending: false,
     error: null,
   }),
 }));
@@ -53,13 +53,13 @@ describe('ContactForm', () => {
 
   it('submits form with valid data', async () => {
     const user = userEvent.setup();
-    const mockMutate = jest.fn();
+    const mockMutateAsync = jest.fn().mockResolvedValue({ data: { id: '1' } });
     
     // Mock the hook to return our mock function
     jest.doMock('@saas-platform/shared', () => ({
-      useContactMutation: () => ({
-        mutate: mockMutate,
-        isLoading: false,
+      useSubmitContactForm: () => ({
+        mutateAsync: mockMutateAsync,
+        isPending: false,
         error: null,
       }),
     }));
@@ -74,7 +74,7 @@ describe('ContactForm', () => {
     await user.click(submitButton);
     
     await waitFor(() => {
-      expect(mockMutate).toHaveBeenCalledWith({
+      expect(mockMutateAsync).toHaveBeenCalledWith({
         name: 'John Doe',
         email: 'john@example.com',
         message: 'Hello, this is a test message.',

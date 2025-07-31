@@ -1,56 +1,86 @@
-# Production Dockerfile for Go Backend
-FROM golang:1.24-alpine AS builder
+# Multi-stage optimized Dockerfile for Go Backend
+# Stage 1: Base - Common Go environment
+FROM golang:1.24-alpine AS base
 
-# Install build dependencies
-RUN apk add --no-cache git ca-certificates tzdata
+# Install essential build dependencies
+RUN apk add --no-cache \
+    git \
+    ca-certificates \
+    tzdata
 
 # Set working directory
 WORKDIR /app
 
-# Copy go mod files first for better layer caching
+# Stage 2: Dependencies - Download and cache Go modules
+FROM base AS deps
+
+# Copy go module files for optimal layer caching
 COPY go.mod go.sum ./
 
-# Download dependencies (cached if go.mod/go.sum unchanged)
-RUN go mod download && go mod verify
+# Download dependencies with module cache mount for faster builds
+RUN --mount=type=cache,target=/go/pkg/mod \
+    --mount=type=cache,target=/root/.cache/go-build \
+    go mod download && go mod verify
 
-# Copy source code (after dependencies for better caching)
+# Stage 3: Builder - Build the application
+FROM base AS builder
+
+# Copy cached modules from deps stage
+COPY --from=deps /go/pkg/mod /go/pkg/mod
+
+# Copy go module files
+COPY go.mod go.sum ./
+
+# Copy source code
 COPY . .
 
-# Build the application with optimizations
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
+# Build the application with optimizations and build cache
+RUN --mount=type=cache,target=/go/pkg/mod \
+    --mount=type=cache,target=/root/.cache/go-build \
+    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
     -ldflags='-w -s -extldflags "-static"' \
     -a -installsuffix cgo \
+    -trimpath \
     -o main ./cmd/api
 
-# Production stage
-FROM alpine:3.18
+# Stage 4: Runner - Minimal production runtime
+FROM alpine:3.20 AS runner
 
-# Install runtime dependencies
-RUN apk --no-cache add ca-certificates tzdata curl
-
-# Create non-root user
-RUN addgroup -g 1001 -S appgroup && \
-    adduser -u 1001 -S appuser -G appgroup
+# Install only essential runtime dependencies
+RUN apk --no-cache add \
+    ca-certificates \
+    tzdata \
+    dumb-init && \
+    # Create non-root user for security
+    addgroup --system --gid 1001 appgroup && \
+    adduser --system --uid 1001 appuser --ingroup appgroup
 
 # Set working directory
 WORKDIR /app
 
-# Copy binary from builder stage
-COPY --from=builder /app/main .
+# Copy binary from builder stage with proper ownership
+COPY --from=builder --chown=appuser:appgroup /app/main .
 
-# Create uploads directory and set permissions
-RUN mkdir -p /app/uploads && \
+# Create necessary directories with proper permissions
+RUN mkdir -p /app/uploads /app/logs && \
     chown -R appuser:appgroup /app
 
-# Switch to non-root user
+# Security: Switch to non-root user
 USER appuser
 
-# Expose ports
+# Expose ports (gRPC and HTTP gateway)
 EXPOSE 8080 9090
 
-# Health check
+# Environment variables
+ENV GIN_MODE=release \
+    GO_ENV=production
+
+# Health check with minimal overhead
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8080/health || exit 1
+    CMD wget --no-verbose --tries=1 --spider http://localhost:8080/health || exit 1
+
+# Use dumb-init for proper signal handling
+ENTRYPOINT ["dumb-init", "--"]
 
 # Run the application
 CMD ["./main"]

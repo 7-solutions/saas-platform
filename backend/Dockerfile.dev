@@ -1,26 +1,43 @@
-# Development Dockerfile for Go Backend
+# Optimized Development Dockerfile for Go Backend
 FROM golang:1.24-alpine AS development
 
-# Install development tools
-RUN apk add --no-cache git curl
+# Install development tools and dependencies
+RUN apk add --no-cache \
+    git \
+    curl \
+    dumb-init
 
 # Set working directory
 WORKDIR /app
 
-# Install air for hot reloading
-RUN go install github.com/air-verse/air@latest
+# Install air for hot reloading with module cache
+RUN --mount=type=cache,target=/go/pkg/mod \
+    --mount=type=cache,target=/root/.cache/go-build \
+    go install github.com/air-verse/air@latest
 
-# Copy go mod files
+# Copy go module files for better caching
 COPY go.mod go.sum ./
 
-# Download dependencies
-RUN go mod download
+# Download dependencies with cache mount
+RUN --mount=type=cache,target=/go/pkg/mod \
+    --mount=type=cache,target=/root/.cache/go-build \
+    go mod download
 
 # Copy source code
 COPY . .
 
-# Expose ports
+# Create necessary directories
+RUN mkdir -p /app/tmp /app/uploads /app/logs
+
+# Expose ports (gRPC and HTTP gateway)
 EXPOSE 8080 9090
+
+# Development environment variables
+ENV GIN_MODE=debug \
+    GO_ENV=development
+
+# Use dumb-init for proper signal handling
+ENTRYPOINT ["dumb-init", "--"]
 
 # Use air for hot reloading in development
 CMD ["air", "-c", ".air.toml"]

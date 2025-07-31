@@ -324,5 +324,8 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   }
 }
 
+// Force dynamic rendering due to searchParams usage
+export const dynamic = 'force-dynamic';
+
 // Enable ISR
 export const revalidate = 300; // 5 minutes

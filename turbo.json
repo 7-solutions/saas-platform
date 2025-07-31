@@ -1,26 +1,78 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
-  "pipeline": {
+  "globalEnv": [
+    "NODE_ENV",
+    "NEXT_PUBLIC_*",
+    "NEXTAUTH_*",
+    "COUCHDB_*",
+    "JWT_SECRET",
+    "PORT",
+    "METRICS_PORT"
+  ],
+  "remoteCache": {
+    "enabled": true
+  },
+  "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**", "build/**"]
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        ".next/standalone/**",
+        ".next/static/**",
+        "dist/**",
+        "build/**"
+      ],
+      "env": [
+        "NODE_ENV",
+        "NEXT_PUBLIC_*",
+        "NEXTAUTH_*"
+      ],
+      "persistent": false
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": [
+        "NODE_ENV",
+        "NEXT_PUBLIC_*",
+        "NEXTAUTH_*",
+        "PORT"
+      ]
     },
     "lint": {
       "dependsOn": ["^build"],
-      "outputs": []
+      "outputs": [],
+      "inputs": [
+        "src/**/*.{js,ts,jsx,tsx}",
+        "app/**/*.{js,ts,jsx,tsx}",
+        "components/**/*.{js,ts,jsx,tsx}",
+        "lib/**/*.{js,ts,jsx,tsx}",
+        "*.{js,ts,jsx,tsx}",
+        ".eslintrc.*",
+        "eslint.config.*"
+      ]
     },
     "lint:fix": {
       "dependsOn": ["^build"],
-      "outputs": []
+      "outputs": [],
+      "cache": false
     },
     "test": {
       "dependsOn": ["^build"],
-      "outputs": ["coverage/**"]
+      "outputs": ["coverage/**"],
+      "inputs": [
+        "src/**/*.{js,ts,jsx,tsx}",
+        "app/**/*.{js,ts,jsx,tsx}",
+        "components/**/*.{js,ts,jsx,tsx}",
+        "lib/**/*.{js,ts,jsx,tsx}",
+        "__tests__/**/*.{js,ts,jsx,tsx}",
+        "**/*.test.{js,ts,jsx,tsx}",
+        "**/*.spec.{js,ts,jsx,tsx}",
+        "jest.config.*",
+        "vitest.config.*"
+      ]
     },
     "test:watch": {
       "cache": false,
@@ -32,7 +84,12 @@
     },
     "test:e2e": {
       "dependsOn": ["^build"],
-      "outputs": ["test-results/**", "playwright-report/**"]
+      "outputs": ["test-results/**", "playwright-report/**"],
+      "env": [
+        "NODE_ENV",
+        "NEXT_PUBLIC_*",
+        "NEXTAUTH_*"
+      ]
     },
     "test:storybook": {
       "dependsOn": ["build-storybook"],
@@ -42,9 +99,23 @@
       "dependsOn": ["build-storybook"],
       "outputs": []
     },
+    "build-storybook": {
+      "dependsOn": ["^build"],
+      "outputs": ["storybook-static/**"]
+    },
     "type-check": {
       "dependsOn": ["^build"],
-      "outputs": []
+      "outputs": [],
+      "inputs": [
+        "src/**/*.{js,ts,jsx,tsx}",
+        "app/**/*.{js,ts,jsx,tsx}",
+        "components/**/*.{js,ts,jsx,tsx}",
+        "lib/**/*.{js,ts,jsx,tsx}",
+        "types/**/*.{js,ts,jsx,tsx}",
+        "*.{js,ts,jsx,tsx}",
+        "tsconfig.json",
+        "tsconfig.*.json"
+      ]
     },
     "clean": {
       "cache": false

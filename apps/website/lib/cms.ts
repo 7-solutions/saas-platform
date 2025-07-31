@@ -76,6 +76,41 @@ class ServerContentService {
   async getPage(request: GetPageRequest): Promise<ApiResponse<Page>> {
     return this.client.get<Page>(`/api/v1/pages/${request.id}`);
   }
+
+  async listBlogPosts(request: ListBlogPostsRequest = {}): Promise<ApiResponse<ListBlogPostsResponse>> {
+    const params: Record<string, string> = {};
+    
+    if (request.page_size) params.page_size = request.page_size.toString();
+    if (request.page_token) params.page_token = request.page_token;
+    if (request.status) params.status = request.status;
+    if (request.category) params.category = request.category;
+    if (request.tag) params.tag = request.tag;
+
+    return this.client.get<ListBlogPostsResponse>('/api/v1/blog', params);
+  }
+
+  async getBlogCategories(): Promise<ApiResponse<GetBlogCategoriesResponse>> {
+    return this.client.get<GetBlogCategoriesResponse>('/api/v1/blog/categories');
+  }
+
+  async getBlogTags(): Promise<ApiResponse<GetBlogTagsResponse>> {
+    return this.client.get<GetBlogTagsResponse>('/api/v1/blog/tags');
+  }
+
+  async searchBlogPosts(request: { query: string; page_size?: number; page_token?: string; category?: string; tag?: string }): Promise<ApiResponse<ListBlogPostsResponse>> {
+    const params: Record<string, string> = { query: request.query };
+    
+    if (request.page_size) params.page_size = request.page_size.toString();
+    if (request.page_token) params.page_token = request.page_token;
+    if (request.category) params.category = request.category;
+    if (request.tag) params.tag = request.tag;
+
+    return this.client.get<ListBlogPostsResponse>('/api/v1/blog/search', params);
+  }
+
+  async getRSSFeed(): Promise<ApiResponse<{ xml_content: string }>> {
+    return this.client.get<{ xml_content: string }>('/api/v1/blog/rss');
+  }
 }
 
 // Create API client for server-side usage

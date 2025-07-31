@@ -43,5 +43,14 @@ jest.mock('next/navigation', () => ({
   },
 }))
 
+// Mock @saas-platform/shared
+jest.mock('@saas-platform/shared', () => ({
+  useSubmitContactForm: jest.fn(() => ({
+    mutateAsync: jest.fn(),
+    isPending: false,
+    error: null,
+  })),
+}));
+
 // Mock environment variables
 process.env.NEXT_PUBLIC_API_URL = 'http://localhost:8080'

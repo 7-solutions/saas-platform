@@ -1,38 +1,78 @@
-# Dependencies
+# Dependencies and build artifacts
 node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
 # Build outputs
 .next
 out
 dist
+build
+.turbo
 
-# Environment files
+# Environment files (keep .env.example for reference)
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-# IDE files
+# IDE and editor files
 .vscode
 .idea
+*.swp
+*.swo
+*~
 
 # OS files
 .DS_Store
 Thumbs.db
+*.tmp
 
-# Git
+# Git and version control
 .git
 .gitignore
+.gitattributes
 
-# Testing
+# Testing and coverage
 coverage
 .nyc_output
+test-results
+playwright-report
 
-# Misc
+# Documentation
+README.md
+*.md
+docs
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+
+# Docker
+Dockerfile*
+docker-compose*
+
+# Misc logs and archives
 *.log
 *.tgz
 *.tar.gz
+*.zip
+
+# TypeScript build info
+*.tsbuildinfo
+
+# ESLint cache
+.eslintcache
+
+# Prettier cache
+.prettiercache
+
+# Next-Auth specific
+.auth
+
+# TipTap editor temp files
+.tiptap-cache

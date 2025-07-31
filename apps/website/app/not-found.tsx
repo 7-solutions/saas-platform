@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { Button } from '@saas-platform/ui';
 import { Home, Search, ArrowLeft } from 'lucide-react';

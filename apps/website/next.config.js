@@ -1,9 +1,25 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ['@saas-platform/ui', '@saas-platform/shared'],
+  
+  // Next.js 15 experimental features
   experimental: {
     typedRoutes: true,
+    // Optimize package imports for better tree shaking
+    optimizePackageImports: [
+      '@saas-platform/ui',
+      '@saas-platform/shared',
+      'lucide-react',
+      '@tanstack/react-query'
+    ],
+    // Enable enhanced caching strategies
+    staleTimes: {
+      dynamic: 30,
+      static: 180,
+    },
   },
+
+  // Image optimization for Docker environment
   images: {
     remotePatterns: [
       {
@@ -23,13 +39,79 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+    // Optimize for Docker deployment
+    unoptimized: process.env.NODE_ENV === 'development',
+    formats: ['image/webp', 'image/avif'],
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-  // Enable static exports for better performance
-  output: process.env.NODE_ENV === 'production' ? 'standalone' : undefined,
-  // Configure caching
+
+  // Docker-optimized standalone output
+  output: 'standalone',
+
+  // Configure dynamic routes
+  trailingSlash: false,
+
+  // Performance optimizations
+  compress: true,
+  poweredByHeader: false,
+  
+  // Enhanced caching configuration
   onDemandEntries: {
     maxInactiveAge: 25 * 1000,
     pagesBufferLength: 2,
+  },
+
+  // Webpack optimizations for Next.js 15
+  webpack: (config, { dev, isServer }) => {
+    // Optimize bundle splitting
+    if (!dev && !isServer) {
+      config.optimization.splitChunks = {
+        ...config.optimization.splitChunks,
+        cacheGroups: {
+          ...config.optimization.splitChunks.cacheGroups,
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all',
+            priority: 10,
+          },
+          common: {
+            name: 'common',
+            minChunks: 2,
+            chunks: 'all',
+            priority: 5,
+            reuseExistingChunk: true,
+          },
+        },
+      };
+    }
+    return config;
+  },
+
+  // Security headers
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+        ],
+      },
+    ];
   },
 };
 

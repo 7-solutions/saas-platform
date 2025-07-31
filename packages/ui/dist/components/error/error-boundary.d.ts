@@ -18,7 +18,7 @@ export declare class ErrorBoundary extends Component<Props, State> {
     private reportError;
     private handleRetry;
     private handleReload;
-    render(): string | number | boolean | Iterable<React.ReactNode> | React.JSX.Element | null | undefined;
+    render(): string | number | boolean | React.JSX.Element | Iterable<React.ReactNode> | null | undefined;
 }
 export declare const useErrorHandler: () => (error: Error) => void;
 export declare function withErrorBoundary<P extends object>(Component: React.ComponentType<P>, errorBoundaryProps?: Omit<Props, 'children'>): {

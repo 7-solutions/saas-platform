@@ -1,0 +1,104 @@
+# Docker Compose override for optimized builds
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.build.yml up --build
+
+services:
+  # Build optimization for website
+  website:
+    build:
+      context: .
+      dockerfile: ./apps/website/Dockerfile.dev
+      args:
+        DOCKER_BUILDKIT: 1
+        BUILDKIT_PROGRESS: plain
+        BUILDKIT_INLINE_CACHE: 1
+        # Enable Turbo remote caching
+        TURBO_TOKEN: ${TURBO_TOKEN:-}
+        TURBO_TEAM: ${TURBO_TEAM:-}
+      cache_from:
+        - node:22-alpine
+        - saas-website:latest
+      target: development
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
+      # Turbo configuration
+      - TURBO_TOKEN=${TURBO_TOKEN:-}
+      - TURBO_TEAM=${TURBO_TEAM:-}
+    volumes:
+      # Mount source code for development
+      - .:/app
+      - /app/node_modules
+      - /app/apps/website/node_modules
+      - /app/packages/ui/node_modules
+      - /app/packages/shared/node_modules
+      # Cache volumes for faster builds
+      - pnpm_cache:/root/.local/share/pnpm/store
+      - turbo_cache:/app/.turbo
+      - next_cache:/app/apps/website/.next/cache
+
+  # Build optimization for CMS
+  cms:
+    build:
+      context: .
+      dockerfile: ./apps/cms/Dockerfile.dev
+      args:
+        DOCKER_BUILDKIT: 1
+        BUILDKIT_PROGRESS: plain
+        BUILDKIT_INLINE_CACHE: 1
+        # Enable Turbo remote caching
+        TURBO_TOKEN: ${TURBO_TOKEN:-}
+        TURBO_TEAM: ${TURBO_TEAM:-}
+      cache_from:
+        - node:22-alpine
+        - saas-cms:latest
+      target: development
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
+      - NEXTAUTH_URL=http://localhost:3001
+      - NEXTAUTH_SECRET=your-nextauth-secret
+      # Turbo configuration
+      - TURBO_TOKEN=${TURBO_TOKEN:-}
+      - TURBO_TEAM=${TURBO_TEAM:-}
+    volumes:
+      # Mount source code for development
+      - .:/app
+      - /app/node_modules
+      - /app/apps/cms/node_modules
+      - /app/packages/ui/node_modules
+      - /app/packages/shared/node_modules
+      # Cache volumes for faster builds
+      - pnpm_cache:/root/.local/share/pnpm/store
+      - turbo_cache:/app/.turbo
+      - next_cache_cms:/app/apps/cms/.next/cache
+
+  # Backend build optimization
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+      args:
+        DOCKER_BUILDKIT: 1
+        BUILDKIT_PROGRESS: plain
+        BUILDKIT_INLINE_CACHE: 1
+      cache_from:
+        - golang:1.21-alpine
+        - saas-backend:latest
+    volumes:
+      - ./backend:/app
+      - go_cache:/go/pkg/mod
+      - go_build_cache:/root/.cache/go-build
+
+volumes:
+  pnpm_cache:
+    driver: local
+  turbo_cache:
+    driver: local
+  next_cache:
+    driver: local
+  next_cache_cms:
+    driver: local
+  go_cache:
+    driver: local
+  go_build_cache:
+    driver: local

@@ -29,8 +29,14 @@ jest.mock('@tiptap/react', () => ({
 }));
 
 describe('PageEditorForm', () => {
+  const mockProps = {
+    onSave: jest.fn(),
+    onPreview: jest.fn(),
+    onImageUpload: jest.fn().mockResolvedValue('http://example.com/image.jpg'),
+  };
+
   it('renders form fields for new page', () => {
-    render(<PageEditorForm />);
+    render(<PageEditorForm {...mockProps} />);
     
     expect(screen.getByLabelText(/title/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/slug/i)).toBeInTheDocument();
@@ -40,7 +46,7 @@ describe('PageEditorForm', () => {
 
   it('validates required fields', async () => {
     const user = userEvent.setup();
-    render(<PageEditorForm />);
+    render(<PageEditorForm {...mockProps} />);
     
     const saveButton = screen.getByRole('button', { name: /save page/i });
     await user.click(saveButton);
@@ -52,7 +58,7 @@ describe('PageEditorForm', () => {
 
   it('auto-generates slug from title', async () => {
     const user = userEvent.setup();
-    render(<PageEditorForm />);
+    render(<PageEditorForm {...mockProps} />);
     
     const titleInput = screen.getByLabelText(/title/i);
     const slugInput = screen.getByLabelText(/slug/i);
@@ -66,7 +72,7 @@ describe('PageEditorForm', () => {
 
   it('allows manual slug editing', async () => {
     const user = userEvent.setup();
-    render(<PageEditorForm />);
+    render(<PageEditorForm {...mockProps} />);
     
     const slugInput = screen.getByLabelText(/slug/i);
     
@@ -86,7 +92,7 @@ describe('PageEditorForm', () => {
       }),
     }));
     
-    render(<PageEditorForm />);
+    render(<PageEditorForm {...mockProps} />);
     
     const saveButton = screen.getByRole('button', { name: /saving/i });
     expect(saveButton).toBeDisabled();

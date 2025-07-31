@@ -3,6 +3,29 @@ x-buildkit: &buildkit
   DOCKER_BUILDKIT: 1
   BUILDKIT_PROGRESS: plain
 
+# Common environment variables
+x-common-env: &common-env
+  NODE_ENV: development
+  NEXT_PUBLIC_API_URL: http://localhost:8080
+
+# Common build configuration
+x-frontend-build: &frontend-build
+  context: .
+  args:
+    <<: *buildkit
+    BUILDKIT_INLINE_CACHE: 1
+  cache_from:
+    - node:22-alpine
+  target: development
+
+# Common health check for frontend services
+x-frontend-healthcheck: &frontend-healthcheck
+  test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+  interval: 30s
+  timeout: 10s
+  retries: 3
+  start_period: 40s
+
 services:
   # CouchDB Database
   couchdb:
@@ -22,6 +45,8 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+      start_period: 30s
+    restart: unless-stopped
 
   # Go Backend API
   backend:
@@ -30,6 +55,9 @@ services:
       dockerfile: Dockerfile.dev
       args:
         <<: *buildkit
+        BUILDKIT_INLINE_CACHE: 1
+      cache_from:
+        - golang:1.21-alpine
     container_name: saas-backend
     environment:
       - COUCHDB_URL=http://couchdb:5984
@@ -50,48 +78,90 @@ services:
         condition: service_healthy
     networks:
       - saas-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    volumes:
+      - ./backend:/app
+      - backend_cache:/go/pkg/mod
 
   # Public Website (Next.js)
   website:
     build:
-      context: .
+      <<: *frontend-build
       dockerfile: ./apps/website/Dockerfile.dev
-      args:
-        <<: *buildkit
     container_name: saas-website
     environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8080
-      - NODE_ENV=development
+      <<: *common-env
     ports:
       - "3000:3000"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
     networks:
       - saas-network
+    healthcheck:
+      <<: *frontend-healthcheck
+    restart: unless-stopped
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/apps/website/node_modules
+      - /app/packages/ui/node_modules
+      - /app/packages/shared/node_modules
+      - pnpm_cache:/root/.local/share/pnpm/store
+      - turbo_cache:/app/.turbo
 
   # CMS Dashboard (Next.js)
   cms:
     build:
-      context: .
+      <<: *frontend-build
       dockerfile: ./apps/cms/Dockerfile.dev
-      args:
-        <<: *buildkit
     container_name: saas-cms
     environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8080
-      - NEXTAUTH_URL=http://localhost:3001
-      - NEXTAUTH_SECRET=your-nextauth-secret
-      - NODE_ENV=development
+      <<: *common-env
+      NEXTAUTH_URL: http://localhost:3001
+      NEXTAUTH_SECRET: your-nextauth-secret
     ports:
       - "3001:3000"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
     networks:
       - saas-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/apps/cms/node_modules
+      - /app/packages/ui/node_modules
+      - /app/packages/shared/node_modules
+      - pnpm_cache:/root/.local/share/pnpm/store
+      - turbo_cache:/app/.turbo
 
 volumes:
   couchdb_data:
+    driver: local
+  backend_cache:
+    driver: local
+  pnpm_cache:
+    driver: local
+  turbo_cache:
+    driver: local
 
 networks:
   saas-network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

@@ -1,3 +1,30 @@
+# Production optimized build configuration
+x-buildkit-prod: &buildkit-prod
+  DOCKER_BUILDKIT: 1
+  BUILDKIT_PROGRESS: plain
+  BUILDKIT_INLINE_CACHE: 1
+
+# Common production environment
+x-prod-env: &prod-env
+  NODE_ENV: production
+  NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8080}
+
+# Production build configuration for frontend services
+x-frontend-prod-build: &frontend-prod-build
+  context: .
+  args:
+    <<: *buildkit-prod
+  cache_from:
+    - node:22-alpine
+  target: runner
+
+# Production health checks
+x-prod-healthcheck: &prod-healthcheck
+  interval: 30s
+  timeout: 10s
+  retries: 3
+  start_period: 60s
+
 services:
   # CouchDB Database
   couchdb:
@@ -15,16 +42,25 @@ services:
       - saas-network
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5984/_up"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+      <<: *prod-healthcheck
+      start_period: 30s
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
 
   # Go Backend API
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
+      args:
+        <<: *buildkit-prod
+      cache_from:
+        - golang:1.21-alpine
     container_name: saas-backend-prod
     environment:
       - COUCHDB_URL=http://couchdb:5984
@@ -45,47 +81,78 @@ services:
         condition: service_healthy
     networks:
       - saas-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/v1/health"]
+      <<: *prod-healthcheck
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
 
   # Public Website (Next.js)
   website:
     build:
-      context: .
+      <<: *frontend-prod-build
       dockerfile: ./apps/website/Dockerfile
     container_name: saas-website-prod
     environment:
-      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8080}
-      - NODE_ENV=production
+      <<: *prod-env
     ports:
       - "3000:3000"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
     networks:
       - saas-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      <<: *prod-healthcheck
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
 
   # CMS Dashboard (Next.js)
   cms:
     build:
-      context: .
+      <<: *frontend-prod-build
       dockerfile: ./apps/cms/Dockerfile
     container_name: saas-cms-prod
     environment:
-      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8080}
-      - NEXTAUTH_URL=${NEXTAUTH_URL}
-      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
-      - NODE_ENV=production
+      <<: *prod-env
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
     ports:
       - "3001:3000"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
     networks:
       - saas-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/api/health"]
+      <<: *prod-healthcheck
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
 
 volumes:
   couchdb_data:
+    driver: local
 
 networks:
   saas-network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16

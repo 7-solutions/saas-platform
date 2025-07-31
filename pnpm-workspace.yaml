@@ -1,3 +1,43 @@
 packages:
   - 'apps/*'
   - 'packages/*'
+
+# pnpm catalog for consistent dependency versions across workspace
+catalog:
+  # Core Framework Dependencies
+  react: ^18.3.1
+  react-dom: ^18.3.1
+  next: ^15.4.5
+  typescript: ^5.7.2
+  
+  # Node.js Types
+  '@types/node': ^22.10.0
+  '@types/react': ^18.3.23
+  '@types/react-dom': ^18.3.1
+  
+  # CSS & Styling
+  tailwindcss: ^3.4.17
+  autoprefixer: ^10.4.21
+  postcss: ^8.5.6
+  cssnano: ^6.0.1
+  '@tailwindcss/forms': ^0.5.10
+  
+  # Form Handling
+  'react-hook-form': ^7.61.1
+  '@hookform/resolvers': ^5.2.0
+  zod: ^4.0.10
+  
+  # UI Components
+  'lucide-react': ^0.263.1
+  
+  # Testing
+  jest: ^29.7.0
+  '@types/jest': ^29.5.0
+  '@testing-library/jest-dom': ^6.2.0
+  '@testing-library/react': ^14.1.0
+  '@testing-library/user-event': ^14.5.0
+  'jest-environment-jsdom': ^29.7.0
+  
+  # React Query
+  '@tanstack/react-query': ^5.83.0
+  '@tanstack/react-query-devtools': ^5.83.0
