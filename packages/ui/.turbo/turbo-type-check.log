@@ -1,4 +1,4 @@
 
-> @saas-platform/ui@0.1.0 type-check /Users/tsaa/Workspace/devops/coder/cms/packages/ui
+> @saas-platform/ui@0.1.0 type-check /Users/tsaa/Workspace/coder/saas-platform/packages/ui
 > tsc --noEmit
 

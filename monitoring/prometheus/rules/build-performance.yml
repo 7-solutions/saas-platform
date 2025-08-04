@@ -1,0 +1,133 @@
+groups:
+  - name: build_performance
+    rules:
+      # Build time alerts
+      - alert: BuildTimeCritical
+        expr: build_duration_seconds > 120
+        for: 0m
+        labels:
+          severity: critical
+          category: build_performance
+        annotations:
+          summary: "Build time exceeds critical threshold"
+          description: "Build for {{ $labels.service }} took {{ $value }}s, exceeding the critical threshold of 120s"
+
+      - alert: BuildTimeWarning
+        expr: build_duration_seconds > 90
+        for: 0m
+        labels:
+          severity: warning
+          category: build_performance
+        annotations:
+          summary: "Build time exceeds warning threshold"
+          description: "Build for {{ $labels.service }} took {{ $value }}s, exceeding the warning threshold of 90s"
+
+      # Cache hit rate alerts
+      - alert: CacheHitRateCritical
+        expr: build_cache_hit_rate < 20
+        for: 0m
+        labels:
+          severity: critical
+          category: build_performance
+        annotations:
+          summary: "Build cache hit rate critically low"
+          description: "Cache hit rate for {{ $labels.service }} is {{ $value }}%, below critical threshold of 20%"
+
+      - alert: CacheHitRateWarning
+        expr: build_cache_hit_rate < 30
+        for: 0m
+        labels:
+          severity: warning
+          category: build_performance
+        annotations:
+          summary: "Build cache hit rate low"
+          description: "Cache hit rate for {{ $labels.service }} is {{ $value }}%, below warning threshold of 30%"
+
+      # Build failure alerts
+      - alert: BuildFailure
+        expr: build_success == 0
+        for: 0m
+        labels:
+          severity: critical
+          category: build_failure
+        annotations:
+          summary: "Build failed"
+          description: "Build for {{ $labels.service }} failed"
+
+      # Build regression alerts (compared to 7-day average)
+      - alert: BuildTimeRegression
+        expr: |
+          (
+            build_duration_seconds - 
+            avg_over_time(build_duration_seconds[7d])
+          ) / avg_over_time(build_duration_seconds[7d]) * 100 > 25
+        for: 5m
+        labels:
+          severity: warning
+          category: build_regression
+        annotations:
+          summary: "Build time regression detected"
+          description: "Build time for {{ $labels.service }} has increased by {{ $value }}% compared to 7-day average"
+
+      # Image size alerts
+      - alert: ImageSizeIncrease
+        expr: |
+          (
+            build_image_size_bytes - 
+            avg_over_time(build_image_size_bytes[7d])
+          ) / avg_over_time(build_image_size_bytes[7d]) * 100 > 20
+        for: 5m
+        labels:
+          severity: warning
+          category: build_regression
+        annotations:
+          summary: "Docker image size increased significantly"
+          description: "Image size for {{ $labels.service }} has increased by {{ $value }}% compared to 7-day average"
+
+  - name: build_health
+    rules:
+      # Build frequency monitoring
+      - alert: NoBuildActivity
+        expr: |
+          (time() - max(build_timestamp)) > 86400
+        for: 0m
+        labels:
+          severity: warning
+          category: build_health
+        annotations:
+          summary: "No build activity detected"
+          description: "No builds have been recorded in the last 24 hours"
+
+      # Build success rate
+      - alert: LowBuildSuccessRate
+        expr: |
+          (
+            rate(build_success[1h]) / 
+            rate(build_total[1h])
+          ) * 100 < 80
+        for: 10m
+        labels:
+          severity: warning
+          category: build_health
+        annotations:
+          summary: "Build success rate is low"
+          description: "Build success rate is {{ $value }}% over the last hour, below 80% threshold"
+
+  - name: build_performance_recording
+    rules:
+      # Recording rules for build performance metrics
+      - record: build:duration_seconds:rate5m
+        expr: rate(build_duration_seconds[5m])
+
+      - record: build:cache_hit_rate:avg5m
+        expr: avg_over_time(build_cache_hit_rate[5m])
+
+      - record: build:success_rate:rate1h
+        expr: |
+          rate(build_success[1h]) / rate(build_total[1h]) * 100
+
+      - record: build:duration_seconds:avg7d
+        expr: avg_over_time(build_duration_seconds[7d])
+
+      - record: build:image_size_bytes:avg7d
+        expr: avg_over_time(build_image_size_bytes[7d])

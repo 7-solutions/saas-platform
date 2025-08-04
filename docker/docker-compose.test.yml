@@ -1,0 +1,159 @@
+version: "3.9"
+
+x-healthcheck: &healthcheck
+  interval: 5s
+  timeout: 3s
+  retries: 30
+
+x-restart: &restart
+  restart: unless-stopped
+
+services:
+  postgres:
+    image: postgres:17.5
+    environment:
+      - POSTGRES_DB=app_test
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=app
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d app_test"]
+      <<: *healthcheck
+    <<: *restart
+
+  # flyway:
+  #   image: flyway/flyway:10
+  #   command: -url=jdbc:postgresql://postgres:5432/app_test -user=app -password=app -connectRetries=60 migrate
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #   profiles: ["migrations"]
+
+  api-gateway:
+    build:
+      context: ..
+      dockerfile: api-gateway/Dockerfile
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_FORMAT=json
+      - HTTP_ADDR=:8080
+      - METRICS_ADDR=:9090
+      - SERVICE_NAME=api-gateway
+      - AUTH_GRPC_ADDR=auth:9101
+      - CONTENT_GRPC_ADDR=content:9102
+      - MEDIA_GRPC_ADDR=media:9103
+      - CONTACT_GRPC_ADDR=contact:9104
+      - CORS_ALLOW_ORIGINS=${CORS_ALLOW_ORIGINS:-*}
+      - TEST_DATABASE_URL=${TEST_DATABASE_URL:-postgres://app:app@postgres:5432/app_test?sslmode=disable}
+    depends_on:
+      auth:
+        condition: service_healthy
+      content:
+        condition: service_healthy
+      media:
+        condition: service_healthy
+      contact:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/health"]
+      <<: *healthcheck
+    <<: *restart
+
+  auth:
+    build:
+      context: ..
+      dockerfile: services/auth/Dockerfile
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+    environment:
+      - SERVICE_NAME=auth
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_FORMAT=json
+      - GRPC_ADDR=:9101
+      - HTTP_ADDR=:8101
+      - METRICS_ADDR=:9100
+      - TEST_DATABASE_URL=${TEST_DATABASE_URL:-postgres://app:app@postgres:5432/app_test?sslmode=disable}
+      - JWT_KID=test
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8101/health"]
+      <<: *healthcheck
+    <<: *restart
+
+  content:
+    build:
+      context: ..
+      dockerfile: services/content/Dockerfile
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+    environment:
+      - SERVICE_NAME=content
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_FORMAT=json
+      - GRPC_ADDR=:9102
+      - HTTP_ADDR=:8102
+      - METRICS_ADDR=:9100
+      - TEST_DATABASE_URL=${TEST_DATABASE_URL:-postgres://app:app@postgres:5432/app_test?sslmode=disable}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8102/health"]
+      <<: *healthcheck
+    <<: *restart
+
+  media:
+    build:
+      context: ..
+      dockerfile: services/media/Dockerfile
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+    environment:
+      - SERVICE_NAME=media
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_FORMAT=json
+      - GRPC_ADDR=:9103
+      - HTTP_ADDR=:8103
+      - METRICS_ADDR=:9100
+      - TEST_DATABASE_URL=${TEST_DATABASE_URL:-postgres://app:app@postgres:5432/app_test?sslmode=disable}
+      - STORAGE_DIR=/data/media
+    volumes:
+      - media_data_test:/data/media
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8103/health"]
+      <<: *healthcheck
+    <<: *restart
+
+  contact:
+    build:
+      context: ..
+      dockerfile: services/contact/Dockerfile
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+    environment:
+      - SERVICE_NAME=contact
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_FORMAT=json
+      - GRPC_ADDR=:9104
+      - HTTP_ADDR=:8104
+      - METRICS_ADDR=:9100
+      - TEST_DATABASE_URL=${TEST_DATABASE_URL:-postgres://app:app@postgres:5432/app_test?sslmode=disable}
+      - EMAIL_PROVIDER=log
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8104/health"]
+      <<: *healthcheck
+    <<: *restart
+
+volumes:
+  media_data_test: {}

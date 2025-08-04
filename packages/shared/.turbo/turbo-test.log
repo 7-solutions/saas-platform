@@ -1,0 +1,13 @@
+
+> @saas-platform/shared@0.1.0 test /Users/tsaa/Workspace/coder/saas-platform/packages/shared
+> vitest run
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v1.6.1 /Users/tsaa/Workspace/coder/saas-platform/packages/shared
+
+ ✓ src/api/__tests__/media.test.ts  (7 tests) 5ms
+ ✓ src/api/__tests__/content.test.ts  (6 tests) 5ms
+ ✓ src/api/__tests__/utils.test.ts  (25 tests) 78ms
+ ✓ src/api/__tests__/provider.test.tsx  (6 tests) 29ms
+ ✓ src/api/__tests__/hooks.test.tsx  (6 tests) 329ms

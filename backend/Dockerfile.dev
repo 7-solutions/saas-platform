@@ -7,8 +7,15 @@ RUN apk add --no-cache \
     curl \
     dumb-init
 
+# Create non-root user for security (even in development)
+RUN addgroup --system --gid 1001 appgroup && \
+    adduser --system --uid 1001 appuser --ingroup appgroup
+
 # Set working directory
 WORKDIR /app
+
+# Change ownership to non-root user
+RUN chown -R appuser:appgroup /app
 
 # Install air for hot reloading with module cache
 RUN --mount=type=cache,target=/go/pkg/mod \
@@ -23,11 +30,15 @@ RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache/go-build \
     go mod download
 
-# Copy source code
-COPY . .
+# Copy source code with proper ownership
+COPY --chown=appuser:appgroup . .
 
-# Create necessary directories
-RUN mkdir -p /app/tmp /app/uploads /app/logs
+# Create necessary directories with proper permissions
+RUN mkdir -p /app/tmp /app/uploads /app/logs && \
+    chown -R appuser:appgroup /app/tmp /app/uploads /app/logs
+
+# Switch to non-root user for security
+USER appuser
 
 # Expose ports (gRPC and HTTP gateway)
 EXPOSE 8080 9090

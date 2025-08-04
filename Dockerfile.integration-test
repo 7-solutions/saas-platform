@@ -6,7 +6,8 @@ RUN apk add --no-cache \
     libc6-compat \
     dumb-init \
     curl \
-    bash && \
+    bash \
+    jq && \
     # Enable corepack and prepare pnpm
     corepack enable && \
     corepack prepare pnpm@9.15.0 --activate
@@ -14,27 +15,32 @@ RUN apk add --no-cache \
 # Set working directory
 WORKDIR /app
 
-# Copy package configuration files
+# Copy package configuration files for optimal caching
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/website/package.json ./apps/website/
 COPY apps/cms/package.json ./apps/cms/
 COPY packages/ui/package.json ./packages/ui/
 COPY packages/shared/package.json ./packages/shared/
 
-# Install dependencies
+# Install dependencies with integration test specific packages
 RUN --mount=type=cache,id=pnpm-store-integration,target=/root/.local/share/pnpm/store \
     --mount=type=cache,id=pnpm-metadata-integration,target=/root/.cache/pnpm \
     pnpm install --frozen-lockfile --prefer-offline
 
-# Copy source code and test files
+# Copy source code
 COPY . .
 
 # Create test results directory
 RUN mkdir -p test-results
 
-# Test environment variables
+# Integration test environment variables
 ENV NODE_ENV=test \
-    CI=true
+    NEXT_TELEMETRY_DISABLED=1 \
+    CI=true \
+    BACKEND_URL=http://backend-test:8080 \
+    WEBSITE_URL=http://website-test:3000 \
+    CMS_URL=http://cms-test:3000 \
+    COUCHDB_URL=http://couchdb-test:5984
 
 # Use dumb-init for proper signal handling
 ENTRYPOINT ["dumb-init", "--"]

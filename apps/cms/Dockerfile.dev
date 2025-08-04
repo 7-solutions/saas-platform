@@ -9,8 +9,15 @@ RUN apk add --no-cache \
     corepack enable && \
     corepack prepare pnpm@9.15.0 --activate
 
+# Create non-root user for security (even in development)
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs
+
 # Set working directory
 WORKDIR /app
+
+# Change ownership to non-root user
+RUN chown -R nextjs:nodejs /app
 
 # Copy package configuration files for optimal caching
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
@@ -23,8 +30,11 @@ RUN --mount=type=cache,id=pnpm-store-cms-dev,target=/root/.local/share/pnpm/stor
     --mount=type=cache,id=pnpm-metadata-cms-dev,target=/root/.cache/pnpm \
     pnpm install --frozen-lockfile --prefer-offline
 
-# Copy source code
-COPY . .
+# Copy source code with proper ownership
+COPY --chown=nextjs:nodejs . .
+
+# Switch to non-root user for security
+USER nextjs
 
 # Expose port
 EXPOSE 3000

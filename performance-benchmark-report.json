@@ -1,0 +1,94 @@
+{
+  "timestamp": "2025-08-04T08:40:10.657Z",
+  "buildPerformance": {
+    "individual": {
+      "website": {
+        "buildTime": 14483,
+        "success": true,
+        "timestamp": "2025-08-04T08:40:25.348Z"
+      },
+      "cms": {
+        "buildTime": 15755,
+        "success": true,
+        "timestamp": "2025-08-04T08:40:41.301Z"
+      }
+    },
+    "totalBuildTime": 30238,
+    "averageBuildTime": 15119,
+    "meetsTarget": true,
+    "targetBuildTime": 120000
+  },
+  "containerPerformance": {
+    "serviceStartupTimes": {
+      "auth": null,
+      "content": null,
+      "media": null,
+      "contact": null
+    },
+    "maxServiceStartupTime": null,
+    "meetsTarget": false,
+    "targetStartupTime": 30000,
+    "allServicesStarted": false,
+    "note": "Measured response time of already running containers"
+  },
+  "bundleAnalysis": {
+    "individual": {
+      "website": {
+        "totalSize": null,
+        "staticSize": null,
+        "serverSize": null,
+        "standaloneSize": null,
+        "largestJSFiles": [],
+        "timestamp": "2025-08-04T08:41:01.428Z"
+      },
+      "cms": {
+        "totalSize": null,
+        "staticSize": null,
+        "serverSize": null,
+        "standaloneSize": null,
+        "largestJSFiles": [],
+        "timestamp": "2025-08-04T08:41:01.456Z"
+      }
+    },
+    "totalBundleSize": null,
+    "averageBundleSize": null,
+    "bundleSizeInMB": null
+  },
+  "summary": {
+    "overallScore": 33,
+    "targetsMet": 1,
+    "totalTargets": 3,
+    "recommendations": [
+      "Optimize container startup: Current nullms exceeds target 30000ms",
+      "Optimize runtime performance: 0/4 services meet response time targets"
+    ],
+    "achievements": [
+      "Build time target met: 30238ms < 120000ms"
+    ]
+  },
+  "targets": {
+    "buildTimeImprovement": 0.3,
+    "containerStartupTime": 30000,
+    "bundleSizeReduction": 0.15,
+    "maxBuildTime": 120000,
+    "maxResponseTime": 2000
+  },
+  "runtimePerformance": {
+    "auth": {
+      "error": "",
+      "meetsTarget": false
+    },
+    "content": {
+      "error": "",
+      "meetsTarget": false
+    },
+    "media": {
+      "error": "",
+      "meetsTarget": false
+    },
+    "contact": {
+      "error": "",
+      "meetsTarget": false
+    }
+  }
+}

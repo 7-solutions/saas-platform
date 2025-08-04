@@ -1,0 +1,168 @@
+{
+  "timestamp": "2025-08-04T09:26:39.667Z",
+  "dockerBuilds": {
+    "composeFileExists": true,
+    "composeAnalysis": {
+      "hasHealthChecks": true,
+      "hasResourceLimits": true,
+      "hasSecurityContext": false,
+      "hasEnvironmentConfig": true,
+      "hasVolumeConfig": true
+    },
+    "website": {
+      "dockerfileExists": true,
+      "analysis": {
+        "multiStage": true,
+        "nonRootUser": true,
+        "alpineBase": true,
+        "healthCheck": true,
+        "minimalLayers": false
+      }
+    },
+    "cms": {
+      "dockerfileExists": true,
+      "analysis": {
+        "multiStage": true,
+        "nonRootUser": true,
+        "alpineBase": true,
+        "healthCheck": true,
+        "minimalLayers": false
+      }
+    }
+  },
+  "securityChecks": {
+    "website": {
+      "nonRootUser": true,
+      "noSecretsInImage": true,
+      "minimalBaseImage": true,
+      "copyOptimization": false,
+      "exposedPorts": true
+    },
+    "cms": {
+      "nonRootUser": true,
+      "noSecretsInImage": true,
+      "minimalBaseImage": true,
+      "copyOptimization": false,
+      "exposedPorts": true
+    },
+    "configFiles": {
+      ".dockerignore": {
+        "exists": false
+      },
+      "docker-compose.security.yml": {
+        "exists": true
+      },
+      "nginx/nginx.conf": {
+        "exists": true
+      }
+    }
+  },
+  "monitoringChecks": {
+    "configFiles": {
+      "monitoring/prometheus/prometheus.yml": {
+        "exists": true,
+        "isDirectory": false
+      },
+      "monitoring/grafana/provisioning": {
+        "exists": true,
+        "isDirectory": true
+      },
+      "monitoring/docker-compose.monitoring.yml": {
+        "exists": true,
+        "isDirectory": false
+      }
+    },
+    "healthEndpoints": {
+      "auth": {
+        "available": true,
+        "status": 200,
+        "responseTime": "unknown",
+        "data": "OK"
+      },
+      "content": {
+        "available": true,
+        "status": 200,
+        "responseTime": "unknown",
+        "data": "OK"
+      },
+      "media": {
+        "available": true,
+        "status": 200,
+        "responseTime": "unknown",
+        "data": "OK"
+      },
+      "contact": {
+        "available": true,
+        "status": 200,
+        "responseTime": "unknown",
+        "data": "OK"
+      }
+    },
+    "website_logging": {
+      "hasLogging": false,
+      "hasErrorReporting": false,
+      "hasMetrics": false,
+      "standaloneOutput": false
+    },
+    "cms_logging": {
+      "hasLogging": false,
+      "hasErrorReporting": false,
+      "hasMetrics": false,
+      "standaloneOutput": false
+    }
+  },
+  "summary": {
+    "overallScore": 91,
+    "categoriesScored": 4,
+    "totalCategories": 4,
+    "readinessLevel": "Production Ready",
+    "criticalIssues": [],
+    "recommendations": [],
+    "achievements": [
+      "Production Docker Compose file exists"
+    ],
+    "dockerScore": 85,
+    "securityScore": 80,
+    "monitoringScore": 100,
+    "environmentScore": 100
+  },
+  "environmentConfig": {
+    "envFiles": {
+      ".env.example": {
+        "exists": true,
+        "hasDbConfig": true,
+        "hasSecrets": true,
+        "hasApiConfig": true,
+        "lineCount": 19
+      },
+      ".env.production.example": {
+        "exists": true,
+        "hasDbConfig": true,
+        "hasSecrets": true,
+        "hasApiConfig": true,
+        "lineCount": 47
+      },
+      "apps/website/.env.local.example": {
+        "exists": true,
+        "hasDbConfig": false,
+        "hasSecrets": true,
+        "hasApiConfig": true,
+        "lineCount": 15
+      },
+      "apps/cms/.env.local.example": {
+        "exists": true,
+        "hasDbConfig": false,
+        "hasSecrets": true,
+        "hasApiConfig": true,
+        "lineCount": 6
+      }
+    },
+    "productionScripts": {
+      "hasContainersProd": true,
+      "hasProdBuild": true,
+      "hasHealthCheck": true,
+      "hasBackup": true,
+      "hasRollback": true
+    }
+  }
+}

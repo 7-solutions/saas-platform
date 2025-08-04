@@ -1,5 +1,7 @@
 package repository
 
+// Ensure views are indexed before queries in list tests
+
 import (
 	"context"
 	"testing"
@@ -8,18 +10,20 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
+	"github.com/saas-startup-platform/backend/internal/database"
 	"github.com/saas-startup-platform/backend/internal/models"
 )
 
-func TestBlogRepository(t *testing.T) {
-	// Setup test database
-	client := SetupTestDB(t)
-	defer CleanupTestDB(t, client)
+var _ = database.PostgresClient{} // compile-time import keeper; remove if unused later
 
-	repo := NewBlogRepository(client)
+func TestBlogRepository(t *testing.T) {
 	ctx := context.Background()
 
 	t.Run("Create and Get Blog Post", func(t *testing.T) {
+		_ = SetupTestDB(t)
+		client := SetupTestPGClient(t)
+		repo := NewBlogRepositorySQL(client)
+
 		// Create a test blog post
 		post := &models.BlogPost{
 			ID:         "blog:test-post",
@@ -52,6 +56,10 @@ func TestBlogRepository(t *testing.T) {
 	})
 
 	t.Run("Get Blog Post by Slug", func(t *testing.T) {
+		_ = SetupTestDB(t)
+		client := SetupTestPGClient(t)
+		repo := NewBlogRepositorySQL(client)
+
 		// Create a test blog post
 		post := &models.BlogPost{
 			ID:        "blog:slug-test",
@@ -78,6 +86,10 @@ func TestBlogRepository(t *testing.T) {
 	})
 
 	t.Run("Update Blog Post", func(t *testing.T) {
+		_ = SetupTestDB(t)
+		client := SetupTestPGClient(t)
+		repo := NewBlogRepositorySQL(client)
+
 		// Create a test blog post
 		post := &models.BlogPost{
 			ID:        "blog:update-test",
@@ -115,6 +127,11 @@ func TestBlogRepository(t *testing.T) {
 	})
 
 	t.Run("List Blog Posts by Status", func(t *testing.T) {
+		// fresh DB per subtest
+		_ = SetupTestDB(t)
+		client := SetupTestPGClient(t)
+		repo := NewBlogRepositorySQL(client)
+
 		// Create test blog posts with different statuses
 		posts := []*models.BlogPost{
 			{
@@ -155,6 +172,8 @@ func TestBlogRepository(t *testing.T) {
 			require.NoError(t, err)
 		}
 
+		// No view indexing needed in Postgres
+
 		// List published posts
 		publishedPosts, err := repo.ListByStatus(ctx, models.PageStatusPublished, DefaultListOptions())
 		require.NoError(t, err)
@@ -167,6 +186,11 @@ func TestBlogRepository(t *testing.T) {
 	})
 
 	t.Run("List Blog Posts by Category", func(t *testing.T) {
+		// fresh DB per subtest
+		_ = SetupTestDB(t)
+		client := SetupTestPGClient(t)
+		repo := NewBlogRepositorySQL(client)
+
 		// Create test blog posts with categories
 		posts := []*models.BlogPost{
 			{
@@ -210,6 +234,8 @@ func TestBlogRepository(t *testing.T) {
 			require.NoError(t, err)
 		}
 
+		// No view indexing needed in Postgres
+
 		// List posts by Technology category
 		techPosts, err := repo.ListByCategory(ctx, "Technology", DefaultListOptions())
 		require.NoError(t, err)
@@ -222,6 +248,11 @@ func TestBlogRepository(t *testing.T) {
 	})
 
 	t.Run("List Blog Posts by Tag", func(t *testing.T) {
+		// fresh DB per subtest
+		_ = SetupTestDB(t)
+		client := SetupTestPGClient(t)
+		repo := NewBlogRepositorySQL(client)
+
 		// Create test blog posts with tags
 		posts := []*models.BlogPost{
 			{
@@ -265,6 +296,8 @@ func TestBlogRepository(t *testing.T) {
 			require.NoError(t, err)
 		}
 
+		// No view indexing needed in Postgres
+
 		// List posts by 'go' tag
 		goPosts, err := repo.ListByTag(ctx, "go", DefaultListOptions())
 		require.NoError(t, err)
@@ -277,6 +310,10 @@ func TestBlogRepository(t *testing.T) {
 	})
 
 	t.Run("Delete Blog Post", func(t *testing.T) {
+		_ = SetupTestDB(t)
+		client := SetupTestPGClient(t)
+		repo := NewBlogRepositorySQL(client)
+
 		// Create a test blog post
 		post := &models.BlogPost{
 			ID:        "blog:delete-test",

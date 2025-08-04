@@ -1,0 +1,94 @@
+{
+  "timestamp": "2025-08-04T09:24:10.820Z",
+  "buildResults": {
+    "website": {
+      "duration": 14372,
+      "success": true,
+      "startTime": "2025-08-04T09:24:11.285Z",
+      "endTime": "2025-08-04T09:24:25.657Z",
+      "meetsTarget": true
+    },
+    "cms": {
+      "duration": 15067,
+      "success": true,
+      "startTime": "2025-08-04T09:24:25.657Z",
+      "endTime": "2025-08-04T09:24:40.724Z",
+      "meetsTarget": true
+    },
+    "summary": {
+      "totalBuildTime": 29439,
+      "averageBuildTime": 14719.5,
+      "allBuildsSuccessful": true,
+      "meetsTarget": true
+    }
+  },
+  "bundleAnalysis": {
+    "website": {
+      "totalSize": 230540108,
+      "staticSize": 958721,
+      "serverSize": 1696778,
+      "standaloneSize": 127377714,
+      "jsChunksSize": 921728,
+      "cssSize": 0,
+      "totalSizeMB": 219.86,
+      "staticSizeMB": 0.91,
+      "serverSizeMB": 1.62,
+      "meetsTarget": false,
+      "timestamp": "2025-08-04T09:24:40.923Z"
+    },
+    "cms": {
+      "totalSize": 298518723,
+      "staticSize": 1453679,
+      "serverSize": 2675386,
+      "standaloneSize": 127820799,
+      "jsChunksSize": 1414312,
+      "cssSize": 0,
+      "totalSizeMB": 284.69,
+      "staticSizeMB": 1.39,
+      "serverSizeMB": 2.55,
+      "meetsTarget": false,
+      "timestamp": "2025-08-04T09:24:41.121Z"
+    },
+    "summary": {
+      "totalBundleSize": 529058831,
+      "totalBundleSizeMB": 504.55,
+      "averageBundleSize": 264529415.5,
+      "validBundles": 2,
+      "allBundlesAnalyzed": true
+    }
+  },
+  "summary": {
+    "overallScore": 50,
+    "targetsMet": 1,
+    "totalTargets": 2,
+    "achievements": [
+      "Build time target met: 29s < 120s"
+    ],
+    "recommendations": [
+      "Consider optimizing bundle size: 504.55MB",
+      "Enable standalone output in all Next.js apps for better Docker performance"
+    ],
+    "metrics": {
+      "totalBuildTime": 29439,
+      "totalBundleSize": 504.55,
+      "appsBuilt": 2,
+      "bundlesAnalyzed": 2
+    }
+  },
+  "nextjsFeatures": {
+    "website": {
+      "hasStandaloneOutput": false,
+      "hasExperimentalFeatures": true,
+      "hasPPR": false,
+      "hasOptimizedImages": true,
+      "configPath": "/Users/tsaa/Workspace/coder/saas-platform/apps/website/next.config.js"
+    },
+    "cms": {
+      "hasStandaloneOutput": false,
+      "hasExperimentalFeatures": true,
+      "hasPPR": false,
+      "hasOptimizedImages": true,
+      "configPath": "/Users/tsaa/Workspace/coder/saas-platform/apps/cms/next.config.js"
+    }
+  }
+}

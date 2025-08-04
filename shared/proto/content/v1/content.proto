@@ -1,0 +1,307 @@
+syntax = "proto3";
+
+package content.v1;
+
+option go_package = "shared/gen/content/v1;contentv1";
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+// Content service for managing pages and blog posts
+service ContentService {
+  // Create a new page
+  rpc CreatePage(CreatePageRequest) returns (Page) {
+    option (google.api.http) = {
+      post: "/api/v1/pages"
+      body: "*"
+    };
+  }
+
+  // Get a page by ID
+  rpc GetPage(GetPageRequest) returns (Page) {
+    option (google.api.http) = {
+      get: "/api/v1/pages/{id}"
+    };
+  }
+
+  // Update an existing page
+  rpc UpdatePage(UpdatePageRequest) returns (Page) {
+    option (google.api.http) = {
+      put: "/api/v1/pages/{id}"
+      body: "*"
+    };
+  }
+
+  // Delete a page
+  rpc DeletePage(DeletePageRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/api/v1/pages/{id}"
+    };
+  }
+
+  // List pages with filtering and pagination
+  rpc ListPages(ListPagesRequest) returns (ListPagesResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/pages"
+    };
+  }
+
+  // Create a new blog post
+  rpc CreateBlogPost(CreateBlogPostRequest) returns (BlogPost) {
+    option (google.api.http) = {
+      post: "/api/v1/blog"
+      body: "*"
+    };
+  }
+
+  // Get a blog post by ID
+  rpc GetBlogPost(GetBlogPostRequest) returns (BlogPost) {
+    option (google.api.http) = {
+      get: "/api/v1/blog/{id}"
+    };
+  }
+
+  // Update an existing blog post
+  rpc UpdateBlogPost(UpdateBlogPostRequest) returns (BlogPost) {
+    option (google.api.http) = {
+      put: "/api/v1/blog/{id}"
+      body: "*"
+    };
+  }
+
+  // Delete a blog post
+  rpc DeleteBlogPost(DeleteBlogPostRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/api/v1/blog/{id}"
+    };
+  }
+
+  // List blog posts with filtering and pagination
+  rpc ListBlogPosts(ListBlogPostsRequest) returns (ListBlogPostsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/blog"
+    };
+  }
+
+  // Search blog posts
+  rpc SearchBlogPosts(SearchBlogPostsRequest) returns (SearchBlogPostsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/blog/search"
+    };
+  }
+
+  // Get blog categories
+  rpc GetBlogCategories(GetBlogCategoriesRequest) returns (GetBlogCategoriesResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/blog/categories"
+    };
+  }
+
+  // Get blog tags
+  rpc GetBlogTags(GetBlogTagsRequest) returns (GetBlogTagsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/blog/tags"
+    };
+  }
+
+  // Generate RSS feed
+  rpc GetRSSFeed(GetRSSFeedRequest) returns (GetRSSFeedResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/blog/rss"
+    };
+  }
+}
+
+// Page represents a content page
+message Page {
+  string id = 1;
+  string title = 2;
+  string slug = 3;
+  PageContent content = 4;
+  PageMeta meta = 5;
+  PageStatus status = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+}
+
+// Page content structure
+message PageContent {
+  repeated ContentBlock blocks = 1;
+}
+
+// Content block for flexible page content
+message ContentBlock {
+  string type = 1;
+  map<string, string> data = 2;
+}
+
+// Page metadata for SEO
+message PageMeta {
+  string title = 1;
+  string description = 2;
+  repeated string keywords = 3;
+}
+
+// Page status enumeration
+enum PageStatus {
+  PAGE_STATUS_UNSPECIFIED = 0;
+  PAGE_STATUS_DRAFT = 1;
+  PAGE_STATUS_PUBLISHED = 2;
+  PAGE_STATUS_ARCHIVED = 3;
+}
+
+// Request messages
+message CreatePageRequest {
+  string title = 1;
+  string slug = 2;
+  PageContent content = 3;
+  PageMeta meta = 4;
+  PageStatus status = 5;
+}
+
+message GetPageRequest {
+  string id = 1;
+}
+
+message UpdatePageRequest {
+  string id = 1;
+  string title = 2;
+  string slug = 3;
+  PageContent content = 4;
+  PageMeta meta = 5;
+  PageStatus status = 6;
+}
+
+message DeletePageRequest {
+  string id = 1;
+}
+
+message ListPagesRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+  PageStatus status = 3;
+  string search = 4;
+}
+
+message ListPagesResponse {
+  repeated Page pages = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+// BlogPost represents a blog post
+message BlogPost {
+  string id = 1;
+  string title = 2;
+  string slug = 3;
+  string excerpt = 4;
+  PageContent content = 5;
+  PageMeta meta = 6;
+  PageStatus status = 7;
+  string author = 8;
+  repeated string categories = 9;
+  repeated string tags = 10;
+  string featured_image = 11;
+  google.protobuf.Timestamp published_at = 12;
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp updated_at = 14;
+}
+
+// Blog post request messages
+message CreateBlogPostRequest {
+  string title = 1;
+  string slug = 2;
+  string excerpt = 3;
+  PageContent content = 4;
+  PageMeta meta = 5;
+  PageStatus status = 6;
+  string author = 7;
+  repeated string categories = 8;
+  repeated string tags = 9;
+  string featured_image = 10;
+  google.protobuf.Timestamp published_at = 11;
+}
+
+message GetBlogPostRequest {
+  string id = 1;
+}
+
+message UpdateBlogPostRequest {
+  string id = 1;
+  string title = 2;
+  string slug = 3;
+  string excerpt = 4;
+  PageContent content = 5;
+  PageMeta meta = 6;
+  PageStatus status = 7;
+  string author = 8;
+  repeated string categories = 9;
+  repeated string tags = 10;
+  string featured_image = 11;
+  google.protobuf.Timestamp published_at = 12;
+}
+
+message DeleteBlogPostRequest {
+  string id = 1;
+}
+
+message ListBlogPostsRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+  PageStatus status = 3;
+  string category = 4;
+  string tag = 5;
+  string author = 6;
+}
+
+message ListBlogPostsResponse {
+  repeated BlogPost posts = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message SearchBlogPostsRequest {
+  string query = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+  string category = 4;
+  string tag = 5;
+}
+
+message SearchBlogPostsResponse {
+  repeated BlogPost posts = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message GetBlogCategoriesRequest {}
+
+message GetBlogCategoriesResponse {
+  repeated BlogCategory categories = 1;
+}
+
+message BlogCategory {
+  string name = 1;
+  string slug = 2;
+  int32 post_count = 3;
+}
+
+message GetBlogTagsRequest {}
+
+message GetBlogTagsResponse {
+  repeated BlogTag tags = 1;
+}
+
+message BlogTag {
+  string name = 1;
+  string slug = 2;
+  int32 post_count = 3;
+}
+
+message GetRSSFeedRequest {}
+
+message GetRSSFeedResponse {
+  string xml_content = 1;
+  string content_type = 2;
+}

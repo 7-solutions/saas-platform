@@ -2,7 +2,10 @@ package services
 
 import (
 	"context"
+	"fmt"
+	"os"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -12,9 +15,26 @@ import (
 	"github.com/saas-startup-platform/backend/internal/repository"
 )
 
+// minimal helper mirroring repository getenvDefault to avoid import cycle
+func getenvDefaultForTests(key, def string) string {
+	if v := os.Getenv(key); v != "" {
+		return v
+	}
+	return def
+}
+
 func setupContentServiceTest(t *testing.T) (*ContentService, func()) {
-	// Create test database client
-	client, err := database.NewTestClient()
+	// Create a unique database per test to avoid cross-test contamination
+	dbName := getenvDefaultForTests("COUCHDB_DATABASE", "")
+	if dbName == "" {
+		dbName = fmt.Sprintf("test_saas_platform_services_%d", time.Now().UnixNano())
+	}
+	client, err := database.NewClient(database.Config{
+		URL:      getenvDefaultForTests("COUCHDB_URL", "http://localhost:15984"),
+		Username: getenvDefaultForTests("COUCHDB_USERNAME", "admin"),
+		Password: getenvDefaultForTests("COUCHDB_PASSWORD", "adminpass"),
+		Database: dbName,
+	})
 	require.NoError(t, err)
 
 	// Setup views
@@ -26,7 +46,8 @@ func setupContentServiceTest(t *testing.T) (*ContentService, func()) {
 	pageRepo := repository.NewPageRepository(client)
 
 	// Create service
-	service := NewContentService(pageRepo)
+	blogRepo := repository.NewBlogRepository(client)
+	service := NewContentService(pageRepo, blogRepo)
 
 	// Return cleanup function
 	cleanup := func() {

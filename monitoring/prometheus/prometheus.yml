@@ -36,3 +36,12 @@ scrape_configs:
     static_configs:
       - targets: ['node-exporter:9100']
     scrape_interval: 30s
+
+  # Build metrics from file-based service discovery
+  - job_name: 'build-metrics'
+    file_sd_configs:
+      - files:
+          - '/etc/prometheus/build-metrics/*.json'
+        refresh_interval: 30s
+    metrics_path: '/metrics'
+    scrape_interval: 60s

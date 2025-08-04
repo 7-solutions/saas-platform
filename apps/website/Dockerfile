@@ -47,6 +47,11 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 
+# Optional build metadata
+ARG VERSION=dev
+ARG GIT_SHA=unknown
+ARG BUILD_TIME=unknown
+
 # Build packages first, then website
 RUN pnpm build --filter=@saas-platform/ui && \
     pnpm build --filter=@saas-platform/shared && \

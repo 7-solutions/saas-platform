@@ -1,5 +1,4 @@
 
-
-> @saas-platform/shared@0.1.0 build /Users/tsaa/Workspace/devops/coder/cms/packages/shared
+> @saas-platform/shared@0.1.0 build /Users/tsaa/Workspace/coder/saas-platform/packages/shared
 > tsc
 

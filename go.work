@@ -1,0 +1,16 @@
+go 1.24.0
+
+toolchain go1.24.5
+
+use (
+	./api-gateway
+	./backend
+	./services/auth
+	./services/contact
+	./services/content
+	./services/media
+	./shared/gen
+	./shared/go-jwt
+	./shared/go-logger
+	./shared/go-metrics
+)

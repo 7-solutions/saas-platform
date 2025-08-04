@@ -1,51 +1,53 @@
 
-
-> @saas-platform/website@0.1.0 build /Users/tsaa/Workspace/devops/coder/cms/apps/website
+> @saas-platform/website@0.1.0 build /Users/tsaa/Workspace/coder/saas-platform/apps/website
 > next build
 
-   [1m[38;2;173;127;168m▲ Next.js 15.4.5[39m[22m
+   ▲ Next.js 15.4.5
    - Experiments (use with caution):
      · staleTimes
-     [1m✓[22m typedRoutes
+     ✓ typedRoutes
      · optimizePackageImports
 
- [37m[1m [22m[39m Creating an optimized production build ...
- [32m[1m✓[22m[39m Compiled successfully in 1000ms
-[?25l [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m ⚠ TypeScript project references are not fully supported. Attempting to build in incremental mode.
- ⨯ ESLint: Failed to load config "@typescript-eslint/recommended" to extend from. Referenced from: /Users/tsaa/Workspace/devops/coder/cms/.eslintrc.js
-[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[?25h [37m[1m [22m[39m Linting and checking validity of types     [32m[1m✓[22m[39m Linting and checking validity of types 
-[?25l [37m[1m [22m[39m Collecting page data  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting page data  [36m..[39mError fetching published pages: { code: 'NETWORK_ERROR', message: 'fetch failed' }
-[2K[1G[?25h [37m[1m [22m[39m Collecting page data     [32m[1m✓[22m[39m Collecting page data 
-[?25l [37m[1m [22m[39m Generating static pages (0/13)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (0/13)  [36m[=   ][39m[2K[1G[?25hError fetching RSS feed: { code: 'NETWORK_ERROR', message: 'fetch failed' }
-[?25h [32m[1m✓[22m[39m Generating static pages (13/13)
-[?25l [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[?25l [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G[?25h [37m[1m [22m[39m Collecting build traces     [32m[1m✓[22m[39m Collecting build traces 
-[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G[?25h [37m[1m [22m[39m Finalizing page optimization     [32m[1m✓[22m[39m Finalizing page optimization 
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 3.0s
+   Linting and checking validity of types ...
+ ⚠ TypeScript project references are not fully supported. Attempting to build in incremental mode.
+ ⨯ ESLint: Failed to load config "@typescript-eslint/recommended" to extend from. Referenced from: /Users/tsaa/Workspace/coder/saas-platform/.eslintrc.js
+   Collecting page data ...
+Error fetching published pages: { code: 'NETWORK_ERROR', message: 'fetch failed' }
+   Generating static pages (0/13) ...
+Error fetching RSS feed: { code: 'NETWORK_ERROR', message: 'fetch failed' }
+   Generating static pages (3/13) 
+   Generating static pages (6/13) 
+   Generating static pages (9/13) 
+ ✓ Generating static pages (13/13)
+   Finalizing page optimization ...
+   Collecting build traces ...
 
-[4mRoute (app)[24m                                 [4mSize[24m  [4mFirst Load JS[24m  [4mRevalidate[24m  [4mExpire[24m
-┌ ○ /                                      118 B         [37m[1m186 kB[22m[39m
-├ ○ /_not-found                            118 B         [37m[1m186 kB[22m[39m
-├ ● /[...slug]                             116 B         [37m[1m186 kB[22m[39m
-├ ○ /about                                 171 B         [37m[1m186 kB[22m[39m
-├ ƒ /admin                               1.36 kB         [37m[1m188 kB[22m[39m
-├ ƒ /admin/contact                       1.87 kB         [37m[1m188 kB[22m[39m
-├ ƒ /api/health                            118 B         [37m[1m186 kB[22m[39m
-├ ƒ /api/revalidate                        118 B         [37m[1m186 kB[22m[39m
-├ ƒ /blog                                  118 B         [37m[1m186 kB[22m[39m
-├ ƒ /blog/[slug]                           118 B         [37m[1m186 kB[22m[39m
-├ ○ /blog/rss                              117 B         [37m[1m186 kB[22m[39m          5m      1y
-├ ƒ /blog/search                           117 B         [37m[1m186 kB[22m[39m
-├ ○ /contact                             4.03 kB         [37m[1m190 kB[22m[39m
-├ ○ /robots.txt                            118 B         [37m[1m186 kB[22m[39m
-├ ○ /services                              118 B         [37m[1m186 kB[22m[39m
-└ ○ /sitemap.xml                           118 B         [37m[1m186 kB[22m[39m          5m      1y
-+ First Load JS shared by all             [37m[1m186 kB[22m[39m
+Route (app)                                 Size  First Load JS  Revalidate  Expire
+┌ ○ /                                      118 B         186 kB
+├ ○ /_not-found                            118 B         186 kB
+├ ● /[...slug]                             116 B         186 kB
+├ ○ /about                                 170 B         186 kB
+├ ƒ /admin                               1.36 kB         188 kB
+├ ƒ /admin/contact                       1.87 kB         188 kB
+├ ƒ /api/health                            118 B         186 kB
+├ ƒ /api/revalidate                        118 B         186 kB
+├ ƒ /blog                                  118 B         186 kB
+├ ƒ /blog/[slug]                           118 B         186 kB
+├ ○ /blog/rss                              117 B         186 kB          5m      1y
+├ ƒ /blog/search                           117 B         186 kB
+├ ○ /contact                             4.03 kB         190 kB
+├ ○ /robots.txt                            118 B         186 kB
+├ ○ /services                              118 B         186 kB
+└ ○ /sitemap.xml                           118 B         186 kB          5m      1y
++ First Load JS shared by all             186 kB
   ├ chunks/5fff77f6-ff99f66bf3ab149e.js  54.1 kB
   ├ chunks/vendors-33933834ff576332.js    126 kB
-  └ other shared chunks (total)          5.66 kB
+  └ other shared chunks (total)          5.67 kB
 
 
 ○  (Static)   prerendered as static content
-●  (SSG)      prerendered as static HTML (uses [36mgenerateStaticParams[39m)
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
 
-[?25h

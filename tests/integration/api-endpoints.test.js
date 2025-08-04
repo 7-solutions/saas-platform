@@ -1,295 +1,316 @@
-#!/usr/bin/env node
-
 /**
- * Comprehensive API endpoint testing script
- * Tests all gRPC Gateway REST endpoints with various scenarios
+ * Integration Tests for API Endpoints
+ * Tests the backend API endpoints within Docker network
  */
 
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-
-const BASE_URL = process.env.API_BASE_URL || 'http://localhost:8080';
-const API_VERSION = 'v1';
+const axios = require('axios');
 
 // Test configuration
-const config = {
-  timeout: 10000,
-  retries: 3,
-  baseURL: `${BASE_URL}/api/${API_VERSION}`,
-};
+const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:8080';
+const TIMEOUT = 30000; // 30 seconds
 
-// Test results tracking
-const results = {
-  passed: 0,
-  failed: 0,
-  skipped: 0,
-  errors: []
-};
+// Create axios instance with default config
+const api = axios.create({
+  baseURL: BACKEND_URL,
+  timeout: TIMEOUT,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 
-// Helper functions
-const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-const makeRequest = async (endpoint, options = {}) => {
-  const url = `${config.baseURL}${endpoint}`;
-  const requestOptions = {
-    timeout: config.timeout,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers
-    },
-    ...options
-  };
-
-  try {
-    const response = await fetch(url, requestOptions);
-    const data = await response.text();
-    
-    let jsonData;
-    try {
-      jsonData = JSON.parse(data);
-    } catch {
-      jsonData = data;
+describe('Backend API Integration Tests', () => {
+  beforeAll(async () => {
+    // Wait for backend to be ready
+    console.log('Waiting for backend to be ready...');
+    let retries = 30;
+    while (retries > 0) {
+      try {
+        await api.get('/api/v1/health');
+        console.log('Backend is ready!');
+        break;
+      } catch (error) {
+        retries--;
+        if (retries === 0) {
+          throw new Error('Backend failed to start within timeout period');
+        }
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
     }
+  }, 60000);
 
-    return {
-      status: response.status,
-      statusText: response.statusText,
-      headers: response.headers,
-      data: jsonData,
-      ok: response.ok
-    };
-  } catch (error) {
-    throw new Error(`Request failed: ${error.message}`);
-  }
-};
-
-const runTest = async (testName, testFn) => {
-  console.log(`\n🧪 Running: ${testName}`);
-  try {
-    await testFn();
-    console.log(`✅ PASSED: ${testName}`);
-    results.passed++;
-  } catch (error) {
-    console.log(`❌ FAILED: ${testName}`);
-    console.log(`   Error: ${error.message}`);
-    results.failed++;
-    results.errors.push({ test: testName, error: error.message });
-  }
-};
-
-const skipTest = (testName, reason) => {
-  console.log(`⏭️  SKIPPED: ${testName} (${reason})`);
-  results.skipped++;
-};
-
-// Test suites
-const testHealthEndpoint = async () => {
-  const response = await makeRequest('/health');
-  if (response.status !== 200) {
-    throw new Error(`Expected status 200, got ${response.status}`);
-  }
-  if (!response.data || typeof response.data !== 'object') {
-    throw new Error('Health endpoint should return JSON object');
-  }
-};
-
-const testContactFormSubmission = async () => {
-  const testData = {
-    name: "API Test User",
-    email: "apitest@example.com",
-    company: "Test Company",
-    message: "This is an automated API test message."
-  };
-
-  const response = await makeRequest('/contact', {
-    method: 'POST',
-    body: JSON.stringify(testData)
-  });
-
-  if (response.status !== 200 && response.status !== 201) {
-    throw new Error(`Expected status 200/201, got ${response.status}`);
-  }
-
-  if (!response.data.id) {
-    throw new Error('Contact submission should return an ID');
-  }
-};
-
-const testContactFormValidation = async () => {
-  // Test empty submission
-  const emptyData = {};
-  const response = await makeRequest('/contact', {
-    method: 'POST',
-    body: JSON.stringify(emptyData)
-  });
-
-  if (response.status !== 400) {
-    throw new Error(`Expected validation error (400), got ${response.status}`);
-  }
-};
-
-const testContentEndpoints = async () => {
-  // Test list pages
-  const listResponse = await makeRequest('/pages');
-  if (listResponse.status !== 200) {
-    throw new Error(`Expected status 200 for pages list, got ${listResponse.status}`);
-  }
-
-  // Test get specific page (if any exist)
-  if (listResponse.data.pages && listResponse.data.pages.length > 0) {
-    const pageId = listResponse.data.pages[0].id;
-    const pageResponse = await makeRequest(`/pages/${pageId}`);
-    if (pageResponse.status !== 200) {
-      throw new Error(`Expected status 200 for page get, got ${pageResponse.status}`);
-    }
-  }
-};
-
-const testBlogEndpoints = async () => {
-  // Test list blog posts
-  const listResponse = await makeRequest('/blog');
-  if (listResponse.status !== 200) {
-    throw new Error(`Expected status 200 for blog list, got ${listResponse.status}`);
-  }
-
-  // Test blog categories
-  const categoriesResponse = await makeRequest('/blog/categories');
-  if (categoriesResponse.status !== 200) {
-    throw new Error(`Expected status 200 for blog categories, got ${categoriesResponse.status}`);
-  }
-
-  // Test blog tags
-  const tagsResponse = await makeRequest('/blog/tags');
-  if (tagsResponse.status !== 200) {
-    throw new Error(`Expected status 200 for blog tags, got ${tagsResponse.status}`);
-  }
-
-  // Test RSS feed
-  const rssResponse = await makeRequest('/blog/rss');
-  if (rssResponse.status !== 200) {
-    throw new Error(`Expected status 200 for RSS feed, got ${rssResponse.status}`);
-  }
-};
-
-const testAuthEndpoints = async () => {
-  // Test login with invalid credentials
-  const loginData = {
-    email: "invalid@example.com",
-    password: "wrongpassword"
-  };
-
-  const response = await makeRequest('/auth/login', {
-    method: 'POST',
-    body: JSON.stringify(loginData)
-  });
-
-  if (response.status !== 401 && response.status !== 400) {
-    throw new Error(`Expected auth error (401/400), got ${response.status}`);
-  }
-};
-
-const testMediaEndpoints = async () => {
-  // Test list media files
-  const listResponse = await makeRequest('/media');
-  if (listResponse.status !== 200) {
-    throw new Error(`Expected status 200 for media list, got ${listResponse.status}`);
-  }
-};
-
-const testErrorHandling = async () => {
-  // Test 404 endpoint
-  const response = await makeRequest('/nonexistent-endpoint');
-  if (response.status !== 404) {
-    throw new Error(`Expected 404 for non-existent endpoint, got ${response.status}`);
-  }
-};
-
-const testRateLimiting = async () => {
-  // Make multiple rapid requests to test rate limiting
-  const promises = [];
-  for (let i = 0; i < 10; i++) {
-    promises.push(makeRequest('/health'));
-  }
-
-  const responses = await Promise.all(promises);
-  const rateLimited = responses.some(r => r.status === 429);
-  
-  // Rate limiting might not be implemented, so we just log the result
-  console.log(`   Rate limiting ${rateLimited ? 'detected' : 'not detected'}`);
-};
-
-const testCORS = async () => {
-  // Test CORS headers
-  const response = await makeRequest('/health', {
-    method: 'OPTIONS'
-  });
-
-  // CORS might not be configured for OPTIONS, so we check the actual response
-  const corsHeaders = response.headers.get('access-control-allow-origin');
-  console.log(`   CORS headers ${corsHeaders ? 'present' : 'not present'}`);
-};
-
-// Main test runner
-const runAllTests = async () => {
-  console.log('🚀 Starting API Endpoint Integration Tests');
-  console.log(`📍 Base URL: ${config.baseURL}`);
-  console.log('=' .repeat(50));
-
-  // Wait for services to be ready
-  console.log('⏳ Waiting for services to be ready...');
-  await sleep(2000);
-
-  // Core functionality tests
-  await runTest('Health Endpoint', testHealthEndpoint);
-  await runTest('Contact Form Submission', testContactFormSubmission);
-  await runTest('Contact Form Validation', testContactFormValidation);
-  await runTest('Content Endpoints', testContentEndpoints);
-  await runTest('Blog Endpoints', testBlogEndpoints);
-  await runTest('Auth Endpoints', testAuthEndpoints);
-  await runTest('Media Endpoints', testMediaEndpoints);
-  
-  // Error handling and edge cases
-  await runTest('Error Handling', testErrorHandling);
-  await runTest('Rate Limiting', testRateLimiting);
-  await runTest('CORS Configuration', testCORS);
-
-  // Print results
-  console.log('\n' + '=' .repeat(50));
-  console.log('📊 Test Results Summary');
-  console.log('=' .repeat(50));
-  console.log(`✅ Passed: ${results.passed}`);
-  console.log(`❌ Failed: ${results.failed}`);
-  console.log(`⏭️  Skipped: ${results.skipped}`);
-  console.log(`📈 Total: ${results.passed + results.failed + results.skipped}`);
-
-  if (results.errors.length > 0) {
-    console.log('\n❌ Failed Tests:');
-    results.errors.forEach(({ test, error }) => {
-      console.log(`   • ${test}: ${error}`);
+  describe('Health Check Endpoint', () => {
+    test('should return healthy status', async () => {
+      const response = await api.get('/api/v1/health');
+      
+      expect(response.status).toBe(200);
+      expect(response.data).toHaveProperty('status', 'healthy');
+      expect(response.data).toHaveProperty('timestamp');
+      expect(response.data).toHaveProperty('version');
     });
-  }
 
-  // Exit with appropriate code
-  process.exit(results.failed > 0 ? 1 : 0);
-};
+    test('should include database connectivity status', async () => {
+      const response = await api.get('/api/v1/health');
+      
+      expect(response.data).toHaveProperty('database');
+      expect(response.data.database).toHaveProperty('status', 'connected');
+    });
+  });
 
-// Handle uncaught errors
-process.on('unhandledRejection', (error) => {
-  console.error('❌ Unhandled rejection:', error);
-  process.exit(1);
+  describe('Contact Form API', () => {
+    test('should accept valid contact form submission', async () => {
+      const contactData = {
+        name: 'Integration Test User',
+        email: 'test@example.com',
+        company: 'Test Company',
+        message: 'This is an integration test message that is long enough to pass validation.',
+      };
+
+      const response = await api.post('/api/v1/contact', contactData);
+      
+      expect(response.status).toBe(201);
+      expect(response.data).toHaveProperty('id');
+      expect(response.data).toHaveProperty('status', 'submitted');
+      expect(response.data).toHaveProperty('createdAt');
+    });
+
+    test('should reject invalid contact form data', async () => {
+      const invalidData = {
+        name: '', // Empty name should fail validation
+        email: 'invalid-email',
+        message: 'Short', // Too short message
+      };
+
+      try {
+        await api.post('/api/v1/contact', invalidData);
+        fail('Should have thrown validation error');
+      } catch (error) {
+        expect(error.response.status).toBe(400);
+        expect(error.response.data).toHaveProperty('errors');
+        expect(Array.isArray(error.response.data.errors)).toBe(true);
+      }
+    });
+
+    test('should handle missing required fields', async () => {
+      const incompleteData = {
+        name: 'Test User',
+        // Missing email and message
+      };
+
+      try {
+        await api.post('/api/v1/contact', incompleteData);
+        fail('Should have thrown validation error');
+      } catch (error) {
+        expect(error.response.status).toBe(400);
+        expect(error.response.data).toHaveProperty('errors');
+      }
+    });
+  });
+
+  describe('Content Management API', () => {
+    let authToken;
+    let testPageId;
+
+    beforeAll(async () => {
+      // Authenticate for content management tests
+      try {
+        const authResponse = await api.post('/api/v1/auth/login', {
+          email: 'admin@example.com',
+          password: 'test-password',
+        });
+        authToken = authResponse.data.token;
+      } catch (error) {
+        console.warn('Authentication failed, skipping authenticated tests');
+      }
+    });
+
+    test('should create a new page', async () => {
+      if (!authToken) {
+        console.log('Skipping authenticated test - no auth token');
+        return;
+      }
+
+      const pageData = {
+        title: 'Integration Test Page',
+        slug: 'integration-test-page',
+        content: '<p>This is a test page created during integration testing.</p>',
+        status: 'draft',
+      };
+
+      const response = await api.post('/api/v1/pages', pageData, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
+      
+      expect(response.status).toBe(201);
+      expect(response.data).toHaveProperty('id');
+      expect(response.data).toHaveProperty('title', pageData.title);
+      expect(response.data).toHaveProperty('slug', pageData.slug);
+      
+      testPageId = response.data.id;
+    });
+
+    test('should retrieve created page', async () => {
+      if (!authToken || !testPageId) {
+        console.log('Skipping test - no auth token or page ID');
+        return;
+      }
+
+      const response = await api.get(`/api/v1/pages/${testPageId}`, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
+      
+      expect(response.status).toBe(200);
+      expect(response.data).toHaveProperty('id', testPageId);
+      expect(response.data).toHaveProperty('title', 'Integration Test Page');
+    });
+
+    test('should update existing page', async () => {
+      if (!authToken || !testPageId) {
+        console.log('Skipping test - no auth token or page ID');
+        return;
+      }
+
+      const updateData = {
+        title: 'Updated Integration Test Page',
+        content: '<p>This page has been updated during integration testing.</p>',
+      };
+
+      const response = await api.put(`/api/v1/pages/${testPageId}`, updateData, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
+      
+      expect(response.status).toBe(200);
+      expect(response.data).toHaveProperty('title', updateData.title);
+      expect(response.data).toHaveProperty('updatedAt');
+    });
+
+    test('should delete test page', async () => {
+      if (!authToken || !testPageId) {
+        console.log('Skipping test - no auth token or page ID');
+        return;
+      }
+
+      const response = await api.delete(`/api/v1/pages/${testPageId}`, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
+      
+      expect(response.status).toBe(204);
+    });
+  });
+
+  describe('Media Upload API', () => {
+    let authToken;
+
+    beforeAll(async () => {
+      // Authenticate for media upload tests
+      try {
+        const authResponse = await api.post('/api/v1/auth/login', {
+          email: 'admin@example.com',
+          password: 'test-password',
+        });
+        authToken = authResponse.data.token;
+      } catch (error) {
+        console.warn('Authentication failed, skipping media upload tests');
+      }
+    });
+
+    test('should handle media upload endpoint', async () => {
+      if (!authToken) {
+        console.log('Skipping authenticated test - no auth token');
+        return;
+      }
+
+      // Test that the media upload endpoint exists and requires authentication
+      try {
+        await api.post('/api/v1/media/upload', {}, {
+          headers: { Authorization: `Bearer ${authToken}` },
+        });
+      } catch (error) {
+        // We expect this to fail due to missing file, but should not be 401/403
+        expect([400, 422]).toContain(error.response.status);
+      }
+    });
+
+    test('should reject unauthenticated media upload', async () => {
+      try {
+        await api.post('/api/v1/media/upload', {});
+        fail('Should have required authentication');
+      } catch (error) {
+        expect([401, 403]).toContain(error.response.status);
+      }
+    });
+  });
+
+  describe('Database Integration', () => {
+    test('should connect to CouchDB', async () => {
+      const response = await api.get('/api/v1/health');
+      
+      expect(response.data.database).toHaveProperty('status', 'connected');
+      expect(response.data.database).toHaveProperty('type', 'couchdb');
+    });
+
+    test('should handle database operations', async () => {
+      // Test that the API can perform basic database operations
+      const contactData = {
+        name: 'Database Test User',
+        email: 'dbtest@example.com',
+        message: 'Testing database integration with a sufficiently long message.',
+      };
+
+      const response = await api.post('/api/v1/contact', contactData);
+      
+      expect(response.status).toBe(201);
+      expect(response.data).toHaveProperty('id');
+      
+      // Verify the data was actually stored by checking it exists
+      // (This would require a GET endpoint for contact submissions)
+    });
+  });
+
+  describe('Error Handling', () => {
+    test('should handle 404 for non-existent endpoints', async () => {
+      try {
+        await api.get('/api/v1/non-existent-endpoint');
+        fail('Should have returned 404');
+      } catch (error) {
+        expect(error.response.status).toBe(404);
+      }
+    });
+
+    test('should handle malformed JSON requests', async () => {
+      try {
+        await api.post('/api/v1/contact', 'invalid-json', {
+          headers: { 'Content-Type': 'application/json' },
+        });
+        fail('Should have returned 400');
+      } catch (error) {
+        expect(error.response.status).toBe(400);
+      }
+    });
+
+    test('should include proper CORS headers', async () => {
+      const response = await api.get('/api/v1/health');
+      
+      expect(response.headers).toHaveProperty('access-control-allow-origin');
+    });
+  });
+
+  describe('Performance', () => {
+    test('should respond to health check within reasonable time', async () => {
+      const startTime = Date.now();
+      await api.get('/api/v1/health');
+      const responseTime = Date.now() - startTime;
+      
+      expect(responseTime).toBeLessThan(1000); // Should respond within 1 second
+    });
+
+    test('should handle concurrent requests', async () => {
+      const requests = Array(5).fill().map(() => api.get('/api/v1/health'));
+      
+      const responses = await Promise.all(requests);
+      
+      responses.forEach(response => {
+        expect(response.status).toBe(200);
+      });
+    });
+  });
 });
-
-process.on('uncaughtException', (error) => {
-  console.error('❌ Uncaught exception:', error);
-  process.exit(1);
-});
-
-// Run tests if this script is executed directly
-if (require.main === module) {
-  runAllTests();
-}
-
-module.exports = {
-  runAllTests,
-  makeRequest,
-  config
-};

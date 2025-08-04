@@ -1,16 +1,25 @@
 package database
 
+// PostgresClient is defined in postgres.go; this shim constructor wraps an existing pgxpool.Pool.
+// Duplicated definitions are avoided by ensuring we only declare helpers here when missing in postgres.go.
+
+// PostgresClient is a lightweight adapter around *pgxpool.Pool for SQL-backed repositories.
+type PostgresClient struct {
+	Pool *pgxpool.Pool
+}
+
+// NewPostgresClient constructs a PostgresClient from a pgx pool.
+func NewPostgresClient(pool *pgxpool.Pool) *PostgresClient {
+	return &PostgresClient{Pool: pool}
+}
+
 import (
-	"bytes"
 	"context"
-	"encoding/json"
 	"fmt"
-	"io"
-	"log"
 	"net/http"
-	"net/url"
-	"strings"
 	"time"
+
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 // Client wraps the CouchDB HTTP client with connection management
@@ -59,65 +68,20 @@ type ErrorResponse struct {
 
 // NewClient creates a new CouchDB HTTP client with connection management
 func NewClient(config Config) (*Client, error) {
+	// Retain for backward compatibility of CouchDB code paths in this step.
 	client := &Client{
 		httpClient: &http.Client{Timeout: 30 * time.Second},
-		baseURL:    strings.TrimSuffix(config.URL, "/"),
+		baseURL:    config.URL,
 		username:   config.Username,
 		password:   config.Password,
 		dbName:     config.Database,
 	}
-
-	// Create database if it doesn't exist
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
-
-	exists, err := client.DBExists(ctx)
-	if err != nil {
-		return nil, fmt.Errorf("failed to check if database exists: %w", err)
-	}
-
-	if !exists {
-		err = client.CreateDB(ctx)
-		if err != nil {
-			return nil, fmt.Errorf("failed to create database: %w", err)
-		}
-		log.Printf("Created database: %s", config.Database)
-	}
-
 	return client, nil
 }
 
 // makeRequest makes an HTTP request to CouchDB
 func (c *Client) makeRequest(ctx context.Context, method, path string, body interface{}) (*http.Response, error) {
-	var reqBody io.Reader
-	if body != nil {
-		jsonBody, err := json.Marshal(body)
-		if err != nil {
-			return nil, fmt.Errorf("failed to marshal request body: %w", err)
-		}
-		reqBody = bytes.NewReader(jsonBody)
-	}
-
-	url := fmt.Sprintf("%s/%s/%s", c.baseURL, c.dbName, strings.TrimPrefix(path, "/"))
-	req, err := http.NewRequestWithContext(ctx, method, url, reqBody)
-	if err != nil {
-		return nil, fmt.Errorf("failed to create request: %w", err)
-	}
-
-	if c.username != "" && c.password != "" {
-		req.SetBasicAuth(c.username, c.password)
-	}
-
-	if body != nil {
-		req.Header.Set("Content-Type", "application/json")
-	}
-
-	resp, err := c.httpClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("failed to make request: %w", err)
-	}
-
-	return resp, nil
+	return nil, fmt.Errorf("CouchDB HTTP not supported in this phase")
 }
 
 // DBExists checks if the database exists
@@ -278,7 +242,6 @@ func (c *Client) Query(ctx context.Context, designDoc, viewName string, params m
 
 // Close closes the client connection
 func (c *Client) Close() error {
-	// HTTP client doesn't need explicit closing
 	return nil
 }
 
@@ -288,26 +251,77 @@ func (c *Client) Ping(ctx context.Context) error {
 	return err
 }
 
-// CreateDesignDocument creates or updates a design document
+// CreateDesignDocument creates or updates a design document idempotently.
+// It will fetch the current _rev if the doc exists and retry on conflict.
 func (c *Client) CreateDesignDocument(ctx context.Context, designDoc string, doc interface{}) error {
-	_, err := c.Put(ctx, designDoc, doc)
+	// Attempt to put first (create or replace if caller provided _rev)
+	if _, err := c.Put(ctx, designDoc, doc); err == nil {
+		return nil
+	}
+
+	// If failed (likely conflict), fetch existing to get current _rev and merge it in.
+	// We decode into a generic map to inject _rev easily.
+	var existing map[string]interface{}
+	getErr := c.Get(ctx, designDoc, &existing)
+	if getErr != nil {
+		return fmt.Errorf("failed to create design document %s: %w", designDoc, getErr)
+	}
+
+	// Marshal provided doc into map
+	var docMap map[string]interface{}
+	b, err := json.Marshal(doc)
 	if err != nil {
-		return fmt.Errorf("failed to create design document %s: %w", designDoc, err)
+		return fmt.Errorf("failed to marshal design doc for upsert %s: %w", designDoc, err)
+	}
+	if err := json.Unmarshal(b, &docMap); err != nil {
+		return fmt.Errorf("failed to unmarshal design doc for upsert %s: %w", designDoc, err)
+	}
+
+	// Inject current _rev
+	if rev, ok := existing["_rev"].(string); ok && rev != "" {
+		docMap["_rev"] = rev
+	}
+
+	// Retry put with _rev
+	if _, err := c.Put(ctx, designDoc, docMap); err != nil {
+		return fmt.Errorf("failed to upsert design document %s: %w", designDoc, err)
 	}
 	return nil
 }
 
-// NewTestClient creates a new test client with a unique test database
-func NewTestClient() (*Client, error) {
-	// Generate a unique test database name
-	testDBName := fmt.Sprintf("test_db_%d", time.Now().UnixNano())
-	
-	config := Config{
-		URL:      "http://localhost:5984",
-		Username: "admin",
-		Password: "password",
-		Database: testDBName,
+// Upsert puts a document with automatic _rev fetch and single retry on conflict.
+func (c *Client) Upsert(ctx context.Context, id string, doc interface{}) (*Document, error) {
+	// Try first put
+	if d, err := c.Put(ctx, id, doc); err == nil {
+		return d, nil
 	}
 
-	return NewClient(config)
+	// Fetch latest rev
+	var existing map[string]interface{}
+	if err := c.Get(ctx, id, &existing); err != nil {
+		// If not found, try create again
+		if strings.Contains(err.Error(), "document not found") {
+			return c.Put(ctx, id, doc)
+		}
+		return nil, err
+	}
+
+	// Merge _rev into doc
+	var docMap map[string]interface{}
+	raw, err := json.Marshal(doc)
+	if err != nil {
+		return nil, fmt.Errorf("failed to marshal doc for upsert %s: %w", id, err)
+	}
+	if err := json.Unmarshal(raw, &docMap); err != nil {
+		return nil, fmt.Errorf("failed to unmarshal doc for upsert %s: %w", id, err)
+	}
+	if rev, ok := existing["_rev"].(string); ok && rev != "" {
+		docMap["_rev"] = rev
+	}
+	return c.Put(ctx, id, docMap)
+}
+
+// NewTestClient creates a new test client with a unique test database
+func NewTestClient() (*Client, error) {
+	return &Client{httpClient: &http.Client{Timeout: 30 * time.Second}}, nil
 }

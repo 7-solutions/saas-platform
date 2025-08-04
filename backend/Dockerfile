@@ -34,11 +34,14 @@ COPY go.mod go.sum ./
 # Copy source code
 COPY . .
 
-# Build the application with optimizations and build cache
+# Build the application with optimizations, metadata and build cache
+ARG VERSION=dev
+ARG GIT_SHA=unknown
+ARG BUILD_TIME=unknown
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache/go-build \
     CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
-    -ldflags='-w -s -extldflags "-static"' \
+    -ldflags="-s -w -extldflags \"-static\" -X main.version=${VERSION} -X main.commit=${GIT_SHA} -X main.date=${BUILD_TIME}" \
     -a -installsuffix cgo \
     -trimpath \
     -o main ./cmd/api
@@ -76,8 +79,8 @@ ENV GIN_MODE=release \
     GO_ENV=production
 
 # Health check with minimal overhead
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD wget --no-verbose --tries=1 --spider http://localhost:8080/health || exit 1
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=5 \
+    CMD wget -qO- http://localhost:8080/health >/dev/null || exit 1
 
 # Use dumb-init for proper signal handling
 ENTRYPOINT ["dumb-init", "--"]

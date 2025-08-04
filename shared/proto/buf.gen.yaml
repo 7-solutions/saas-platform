@@ -1,0 +1,29 @@
+version: v1
+managed:
+  enabled: true
+plugins:
+  # Generate Go message/types and gRPC service code into shared/gen
+  - plugin: go
+    out: ../gen
+    opt:
+      - paths=source_relative
+  - plugin: go-grpc
+    out: ../gen
+    opt:
+      - paths=source_relative
+
+  # Generate gRPC-Gateway reverse proxy stubs into shared/gen as well
+  # This produces *_gw.go with Register<Service>HandlerFromEndpoint symbols
+  - plugin: grpc-gateway
+    out: ../gen
+    opt:
+      - paths=source_relative
+      - generate_unbound_methods=true
+
+  # OpenAPI: single merged spec
+  - plugin: openapiv2
+    out: ../api-gateway/gen/openapi
+    opt:
+      - allow_merge=true
+      - merge_file_name=api
+      - use_go_templates=true

@@ -1,0 +1,219 @@
+
+> @saas-platform/ui@0.1.0 test /Users/tsaa/Workspace/coder/saas-platform/packages/ui
+> jest
+
+FAIL src/components/ui/__tests__/button.test.tsx
+  ● Button › renders with default props
+
+    expect(element).toHaveClass("bg-primary")
+
+    Expected the element to have class:
+      bg-primary
+    Received:
+      inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-indigo-600 text-white hover:bg-indigo-700 h-10 px-4 py-2
+
+       8 |     const button = screen.getByRole('button', { name: /click me/i });
+       9 |     expect(button).toBeInTheDocument();
+    > 10 |     expect(button).toHaveClass('bg-primary');
+         |                    ^
+      11 |   });
+      12 |
+      13 |   it('renders with different variants', () => {
+
+      at Object.<anonymous> (src/components/ui/__tests__/button.test.tsx:10:20)
+
+  ● Button › renders with different variants
+
+    expect(element).toHaveClass("bg-secondary")
+
+    Expected the element to have class:
+      bg-secondary
+    Received:
+      inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-100 text-gray-900 hover:bg-gray-200 h-10 px-4 py-2
+
+      13 |   it('renders with different variants', () => {
+      14 |     const { rerender } = render(<Button variant="secondary">Secondary</Button>);
+    > 15 |     expect(screen.getByRole('button')).toHaveClass('bg-secondary');
+         |                                        ^
+      16 |
+      17 |     rerender(<Button variant="destructive">Destructive</Button>);
+      18 |     expect(screen.getByRole('button')).toHaveClass('bg-destructive');
+
+      at Object.<anonymous> (src/components/ui/__tests__/button.test.tsx:15:40)
+
+FAIL src/components/ui/__tests__/input.test.tsx
+  ● Input › supports different input types
+
+    TestingLibraryElementError: Unable to find a label with the text of: /password/i
+
+    Ignored nodes: comments, script, style
+    [36m<body>[39m
+      [36m<div>[39m
+        [36m<input[39m
+          [33mclass[39m=[32m"flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"[39m
+          [33mtype[39m=[32m"password"[39m
+        [36m/>[39m
+      [36m</div>[39m
+    [36m</body>[39m
+
+      33 |
+      34 |     rerender(<Input type="password" />);
+    > 35 |     expect(screen.getByLabelText(/password/i) || screen.getByDisplayValue('')).toHaveAttribute('type', 'password');
+         |                   ^
+      36 |   });
+      37 |
+      38 |   it('forwards refs correctly', () => {
+
+      at Object.getElementError (../../node_modules/.pnpm/@testing-library+dom@9.3.4/node_modules/@testing-library/dom/dist/config.js:37:19)
+      at getAllByLabelText (../../node_modules/.pnpm/@testing-library+dom@9.3.4/node_modules/@testing-library/dom/dist/queries/label-text.js:111:38)
+      at ../../node_modules/.pnpm/@testing-library+dom@9.3.4/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+      at ../../node_modules/.pnpm/@testing-library+dom@9.3.4/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+      at Object.<anonymous> (src/components/ui/__tests__/input.test.tsx:35:19)
+
+FAIL src/components/forms/__tests__/form-input.test.tsx
+  ● Console
+
+    console.error
+      Warning: React does not recognize the `helpText` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `helptext` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+          at input
+          at /Users/tsaa/Workspace/coder/saas-platform/packages/ui/src/components/ui/input.tsx:9:6
+          at div
+          at onSubmit (/Users/tsaa/Workspace/coder/saas-platform/node_modules/.pnpm/react-hook-form@7.61.1_react@18.3.1/node_modules/react-hook-form/src/form.tsx:39:5)
+          at FormField (/Users/tsaa/Workspace/coder/saas-platform/packages/ui/src/components/forms/form-field.tsx:28:3)
+          at FormInput (/Users/tsaa/Workspace/coder/saas-platform/packages/ui/src/components/forms/form-input.tsx:21:3)
+          at TestFormInput (/Users/tsaa/Workspace/coder/saas-platform/packages/ui/src/components/forms/__tests__/form-input.test.tsx:8:3)
+
+      34 |
+      35 |   it('displays help text when provided', () => {
+    > 36 |     render(<TestFormInput helpText="This is help text" />);
+         |           ^
+      37 |     expect(screen.getByText('This is help text')).toBeInTheDocument();
+      38 |   });
+      39 |
+
+      at printWarning (../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:86:30)
+      at error (../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:60:7)
+      at validateProperty$1 (../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:3757:7)
+      at warnUnknownProperties (../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:3803:21)
+      at validateProperties$2 (../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:3827:3)
+      at validatePropertiesInDevelopment (../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:9541:5)
+      at setInitialProperties (../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:9830:5)
+      at finalizeInitialChildren (../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:10950:3)
+      at completeWork (../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:22232:17)
+      at completeUnitOfWork (../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26632:16)
+      at performUnitOfWork (../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26607:5)
+      at workLoopSync (../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+      at renderRootSync (../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+      at performConcurrentWorkOnRoot (../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:25777:74)
+      at flushActQueue (../../node_modules/.pnpm/react@18.3.1/node_modules/react/cjs/react.development.js:2667:24)
+      at act (../../node_modules/.pnpm/react@18.3.1/node_modules/react/cjs/react.development.js:2582:11)
+      at ../../node_modules/.pnpm/@testing-library+react@14.3.1_@types+react@18.3.23_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@testing-library/react/dist/act-compat.js:47:25
+      at renderRoot (../../node_modules/.pnpm/@testing-library+react@14.3.1_@types+react@18.3.23_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@testing-library/react/dist/pure.js:180:26)
+      at render (../../node_modules/.pnpm/@testing-library+react@14.3.1_@types+react@18.3.23_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@testing-library/react/dist/pure.js:271:10)
+      at Object.<anonymous> (src/components/forms/__tests__/form-input.test.tsx:36:11)
+
+  ● FormInput › shows required indicator when required
+
+    TestingLibraryElementError: Unable to find an element with the text: *. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+    Ignored nodes: comments, script, style
+    [36m<body>[39m
+      [36m<div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"space-y-2"[39m
+        [36m>[39m
+          [36m<label[39m
+            [33mclass[39m=[32m"text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 after:content-['*'] after:ml-0.5 after:text-red-500"[39m
+            [33mfor[39m=[32m"test"[39m
+          [36m>[39m
+            [0mTest Label[0m
+          [36m</label>[39m
+          [36m<input[39m
+            [33mclass[39m=[32m"flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"[39m
+            [33mid[39m=[32m"test"[39m
+            [33mname[39m=[32m"test"[39m
+            [33mvalue[39m=[32m""[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</body>[39m
+
+      30 |   it('shows required indicator when required', () => {
+      31 |     render(<TestFormInput required />);
+    > 32 |     expect(screen.getByText('*')).toBeInTheDocument();
+         |                   ^
+      33 |   });
+      34 |
+      35 |   it('displays help text when provided', () => {
+
+      at Object.getElementError (../../node_modules/.pnpm/@testing-library+dom@9.3.4/node_modules/@testing-library/dom/dist/config.js:37:19)
+      at ../../node_modules/.pnpm/@testing-library+dom@9.3.4/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+      at ../../node_modules/.pnpm/@testing-library+dom@9.3.4/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+      at ../../node_modules/.pnpm/@testing-library+dom@9.3.4/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+      at Object.<anonymous> (src/components/forms/__tests__/form-input.test.tsx:32:19)
+
+  ● FormInput › displays help text when provided
+
+    TestingLibraryElementError: Unable to find an element with the text: This is help text. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+    Ignored nodes: comments, script, style
+    [36m<body>[39m
+      [36m<div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"space-y-2"[39m
+        [36m>[39m
+          [36m<label[39m
+            [33mclass[39m=[32m"text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"[39m
+            [33mfor[39m=[32m"test"[39m
+          [36m>[39m
+            [0mTest Label[0m
+          [36m</label>[39m
+          [36m<input[39m
+            [33mclass[39m=[32m"flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"[39m
+            [33mhelptext[39m=[32m"This is help text"[39m
+            [33mid[39m=[32m"test"[39m
+            [33mname[39m=[32m"test"[39m
+            [33mvalue[39m=[32m""[39m
+          [36m/>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</body>[39m
+
+      35 |   it('displays help text when provided', () => {
+      36 |     render(<TestFormInput helpText="This is help text" />);
+    > 37 |     expect(screen.getByText('This is help text')).toBeInTheDocument();
+         |                   ^
+      38 |   });
+      39 |
+      40 |   it('handles different input types', () => {
+
+      at Object.getElementError (../../node_modules/.pnpm/@testing-library+dom@9.3.4/node_modules/@testing-library/dom/dist/config.js:37:19)
+      at ../../node_modules/.pnpm/@testing-library+dom@9.3.4/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+      at ../../node_modules/.pnpm/@testing-library+dom@9.3.4/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+      at ../../node_modules/.pnpm/@testing-library+dom@9.3.4/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+      at Object.<anonymous> (src/components/forms/__tests__/form-input.test.tsx:37:19)
+
+FAIL src/components/error/__tests__/error-boundary.test.tsx
+  ● ErrorBoundary › renders custom fallback component
+
+    TestingLibraryElementError: Unable to find an element with the text: Custom error message. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+    Ignored nodes: comments, script, style
+    [36m<body>[39m
+      [36m<div />[39m
+    [36m</body>[39m
+
+      50 |     );
+      51 |     
+    > 52 |     expect(screen.getByText('Custom error message')).toBeInTheDocument();
+         |                   ^
+      53 |   });
+      54 |
+      55 |   it('calls onError callback when error occurs', () => {
+
+      at Object.getElementError (../../node_modules/.pnpm/@testing-library+dom@9.3.4/node_modules/@testing-library/dom/dist/config.js:37:19)
+      at ../../node_modules/.pnpm/@testing-library+dom@9.3.4/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+      at ../../node_modules/.pnpm/@testing-library+dom@9.3.4/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+      at ../../node_modules/.pnpm/@testing-library+dom@9.3.4/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+      at Object.<anonymous> (src/components/error/__tests__/error-boundary.test.tsx:52:19)
+

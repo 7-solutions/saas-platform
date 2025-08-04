@@ -1,0 +1,335 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "contact/v1/contact.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ContactService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/contact": {
+      "post": {
+        "summary": "Submit a contact form",
+        "operationId": "ContactService_SubmitContactForm",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ContactSubmission"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SubmitContactFormRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ContactService"
+        ]
+      }
+    },
+    "/api/v1/contact/submissions": {
+      "get": {
+        "summary": "List contact submissions (admin only)",
+        "operationId": "ContactService_ListContactSubmissions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListContactSubmissionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "CONTACT_STATUS_UNSPECIFIED",
+              "CONTACT_STATUS_NEW",
+              "CONTACT_STATUS_READ",
+              "CONTACT_STATUS_REPLIED",
+              "CONTACT_STATUS_SPAM"
+            ],
+            "default": "CONTACT_STATUS_UNSPECIFIED"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ContactService"
+        ]
+      }
+    },
+    "/api/v1/contact/submissions/{id}": {
+      "get": {
+        "summary": "Get a specific contact submission (admin only)",
+        "operationId": "ContactService_GetContactSubmission",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ContactSubmission"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ContactService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete contact submission (admin only)",
+        "operationId": "ContactService_DeleteContactSubmission",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ContactService"
+        ]
+      }
+    },
+    "/api/v1/contact/submissions/{id}/read": {
+      "put": {
+        "summary": "Mark contact submission as read (admin only)",
+        "operationId": "ContactService_MarkContactSubmissionAsRead",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ContactSubmission"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContactServiceMarkContactSubmissionAsReadBody"
+            }
+          }
+        ],
+        "tags": [
+          "ContactService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ContactServiceMarkContactSubmissionAsReadBody": {
+      "type": "object"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1ContactStatus": {
+      "type": "string",
+      "enum": [
+        "CONTACT_STATUS_UNSPECIFIED",
+        "CONTACT_STATUS_NEW",
+        "CONTACT_STATUS_READ",
+        "CONTACT_STATUS_REPLIED",
+        "CONTACT_STATUS_SPAM"
+      ],
+      "default": "CONTACT_STATUS_UNSPECIFIED",
+      "title": "Contact submission status"
+    },
+    "v1ContactSubmission": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "company": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "userAgent": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/v1ContactStatus"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "ContactSubmission represents a contact form submission"
+    },
+    "v1ListContactSubmissionsResponse": {
+      "type": "object",
+      "properties": {
+        "submissions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1ContactSubmission"
+          }
+        },
+        "nextPageToken": {
+          "type": "string"
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1SubmitContactFormRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "company": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "captchaToken": {
+          "type": "string",
+          "title": "For spam protection"
+        }
+      },
+      "title": "Request messages"
+    }
+  }
+}

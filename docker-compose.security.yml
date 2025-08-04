@@ -1,0 +1,72 @@
+# Docker Compose configuration for security scanning
+version: '3.8'
+
+services:
+  # Security scanner service
+  security-scanner:
+    build:
+      context: .
+      dockerfile: docker/security-scan.dockerfile
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./security-scan-results:/output
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    profiles:
+      - security
+    command: ["--help"]
+
+  # Dependency vulnerability scanner
+  dependency-scanner:
+    image: node:22-alpine
+    working_dir: /app
+    volumes:
+      - .:/app:ro
+      - ./security-scan-results:/output
+    environment:
+      - NODE_ENV=development
+    profiles:
+      - security
+    command: >
+      sh -c "
+        apk add --no-cache git &&
+        corepack enable &&
+        corepack prepare pnpm@9.15.0 --activate &&
+        pnpm audit --audit-level moderate --json > /output/dependency_audit_$(date +%Y%m%d_%H%M%S).json 2>/dev/null || true &&
+        pnpm audit --audit-level moderate || true
+      "
+
+  # SAST (Static Application Security Testing) scanner
+  sast-scanner:
+    image: securecodewarrior/semgrep:latest
+    working_dir: /src
+    volumes:
+      - .:/src:ro
+      - ./security-scan-results:/output
+    profiles:
+      - security
+    command: >
+      sh -c "
+        semgrep --config=auto --json --output=/output/sast_scan_$(date +%Y%m%d_%H%M%S).json /src &&
+        semgrep --config=auto /src
+      "
+
+  # Container security benchmark
+  docker-bench:
+    image: docker/docker-bench-security:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /usr/lib/systemd:/usr/lib/systemd:ro
+      - /etc:/etc:ro
+      - ./security-scan-results:/output
+    profiles:
+      - security
+    command: >
+      sh -c "
+        /docker-bench-security.sh -l /output/docker_bench_$(date +%Y%m%d_%H%M%S).log
+      "
+
+networks:
+  default:
+    name: saas-platform-security
+    driver: bridge

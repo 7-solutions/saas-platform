@@ -3,17 +3,16 @@ package repository
 import (
 	"context"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 func TestMediaRepository_Create(t *testing.T) {
-	client := SetupTestDB(t)
-	defer CleanupTestDB(t, client)
+	_ = SetupTestDB(t)
 
-	repo := NewMediaRepository(client)
+	client := SetupTestPGClient(t)
+	repo := NewMediaRepositorySQL(client)
 	ctx := context.Background()
 
 	media := CreateTestMedia("test-image.jpg", "user:admin@example.com")
@@ -28,10 +27,10 @@ func TestMediaRepository_Create(t *testing.T) {
 }
 
 func TestMediaRepository_GetByID(t *testing.T) {
-	client := SetupTestDB(t)
-	defer CleanupTestDB(t, client)
+	_ = SetupTestDB(t)
 
-	repo := NewMediaRepository(client)
+	client := SetupTestPGClient(t)
+	repo := NewMediaRepositorySQL(client)
 	ctx := context.Background()
 
 	// Create a test media
@@ -50,10 +49,10 @@ func TestMediaRepository_GetByID(t *testing.T) {
 }
 
 func TestMediaRepository_GetByID_NotFound(t *testing.T) {
-	client := SetupTestDB(t)
-	defer CleanupTestDB(t, client)
+	_ = SetupTestDB(t)
 
-	repo := NewMediaRepository(client)
+	client := SetupTestPGClient(t)
+	repo := NewMediaRepositorySQL(client)
 	ctx := context.Background()
 
 	_, err := repo.GetByID(ctx, "media:nonexistent.jpg")
@@ -62,22 +61,17 @@ func TestMediaRepository_GetByID_NotFound(t *testing.T) {
 }
 
 func TestMediaRepository_GetByFilename(t *testing.T) {
-	client := SetupTestDB(t)
-	defer CleanupTestDB(t, client)
+	_ = SetupTestDB(t)
 
-	repo := NewMediaRepository(client)
+	client := SetupTestPGClient(t)
+	repo := NewMediaRepositorySQL(client)
 	ctx := context.Background()
-
-	// Wait for views to be available
-	WaitForView(t, client, "_design/media", "by_filename")
 
 	// Create a test media
 	originalMedia := CreateTestMedia("test-image.jpg", "user:admin@example.com")
 	err := repo.Create(ctx, originalMedia)
 	require.NoError(t, err)
 
-	// Wait a bit for the view to update
-	time.Sleep(100 * time.Millisecond)
 
 	// Retrieve the media by filename
 	retrievedMedia, err := repo.GetByFilename(ctx, "test-image.jpg")
@@ -88,10 +82,10 @@ func TestMediaRepository_GetByFilename(t *testing.T) {
 }
 
 func TestMediaRepository_Update(t *testing.T) {
-	client := SetupTestDB(t)
-	defer CleanupTestDB(t, client)
+	_ = SetupTestDB(t)
 
-	repo := NewMediaRepository(client)
+	client := SetupTestPGClient(t)
+	repo := NewMediaRepositorySQL(client)
 	ctx := context.Background()
 
 	// Create a test media
@@ -117,10 +111,10 @@ func TestMediaRepository_Update(t *testing.T) {
 }
 
 func TestMediaRepository_Delete(t *testing.T) {
-	client := SetupTestDB(t)
-	defer CleanupTestDB(t, client)
+	_ = SetupTestDB(t)
 
-	repo := NewMediaRepository(client)
+	client := SetupTestPGClient(t)
+	repo := NewMediaRepositorySQL(client)
 	ctx := context.Background()
 
 	// Create a test media
@@ -139,14 +133,11 @@ func TestMediaRepository_Delete(t *testing.T) {
 }
 
 func TestMediaRepository_List(t *testing.T) {
-	client := SetupTestDB(t)
-	defer CleanupTestDB(t, client)
+	_ = SetupTestDB(t)
 
-	repo := NewMediaRepository(client)
+	client := SetupTestPGClient(t)
+	repo := NewMediaRepositorySQL(client)
 	ctx := context.Background()
-
-	// Wait for views to be available
-	WaitForView(t, client, "_design/media", "all")
 
 	// Create test media
 	media1 := CreateTestMedia("image1.jpg", "user:admin@example.com")
@@ -158,8 +149,6 @@ func TestMediaRepository_List(t *testing.T) {
 	err = repo.Create(ctx, media2)
 	require.NoError(t, err)
 
-	// Wait for views to update
-	time.Sleep(100 * time.Millisecond)
 
 	// List media
 	options := DefaultListOptions()
@@ -170,14 +159,11 @@ func TestMediaRepository_List(t *testing.T) {
 }
 
 func TestMediaRepository_ListByUploader(t *testing.T) {
-	client := SetupTestDB(t)
-	defer CleanupTestDB(t, client)
+	_ = SetupTestDB(t)
 
-	repo := NewMediaRepository(client)
+	client := SetupTestPGClient(t)
+	repo := NewMediaRepositorySQL(client)
 	ctx := context.Background()
-
-	// Wait for views to be available
-	WaitForView(t, client, "_design/media", "by_uploader")
 
 	// Create test media with different uploaders
 	media1 := CreateTestMedia("image1.jpg", "user:admin@example.com")
@@ -193,8 +179,6 @@ func TestMediaRepository_ListByUploader(t *testing.T) {
 	err = repo.Create(ctx, media3)
 	require.NoError(t, err)
 
-	// Wait for views to update
-	time.Sleep(100 * time.Millisecond)
 
 	// List media by admin uploader
 	options := DefaultListOptions()

@@ -20,9 +20,10 @@ func TestContentServiceIntegration(t *testing.T) {
 
 	// Create repositories
 	pageRepo := repository.NewPageRepository(client)
+	blogRepo := repository.NewBlogRepository(client)
 
 	// Create service
-	service := NewContentService(pageRepo)
+	service := NewContentService(pageRepo, blogRepo)
 
 	ctx := context.Background()
 
