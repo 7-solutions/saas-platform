@@ -1,0 +1,41 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "outputs": [".next/standalone/**", ".next/static/**", ".next/cache/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "env": ["NODE_ENV", "NEXT_PUBLIC_", "NEXTAUTH_", "PORT"]
+    },
+    "start": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "env": ["NODE_ENV", "NEXTAUTH_URL", "NEXTAUTH_SECRET", "PORT"]
+    },
+    "lint": {
+      "outputs": []
+    },
+    "type-check": {
+      "outputs": []
+    },
+    "test": {
+      "outputs": ["coverage/**"]
+    },
+    "test:ci": {
+      "outputs": ["coverage/**"]
+    },
+    "test:coverage": {
+      "outputs": ["coverage/**"]
+    },
+    "clean": {
+      "cache": false
+    },
+    "check": {
+      "dependsOn": ["lint", "type-check", "test"],
+      "cache": false
+    }
+  }
+}

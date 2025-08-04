@@ -1,0 +1,18 @@
+{
+  "/api/health/route": "/api/health",
+  "/api/revalidate/route": "/api/revalidate",
+  "/robots.txt/route": "/robots.txt",
+  "/sitemap.xml/route": "/sitemap.xml",
+  "/blog/rss/route": "/blog/rss",
+  "/_not-found/page": "/_not-found",
+  "/contact/page": "/contact",
+  "/page": "/",
+  "/[...slug]/page": "/[...slug]",
+  "/about/page": "/about",
+  "/blog/[slug]/page": "/blog/[slug]",
+  "/blog/page": "/blog",
+  "/services/page": "/services",
+  "/blog/search/page": "/blog/search",
+  "/admin/page": "/admin",
+  "/admin/contact/page": "/admin/contact"
+}

@@ -1,0 +1,12 @@
+{
+  "/api/health/route": "app/api/health/route.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
+  "/dashboard/media/page": "app/dashboard/media/page.js",
+  "/dashboard/pages/new/page": "app/dashboard/pages/new/page.js",
+  "/dashboard/pages/page": "app/dashboard/pages/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/pages/[id]/edit/page": "app/dashboard/pages/[id]/edit/page.js"
+}

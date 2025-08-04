@@ -2,24 +2,3 @@
 > @saas-platform/website@0.1.0 test /Users/tsaa/Workspace/coder/saas-platform/apps/website
 > jest
 
-● Validation Warning:
-
-  Unknown option "moduleNameMapping" with value {"^@/(.*)$": "<rootDir>/$1"} was found.
-  This is probably a typing mistake. Fixing it will remove this message.
-
-  Configuration Documentation:
-  https://jestjs.io/docs/configuration
-
-● Validation Warning:
-
-  Unknown option "moduleNameMapping" with value {"^@/(.*)$": "<rootDir>/$1"} was found.
-  This is probably a typing mistake. Fixing it will remove this message.
-
-  Configuration Documentation:
-  https://jestjs.io/docs/configuration
-
-jest-haste-map: Haste module naming collision: @saas-platform/website
-  The following files share their name; please adjust your hasteImpl:
-    * <rootDir>/package.json
-    * <rootDir>/.next/standalone/apps/website/package.json
-

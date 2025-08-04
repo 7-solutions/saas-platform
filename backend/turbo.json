@@ -1,0 +1,39 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "outputs": ["bin/backend"],
+      "inputs": ["**/*.go", "go.mod", "go.sum", "internal/**/*", "cmd/**/*", "proto/**/*", "gen/**/*"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "start": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "lint": {
+      "outputs": []
+    },
+    "type-check": {
+      "outputs": []
+    },
+    "test": {
+      "outputs": ["coverage/coverage.out"]
+    },
+    "test:ci": {
+      "outputs": ["coverage/coverage.out", "coverage/test-report.json"]
+    },
+    "test:coverage": {
+      "outputs": ["coverage/coverage.out"]
+    },
+    "clean": {
+      "cache": false
+    },
+    "check": {
+      "dependsOn": ["lint", "type-check", "test"],
+      "cache": false
+    }
+  }
+}

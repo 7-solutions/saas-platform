@@ -2,5 +2,3 @@
 > @saas-platform/cms@0.1.0 type-check /Users/tsaa/Workspace/coder/saas-platform/apps/cms
 > tsc --noEmit
 
-__tests__/components/page-editor.test.tsx(136,43): error TS2739: Type '{ id: string; title: string; slug: string; content: string; status: "published"; createdAt: string; updatedAt: string; }' is missing the following properties from type 'Page': meta, created_at, updated_at
- ELIFECYCLE  Command failed with exit code 2.

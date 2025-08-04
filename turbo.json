@@ -1,123 +1,41 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
-  "globalEnv": [
-    "NODE_ENV",
-    "NEXT_PUBLIC_*",
-    "NEXTAUTH_*",
-    "COUCHDB_*",
-    "JWT_SECRET",
-    "PORT",
-    "METRICS_PORT"
-  ],
-  "remoteCache": {
-    "enabled": true
-  },
+  "globalEnv": ["NODE_ENV", "NEXT_PUBLIC_", "NEXTAUTH_", "PORT", "JWT_SECRET"],
+  "remoteCache": { "enabled": true },
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [
-        ".next/**",
-        "!.next/cache/**",
-        ".next/standalone/**",
-        ".next/static/**",
-        "dist/**",
-        "build/**"
-      ],
-      "env": [
-        "NODE_ENV",
-        "NEXT_PUBLIC_*",
-        "NEXTAUTH_*"
-      ],
-      "persistent": false
+      "outputs": [".next/**", "!.next/cache/**", ".next/standalone/**", ".next/static/**", "dist/**", "build/**"]
     },
     "dev": {
       "cache": false,
-      "persistent": true,
-      "env": [
-        "NODE_ENV",
-        "NEXT_PUBLIC_*",
-        "NEXTAUTH_*",
-        "PORT"
-      ]
-    },
-    "lint": {
-      "dependsOn": ["^build"],
-      "outputs": [],
-      "inputs": [
-        "src/**/*.{js,ts,jsx,tsx}",
-        "app/**/*.{js,ts,jsx,tsx}",
-        "components/**/*.{js,ts,jsx,tsx}",
-        "lib/**/*.{js,ts,jsx,tsx}",
-        "*.{js,ts,jsx,tsx}",
-        ".eslintrc.*",
-        "eslint.config.*"
-      ]
-    },
-    "lint:fix": {
-      "dependsOn": ["^build"],
-      "outputs": [],
-      "cache": false
-    },
-    "test": {
-      "dependsOn": ["^build"],
-      "outputs": ["coverage/**"],
-      "inputs": [
-        "src/**/*.{js,ts,jsx,tsx}",
-        "app/**/*.{js,ts,jsx,tsx}",
-        "components/**/*.{js,ts,jsx,tsx}",
-        "lib/**/*.{js,ts,jsx,tsx}",
-        "__tests__/**/*.{js,ts,jsx,tsx}",
-        "**/*.test.{js,ts,jsx,tsx}",
-        "**/*.spec.{js,ts,jsx,tsx}",
-        "jest.config.*",
-        "vitest.config.*"
-      ]
-    },
-    "test:watch": {
-      "cache": false,
       "persistent": true
     },
-    "test:coverage": {
-      "dependsOn": ["^build"],
-      "outputs": ["coverage/**"]
+    "start": {
+      "dependsOn": ["build"],
+      "cache": false
     },
-    "test:e2e": {
-      "dependsOn": ["^build"],
-      "outputs": ["test-results/**", "playwright-report/**"],
-      "env": [
-        "NODE_ENV",
-        "NEXT_PUBLIC_*",
-        "NEXTAUTH_*"
-      ]
-    },
-    "test:storybook": {
-      "dependsOn": ["build-storybook"],
+    "lint": {
       "outputs": []
-    },
-    "test:visual": {
-      "dependsOn": ["build-storybook"],
-      "outputs": []
-    },
-    "build-storybook": {
-      "dependsOn": ["^build"],
-      "outputs": ["storybook-static/**"]
     },
     "type-check": {
-      "dependsOn": ["^build"],
-      "outputs": [],
-      "inputs": [
-        "src/**/*.{js,ts,jsx,tsx}",
-        "app/**/*.{js,ts,jsx,tsx}",
-        "components/**/*.{js,ts,jsx,tsx}",
-        "lib/**/*.{js,ts,jsx,tsx}",
-        "types/**/*.{js,ts,jsx,tsx}",
-        "*.{js,ts,jsx,tsx}",
-        "tsconfig.json",
-        "tsconfig.*.json"
-      ]
+      "outputs": []
+    },
+    "test": {
+      "outputs": ["coverage/**"]
+    },
+    "test:ci": {
+      "outputs": ["coverage/**"]
+    },
+    "test:coverage": {
+      "outputs": ["coverage/**"]
     },
     "clean": {
+      "cache": false
+    },
+    "check": {
+      "dependsOn": ["lint", "type-check", "test"],
       "cache": false
     }
   }

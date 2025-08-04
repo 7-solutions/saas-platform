@@ -2,11 +2,6 @@
 > @saas-platform/cms@0.1.0 build /Users/tsaa/Workspace/coder/saas-platform/apps/cms
 > next build
 
-Attention: Next.js now collects completely anonymous telemetry regarding usage.
-This information is used to shape Next.js' roadmap and prioritize features.
-You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
-https://nextjs.org/telemetry
-
    ▲ Next.js 15.4.5
    - Experiments (use with caution):
      · staleTimes
@@ -25,23 +20,23 @@ https://nextjs.org/telemetry
    Collecting build traces ...
 
 Route (app)                                 Size  First Load JS
-┌ ƒ /                                      525 B         262 kB
-├ ƒ /_not-found                            118 B         262 kB
-├ ƒ /api/auth/[...nextauth]                117 B         262 kB
-├ ƒ /api/health                            118 B         262 kB
-├ ƒ /dashboard                           1.63 kB         263 kB
-├ ƒ /dashboard/media                     6.83 kB         269 kB
-├ ƒ /dashboard/pages                     3.93 kB         266 kB
-├ ƒ /dashboard/pages/[id]/edit           1.35 kB         327 kB
-├ ƒ /dashboard/pages/new                   941 B         326 kB
-└ ƒ /login                               1.35 kB         263 kB
-+ First Load JS shared by all             262 kB
-  ├ chunks/5fff77f6-ff99f66bf3ab149e.js  54.1 kB
-  ├ chunks/vendors-0585d08278291546.js    198 kB
-  └ other shared chunks (total)          9.62 kB
+┌ ƒ /                                      524 B         263 kB
+├ ƒ /_not-found                            118 B         263 kB
+├ ƒ /api/auth/[...nextauth]                117 B         263 kB
+├ ƒ /api/health                            118 B         263 kB
+├ ƒ /dashboard                           1.63 kB         264 kB
+├ ƒ /dashboard/media                     6.82 kB         270 kB
+├ ƒ /dashboard/pages                     3.93 kB         267 kB
+├ ƒ /dashboard/pages/[id]/edit           1.36 kB         328 kB
+├ ƒ /dashboard/pages/new                   942 B         327 kB
+└ ƒ /login                               1.35 kB         264 kB
++ First Load JS shared by all             263 kB
+  ├ chunks/803bf872-6f77843a79359d6e.js  54.1 kB
+  ├ chunks/vendors-84799ec298cea028.js    199 kB
+  └ other shared chunks (total)          9.68 kB
 
 
-ƒ Middleware                             47.7 kB
+ƒ Middleware                             47.9 kB
 
 ƒ  (Dynamic)  server-rendered on demand
 

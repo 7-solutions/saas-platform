@@ -25,25 +25,25 @@ Error fetching RSS feed: { code: 'NETWORK_ERROR', message: 'fetch failed' }
    Collecting build traces ...
 
 Route (app)                                 Size  First Load JS  Revalidate  Expire
-┌ ○ /                                      118 B         186 kB
-├ ○ /_not-found                            118 B         186 kB
-├ ● /[...slug]                             116 B         186 kB
-├ ○ /about                                 170 B         186 kB
+┌ ○ /                                      118 B         187 kB
+├ ○ /_not-found                            118 B         187 kB
+├ ● /[...slug]                             116 B         187 kB
+├ ○ /about                                 171 B         187 kB
 ├ ƒ /admin                               1.36 kB         188 kB
-├ ƒ /admin/contact                       1.87 kB         188 kB
-├ ƒ /api/health                            118 B         186 kB
-├ ƒ /api/revalidate                        118 B         186 kB
-├ ƒ /blog                                  118 B         186 kB
-├ ƒ /blog/[slug]                           118 B         186 kB
-├ ○ /blog/rss                              117 B         186 kB          5m      1y
-├ ƒ /blog/search                           117 B         186 kB
-├ ○ /contact                             4.03 kB         190 kB
-├ ○ /robots.txt                            118 B         186 kB
-├ ○ /services                              118 B         186 kB
-└ ○ /sitemap.xml                           118 B         186 kB          5m      1y
-+ First Load JS shared by all             186 kB
-  ├ chunks/5fff77f6-ff99f66bf3ab149e.js  54.1 kB
-  ├ chunks/vendors-33933834ff576332.js    126 kB
+├ ƒ /admin/contact                       1.87 kB         189 kB
+├ ƒ /api/health                            118 B         187 kB
+├ ƒ /api/revalidate                        118 B         187 kB
+├ ƒ /blog                                  118 B         187 kB
+├ ƒ /blog/[slug]                           118 B         187 kB
+├ ○ /blog/rss                              117 B         187 kB          5m      1y
+├ ƒ /blog/search                           117 B         187 kB
+├ ○ /contact                             4.03 kB         191 kB
+├ ○ /robots.txt                            118 B         187 kB
+├ ○ /services                              118 B         187 kB
+└ ○ /sitemap.xml                           118 B         187 kB          5m      1y
++ First Load JS shared by all             187 kB
+  ├ chunks/803bf872-6f77843a79359d6e.js  54.1 kB
+  ├ chunks/vendors-a14c7955ca1443c8.js    127 kB
   └ other shared chunks (total)          5.67 kB
 
 
