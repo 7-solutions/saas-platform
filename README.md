@@ -1,23 +1,86 @@
-# SaaS Startup Platform
+# SaaS Platform Monorepo
 
-Monorepo containing:
-- Next.js apps: `apps/website`, `apps/cms`
-- Go services: `api-gateway`, `backend` (monolith for alternative deployment)
-- Shared TypeScript libraries: `packages/ui`, `packages/shared`
-- Infra: Dockerfiles, docker-compose (dev/test/prod), DB migrations, scripts
+Production-grade monorepo providing:
+- Public website (Next.js)
+- Admin CMS (Next.js + NextAuth)
+- API Gateway (Go, gRPC-Gateway)
+- Optional Monolith backend (Go, gRPC + HTTP gateway)
+- Shared UI and utilities packages (TypeScript)
+- Docker/Compose environments (dev/test/prod)
+- Turborepo for orchestration, caching, and CI friendliness
 
-Tooling:
-- Package manager: pnpm
-- Task orchestrator: Turborepo
-- Next.js 15 standalone builds for container deployments
-- Go 1.24.x for services
-- Postgres database, SQLC for Go DB layer
+## Tech Stack
+
+Frontend
+- Next.js 15 (App Router, standalone output)
+- React 18
+- TypeScript 5.7+
+- Jest + Testing Library (unit tests)
+- ESLint (next/core-web-vitals, TypeScript plugin)
+
+Backend/Services
+- Go 1.24.x
+- gRPC + grpc-gateway HTTP
+- SQLC for typed DB access (Postgres)
+- Prometheus client for metrics
+- Structured logging
+
+Infrastructure/Tooling
+- pnpm workspaces
+- Turborepo (build/lint/test/dev orchestration, remote cache-ready)
+- Docker multi-stage builds; distroless/alpine for Go services
+- Docker Compose: dev, test, prod overlays
+- Postgres
+- Optional hot-reload: air (Go)
+
+## Repository Structure
+
+- apps/
+  - website: Public website (Next.js)
+  - cms: Admin CMS (Next.js, NextAuth)
+- api-gateway/: Go HTTP gateway → upstream microservices via gRPC
+- backend/: Go monolith (alternative to microservices topology)
+- packages/
+  - ui: Shared UI library (TS, Storybook-ready)
+  - shared: Shared TS utilities
+- docker/: Compose overlays for dev/test/prod
+- backend/db/: SQL queries and schema (Postgres)
+- backend/migrations/: DB migrations
+- turbo.json: Root pipeline
+- Per-package turbo.json: Specialization (outputs/inputs/env)
+
+## Architecture (Designed)
+
+Overview
+- Frontends (website, cms) consume REST endpoints from api-gateway.
+- api-gateway exposes HTTP routes and translates into upstream gRPC calls to domain microservices (auth, content, media, contact). In this repo, those can be external services or replaced by the monolith backend for a simpler deployment.
+- Shared libs provide design system (ui) and utilities (shared) to both apps.
+- Turborepo defines a uniform pipeline for build/dev/test/lint/type-check/clean/check with caching and dependency graph across packages. Next apps depend on packages/ui and packages/shared; Go services optionally depend on shared Go libs (if present).
+
+Deployment Modes
+1) Microservices with api-gateway
+   - api-gateway uses gRPC upstreams (addresses configured via env).
+   - Frontends talk to gateway (NEXT_PUBLIC_API_URL).
+2) Monolith backend
+   - Single backend binary exposes gRPC + HTTP gateway; api-gateway can be bypassed.
+   - Frontends talk directly to monolith HTTP.
+
+Data layer
+- Postgres as primary DB. SQLC-generated Go code under backend/internal/database/sqlc supports typed queries.
+
+Observability
+- Metrics via Prometheus client endpoints (metrics ports per service).
+- Health endpoints for liveness and readiness.
+
+Security
+- JWT secret for services consuming auth.
+- NextAuth (CMS) requires NEXTAUTH_URL and NEXTAUTH_SECRET.
 
 ## Prerequisites
 
 - Node.js 22+ and pnpm 9+
+- Go 1.24+
 - Docker and Docker Compose v2
-- Go 1.24+ (for local Go development)
 - Recommended: direnv for environment management
 
 Copy `.env.example` to `.env` and adjust as needed:
@@ -25,57 +88,57 @@ Copy `.env.example` to `.env` and adjust as needed:
 cp .env.example .env
 ```
 
-Important variables:
+Key env vars:
 - NEXT_PUBLIC_API_URL (frontends)
-- NEXTAUTH_URL, NEXTAUTH_SECRET (CMS and auth flows)
+- NEXTAUTH_URL, NEXTAUTH_SECRET (CMS)
 - DATABASE_URL, TEST_DATABASE_URL (Postgres)
 - JWT_SECRET (services)
-- HTTP/GRPC/METRICS_ADDR or PORT as used by services
+- Service ports: HTTP/GRPC/METRICS or PORT
 
-## Monorepo Commands (Turbo)
+## Turborepo Workflows
 
-At repo root:
-- Dev both Next apps:
-  ```
-  pnpm turbo run dev --parallel --filter=@saas-platform/website --filter=@saas-platform/cms
-  ```
-- Dev single app:
-  ```
-  pnpm turbo run dev --filter=@saas-platform/website
-  pnpm turbo run dev --filter=@saas-platform/cms
-  ```
-- Build all:
-  ```
-  pnpm turbo run build
-  ```
-- Lint / Type-check / Test:
-  ```
-  pnpm turbo run lint
-  pnpm turbo run type-check
-  pnpm turbo run test
-  ```
+Install dependencies:
+```
+pnpm install
+```
 
-Go services (via Turbo scripts in package.json):
-- Dev:
-  ```
-  pnpm turbo run dev --filter=@saas-platform/api-gateway
-  pnpm turbo run dev --filter=@saas-platform/backend
-  ```
-  If `air` is not installed, dev will fallback to `go run`.
+Dev (Next apps in parallel):
+```
+pnpm turbo run dev --parallel --filter=@saas-platform/website --filter=@saas-platform/cms
+```
 
-- Build binaries:
-  ```
-  pnpm turbo run build --filter=@saas-platform/api-gateway
-  pnpm turbo run build --filter=@saas-platform/backend
-  ```
+Dev single app:
+```
+pnpm turbo run dev --filter=@saas-platform/website
+pnpm turbo run dev --filter=@saas-platform/cms
+```
 
-## Deployment (Docker)
+Go services:
+```
+# Dev (falls back to `go run` if `air` is unavailable)
+pnpm turbo run dev --filter=@saas-platform/api-gateway
+pnpm turbo run dev --filter=@saas-platform/backend
 
-This repository supports containerized deployment using multi-stage Dockerfiles and Next.js standalone output.
+# Build binaries
+pnpm turbo run build --filter=@saas-platform/api-gateway
+pnpm turbo run build --filter=@saas-platform/backend
+```
 
-### Build Docker images
+Build everything:
+```
+pnpm turbo run build
+```
 
-From repo root:
+Quality checks:
+```
+pnpm turbo run lint
+pnpm turbo run type-check
+pnpm turbo run test
+```
+
+## Docker Deployment
+
+Build images (from repo root):
 ```
 # Website
 docker build -f apps/website/Dockerfile -t saas/website:latest apps/website
@@ -86,183 +149,97 @@ docker build -f apps/cms/Dockerfile -t saas/cms:latest apps/cms
 # API Gateway
 docker build -f api-gateway/Dockerfile -t saas/api-gateway:latest api-gateway
 
-# Backend monolith (alternative to microservices)
+# Backend (monolith), optional
 docker build -f backend/Dockerfile -t saas/backend:latest backend
 ```
 
 Notes:
-- Next.js Dockerfiles expect `output: 'standalone'` (already configured).
-- Go service Dockerfiles produce static binaries in distroless/alpine images.
+- Next.js apps use `output: 'standalone'`, Dockerfiles copy `.next/standalone` and `.next/static`.
+- Go services produce static binaries and run under distroless/alpine.
 
-### Docker Compose Environments
+### Docker Compose
 
-This repo includes multiple compose files under `docker/` and a root `docker-compose.yml`.
-
-Common flows:
-
-Dev compose:
+Dev:
 ```
 docker compose -f docker-compose.yml -f docker/docker-compose.dev.yml up --build
 ```
 
-Test compose:
+Test:
 ```
 docker compose -f docker-compose.yml -f docker/docker-compose.test.yml up --build --abort-on-container-exit
 ```
 
-Prod compose (example):
+Prod (example):
 ```
 docker compose -f docker-compose.yml -f docker/docker-compose.prod.yml up -d
 ```
 
-Shorthands (if present in package.json scripts at root):
-```
-pnpm containers:build
-pnpm containers:up
-pnpm containers:down
-pnpm containers:prod
-pnpm containers:prod:build
-```
+Ensure envs are present (often enforced in prod via `${VAR:?err}`):
+- NEXT_PUBLIC_API_URL (e.g., http://api-gateway:8080)
+- NEXTAUTH_URL, NEXTAUTH_SECRET
+- DATABASE_URL
+- JWT_SECRET
 
-Environment variables for compose:
-- Ensure `.env` provides values for:
-  - NEXT_PUBLIC_API_URL (e.g., http://api-gateway:8080)
-  - NEXTAUTH_URL, NEXTAUTH_SECRET (for CMS auth)
-  - DATABASE_URL (Postgres DSN)
-  - JWT_SECRET
-- Compose files may enforce required vars via `${VAR:?err}` syntax in prod.
-
-### Service Ports (typical defaults)
-
-- api-gateway: HTTP 8080, metrics 9090
-- backend monolith: HTTP 8080 (or 8090), gRPC 9090, metrics 8081/9091 (verify Dockerfile and main.go)
-- website: 3000 (may auto-swizzle if occupied)
-- cms: 3001 (may auto-swizzle if occupied)
+Typical ports:
+- api-gateway: 8080 (HTTP), 9090 (metrics)
+- backend monolith: 8080 (HTTP), 9090 (gRPC), 8081/9091 (metrics)
+- website: 3000 (auto-swizzle if occupied)
+- cms: 3001 (auto-swizzle if occupied)
 - postgres: 5432
 
-## Database: Migrate and Seed
+## Database: Migration & Seeding
 
-This repo uses Postgres and `sqlc`-generated code in Go services. Migrations are in `backend/migrations/` and SQL query sources in `backend/db/queries/`.
-
-You can run DB tasks via included node scripts (see root `package.json` scripts) or your preferred migrate tool:
-
-Root scripts:
+Scripts at repo root (package.json):
 ```
-# Initialize database (create DB/schema)
-pnpm db:init
-
-# Run migrations
-pnpm db:migrate
-
-# List migrations
-pnpm db:migrate:list
-
-# Seed data
-pnpm db:seed
-
-# Reset database (drop + recreate)
-pnpm db:reset
+pnpm db:init          # Initialize database/schema
+pnpm db:migrate       # Run migrations
+pnpm db:migrate:list  # List migrations
+pnpm db:seed          # Seed data
+pnpm db:reset         # Reset database
 ```
 
-Test database helpers:
+Test DB helpers:
 ```
 pnpm db:test:init
 pnpm db:test:clean
 ```
 
-Alternatively, inside running compose services, you can execute migration binaries (if packaged) or run SQL scripts directly against Postgres.
+Ensure `DATABASE_URL` (and `TEST_DATABASE_URL`) are configured. Migrations live in `backend/migrations/`; SQL sources in `backend/db/queries/`. SQLC-generated code in `backend/internal/database/sqlc/`.
 
-Ensure `DATABASE_URL` (and `TEST_DATABASE_URL` for test) is set appropriately in your environment or compose.
+## CI (Outline)
 
-## Production Deployment Outline
-
-1) Build images
-```
-docker build -f apps/website/Dockerfile -t ghcr.io/ORG/website:SHA apps/website
-docker build -f apps/cms/Dockerfile -t ghcr.io/ORG/cms:SHA apps/cms
-docker build -f api-gateway/Dockerfile -t ghcr.io/ORG/api-gateway:SHA api-gateway
-# optional monolith path
-docker build -f backend/Dockerfile -t ghcr.io/ORG/backend:SHA backend
-```
-
-2) Push images
-```
-docker push ghcr.io/ORG/website:SHA
-docker push ghcr.io/ORG/cms:SHA
-docker push ghcr.io/ORG/api-gateway:SHA
-docker push ghcr.io/ORG/backend:SHA
-```
-
-3) Provision environment variables/secrets:
-- NEXT_PUBLIC_API_URL accordingly
-- NEXTAUTH_URL, NEXTAUTH_SECRET (CMS)
-- DATABASE_URL (Postgres managed service)
-- JWT_SECRET
-- Any service-specific GRPC/HTTP/METRICS_ADDR overrides
-
-4) Run compose in the target environment (or deploy via your orchestrator with equivalent specs).
-
-## CI with Turborepo (Outline)
-
-Recommended GitHub Actions workflow (not yet committed here):
-- Job `checks`: install with pnpm, run `pnpm turbo run lint type-check test`
-- Job `build`: run `pnpm turbo run build`
-- Job `docker-build`: build and push images (buildx) with tags per SHA
-- Optional: Enable Turbo remote caching with `TURBO_TOKEN` and `TURBO_TEAM`
+Recommended GitHub Actions jobs:
+1) checks
+   - pnpm install
+   - pnpm turbo run lint type-check test
+2) build
+   - pnpm turbo run build
+3) docker-build
+   - Build and push images for apps/services
+Remote cache:
+- Configure `TURBO_TOKEN` + `TURBO_TEAM`. Consider `TURBO_REMOTE_ONLY=true` in CI.
 
 ## Troubleshooting
 
-- Next build fails fetching data: Ensure NEXT_PUBLIC_API_URL points to reachable api-gateway or mock endpoint during build. For static export, handle fetch failures gracefully or use ISR fallbacks.
+- Next build data fetch failures:
+  - Ensure NEXT_PUBLIC_API_URL is reachable in build environment; if not, use ISR fallbacks/mocks.
 
-- ESLint config errors:
-  - `.eslintrc.js` uses `plugin:@typescript-eslint/recommended`. Ensure root devDeps include `@typescript-eslint/eslint-plugin` and `@typescript-eslint/parser`.
+- ESLint config:
+  - `.eslintrc.js` uses `plugin:@typescript-eslint/recommended`. Ensure devDeps include `@typescript-eslint/eslint-plugin` and `@typescript-eslint/parser`.
 
-- Turbo errors about project config:
-  - Ensure per-app `turbo.json` includes `"extends": ["//"]` to inherit root pipeline.
+- Turborepo per-package config:
+  - Ensure per-app `turbo.json` has `"extends": ["//"]`.
 
-- Ports already in use:
-  - Next dev auto-selects a different port and logs it (e.g., 3002, 3003). For fixed ports, export `PORT` per app.
+- Port conflicts:
+  - Dev servers auto-select available ports and log them.
 
-## Repository Structure
+## Roadmap
 
-- apps/website: Public website (Next.js, standalone)
-- apps/cms: Admin CMS (Next.js, NextAuth)
-- api-gateway: Go gateway (HTTP + gRPC upstreams)
-- backend: Go monolith (alternative to microservices)
-- packages/ui: Shared UI library
-- packages/shared: Shared TS utilities
-- docker/: Compose overlays for dev/test/prod
-- backend/db/: SQL queries and schema (Postgres)
-- backend/migrations/: Migrations
-- turbo.json: Root Turborepo pipeline
-- Per-package turbo.json: Package-specific outputs/inputs/env
-
-## Quick Start
-
-Development (Next apps):
-```
-pnpm install
-pnpm turbo run dev --parallel --filter=@saas-platform/website --filter=@saas-platform/cms
-# Website: http://localhost:3003 (or 3000 if free)
-# CMS:     http://localhost:3002 (or 3001 if free)
-```
-
-Build and test:
-```
-pnpm turbo run build
-pnpm turbo run lint type-check test
-```
-
-Compose up (dev):
-```
-docker compose -f docker-compose.yml -f docker/docker-compose.dev.yml up --build
-```
-
-Migrate and seed:
-```
-pnpm db:migrate
-pnpm db:seed
-```
+- Decide final backend shape: microservices behind api-gateway vs monolith
+- Adopt `golangci-lint` and `.golangci.yml` for Go linting
+- Add `.air.toml` for Go live reload
+- CI pipelines for PR checks and image publishing
+- Optional: Remote cache in CI via Turbo token/team
 
 ## License
 
