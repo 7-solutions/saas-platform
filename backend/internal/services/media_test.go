@@ -8,9 +8,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 
-	mediav1 "github.com/saas-startup-platform/backend/gen/media/v1"
-	"github.com/saas-startup-platform/backend/internal/models"
-	"github.com/saas-startup-platform/backend/internal/repository"
+	mediav1 "github.com/7-solutions/saas-platformbackend/gen/media/v1"
+	"github.com/7-solutions/saas-platformbackend/internal/models"
+	"github.com/7-solutions/saas-platformbackend/internal/repository"
 )
 
 // MockMediaRepository is a mock implementation of MediaRepository

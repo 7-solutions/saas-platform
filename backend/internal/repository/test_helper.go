@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/7-solutions/saas-platformbackend/internal/database"
+	"github.com/7-solutions/saas-platformbackend/internal/models"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/saas-startup-platform/backend/internal/database"
-	"github.com/saas-startup-platform/backend/internal/models"
 	"github.com/stretchr/testify/require"
 )
 
@@ -32,7 +32,6 @@ func DefaultTestDBConfig() TestDBConfig {
 	url := getenvDefault("TEST_DATABASE_URL", getenvDefault("DATABASE_URL", "postgres://app:app@localhost:15432/app_test?sslmode=disable"))
 	return TestDBConfig{URL: url}
 }
-
 
 // SetupTestDB initializes a pgxpool.Pool for tests, ensures schema exists, and seeds minimal data.
 // It returns the pool and a teardown function that truncates tables with CASCADE semantics.

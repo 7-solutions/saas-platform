@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package contact.v1;
 
-option go_package = "github.com/saas-startup-platform/backend/gen/contact/v1;contactv1";
+option go_package = "github.com/7-solutions/saas-platformbackend/gen/contact/v1;contactv1";
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";

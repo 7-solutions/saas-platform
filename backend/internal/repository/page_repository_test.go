@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/saas-startup-platform/backend/internal/models"
+	"github.com/7-solutions/saas-platformbackend/internal/models"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -18,7 +18,7 @@ func TestPageRepository_Create(t *testing.T) {
 	ctx := context.Background()
 
 	page := CreateTestPage("test-page", "Test Page")
-	
+
 	err := repo.Create(ctx, page)
 	require.NoError(t, err)
 
@@ -110,7 +110,7 @@ func TestPageRepository_Update(t *testing.T) {
 	// Update the page
 	latestPage.Title = "Updated Test Page"
 	time.Sleep(10 * time.Millisecond) // Ensure different timestamp
-	
+
 	err = repo.Update(ctx, latestPage)
 	require.NoError(t, err)
 
@@ -157,10 +157,10 @@ func TestPageRepository_List(t *testing.T) {
 	// Create test pages
 	page1 := CreateTestPage("page-1", "Page 1")
 	page2 := CreateTestPage("page-2", "Page 2")
-	
+
 	err := repo.Create(ctx, page1)
 	require.NoError(t, err)
-	
+
 	err = repo.Create(ctx, page2)
 	require.NoError(t, err)
 
@@ -188,13 +188,13 @@ func TestPageRepository_ListByStatus(t *testing.T) {
 	// Create test pages with different statuses
 	page1 := CreateTestPage("page-1", "Page 1")
 	page1.Status = models.PageStatusPublished
-	
+
 	page2 := CreateTestPage("page-2", "Page 2")
 	page2.Status = models.PageStatusDraft
-	
+
 	err := repo.Create(ctx, page1)
 	require.NoError(t, err)
-	
+
 	err = repo.Create(ctx, page2)
 	require.NoError(t, err)
 

@@ -11,29 +11,47 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	mediav1 "github.com/saas-startup-platform/backend/gen/media/v1"
-	"github.com/saas-startup-platform/backend/internal/models"
-	"github.com/saas-startup-platform/backend/internal/repository"
-	"github.com/saas-startup-platform/backend/internal/utils/media"
+	mediav1 "github.com/7-solutions/saas-platformbackend/gen/media/v1"
+	"github.com/7-solutions/saas-platformbackend/internal/models"
+	ports "github.com/7-solutions/saas-platformbackend/internal/ports"
+	"github.com/7-solutions/saas-platformbackend/internal/repository"
+	"github.com/7-solutions/saas-platformbackend/internal/utils/media"
 )
 
 // MediaService implements the media service
+// Adapter pattern: constructor now accepts ports for DI. Shim retained for compatibility.
 type MediaService struct {
 	mediav1.UnimplementedMediaServiceServer
 	mediaRepo         repository.MediaRepository
 	fileStorage       media.FileStorageInterface
 	imageProcessor    *media.ImageProcessor
 	metadataExtractor *media.MetadataExtractor
+
+	// Optional future-use dependencies via ports (can be nil; not used yet)
+	uow ports.UnitOfWork
 }
 
-// NewMediaService creates a new media service
-func NewMediaService(mediaRepo repository.MediaRepository) *MediaService {
-	return &MediaService{
+// NewMediaServiceWithPorts constructs MediaService with ports-based dependencies.
+// Adapter pattern: constructor now accepts ports for DI. Shim retained for compatibility.
+func NewMediaServiceWithPorts(
+	mediaRepo repository.MediaRepository, // keep concrete repo until a port exists
+	uow ports.UnitOfWork,
+) *MediaService {
+	// Preserve existing behavior using default utils while storing optional ports.
+	svc := &MediaService{
 		mediaRepo:         mediaRepo,
 		fileStorage:       media.NewFileStorage(media.DefaultStorageConfig()),
 		imageProcessor:    media.DefaultImageProcessor(),
 		metadataExtractor: media.NewMetadataExtractor(),
+		uow:               uow,
 	}
+	return svc
+}
+
+// NewMediaService creates a new media service (backward-compatible shim).
+// Deprecated: prefer NewMediaServiceWithPorts. Shim retained for compatibility.
+func NewMediaService(mediaRepo repository.MediaRepository) *MediaService {
+	return NewMediaServiceWithPorts(mediaRepo, nil)
 }
 
 // NewMediaServiceWithDependencies creates a new media service with custom dependencies

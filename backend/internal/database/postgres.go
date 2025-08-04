@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
-	
-	db "github.com/saas-startup-platform/backend/internal/database/sqlc"
+
+	db "github.com/7-solutions/saas-platformbackend/internal/database/sqlc"
 )
 
 // PostgresClient wraps a pgx connection pool and sqlc queries adapter.

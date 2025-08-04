@@ -7,14 +7,15 @@
 package contentv1
 
 import (
+	reflect "reflect"
+	sync "sync"
+	unsafe "unsafe"
+
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
-	reflect "reflect"
-	sync "sync"
-	unsafe "unsafe"
 )
 
 const (
@@ -2040,7 +2041,7 @@ const file_content_v1_content_proto_rawDesc = "" +
 	"\x11GetBlogCategories\x12$.content.v1.GetBlogCategoriesRequest\x1a%.content.v1.GetBlogCategoriesResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/v1/blog/categories\x12i\n" +
 	"\vGetBlogTags\x12\x1e.content.v1.GetBlogTagsRequest\x1a\x1f.content.v1.GetBlogTagsResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/api/v1/blog/tags\x12e\n" +
 	"\n" +
-	"GetRSSFeed\x12\x1d.content.v1.GetRSSFeedRequest\x1a\x1e.content.v1.GetRSSFeedResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/v1/blog/rssBCZAgithub.com/saas-startup-platform/backend/gen/content/v1;contentv1b\x06proto3"
+	"GetRSSFeed\x12\x1d.content.v1.GetRSSFeedRequest\x1a\x1e.content.v1.GetRSSFeedResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/api/v1/blog/rssBCZAgithub.com/7-solutions/saas-platformbackend/gen/content/v1;contentv1b\x06proto3"
 
 var (
 	file_content_v1_content_proto_rawDescOnce sync.Once

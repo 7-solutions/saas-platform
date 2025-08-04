@@ -5,6 +5,8 @@ import (
 	"log"
 	"os"
 	"strconv"
+
+	db "github.com/7-solutions/saas-platformbackend/internal/database/sqlc"
 )
 
 type PGConfig struct {
@@ -70,4 +72,10 @@ func urlEscape(v string) string {
 	// Very light escaping; for full coverage consider url.QueryEscape or net/url.UserPassword handling.
 	// Keeping it simple to avoid adding extra imports/behavior.
 	return v
+}
+
+// NewUnitOfWorkFromPool is a minimal wiring helper to construct SQLUnitOfWork without
+// colliding with the constructor defined in uow.go. This keeps config-only code additive.
+func NewUnitOfWorkFromPool(pool PgxBeginner, base *db.Queries, logger Logger) *SQLUnitOfWork {
+	return NewSQLUnitOfWork(pool, base, logger)
 }

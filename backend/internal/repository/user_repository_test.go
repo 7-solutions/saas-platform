@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/saas-startup-platform/backend/internal/models"
+	"github.com/7-solutions/saas-platformbackend/internal/models"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -18,7 +18,7 @@ func TestUserRepository_Create(t *testing.T) {
 	ctx := context.Background()
 
 	user := CreateTestUser("test@example.com", models.UserRoleAdmin)
-	
+
 	err := repo.Create(ctx, user)
 	require.NoError(t, err)
 
@@ -107,7 +107,7 @@ func TestUserRepository_Update(t *testing.T) {
 	// Update the user
 	latestUser.Profile.Name = "Updated Name"
 	latestUser.Role = models.UserRoleEditor
-	
+
 	err = repo.Update(ctx, latestUser)
 	require.NoError(t, err)
 
@@ -154,10 +154,10 @@ func TestUserRepository_List(t *testing.T) {
 	// Create test users
 	user1 := CreateTestUser("user1@example.com", models.UserRoleAdmin)
 	user2 := CreateTestUser("user2@example.com", models.UserRoleEditor)
-	
+
 	err := repo.Create(ctx, user1)
 	require.NoError(t, err)
-	
+
 	err = repo.Create(ctx, user2)
 	require.NoError(t, err)
 
@@ -186,13 +186,13 @@ func TestUserRepository_ListByRole(t *testing.T) {
 	user1 := CreateTestUser("admin@example.com", models.UserRoleAdmin)
 	user2 := CreateTestUser("editor@example.com", models.UserRoleEditor)
 	user3 := CreateTestUser("admin2@example.com", models.UserRoleAdmin)
-	
+
 	err := repo.Create(ctx, user1)
 	require.NoError(t, err)
-	
+
 	err = repo.Create(ctx, user2)
 	require.NoError(t, err)
-	
+
 	err = repo.Create(ctx, user3)
 	require.NoError(t, err)
 

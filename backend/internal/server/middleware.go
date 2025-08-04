@@ -10,21 +10,21 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
-	"github.com/saas-startup-platform/backend/internal/utils/auth"
-	"github.com/saas-startup-platform/backend/internal/utils/logger"
+	"github.com/7-solutions/saas-platformbackend/internal/utils/auth"
+	"github.com/7-solutions/saas-platformbackend/internal/utils/logger"
 )
 
 // LoggingInterceptor logs gRPC requests with structured logging
 func LoggingInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
 	start := time.Now()
-	
+
 	// Add request ID to context for tracing
 	requestID := generateRequestID()
 	ctx = context.WithValue(ctx, "request_id", requestID)
-	
+
 	// Call the handler
 	resp, err := handler(ctx, req)
-	
+
 	// Log the request with structured logging
 	duration := time.Since(start)
 	statusCode := 200
@@ -35,9 +35,9 @@ func LoggingInterceptor(ctx context.Context, req interface{}, info *grpc.UnarySe
 			statusCode = 500
 		}
 	}
-	
+
 	logger.LogRequest(ctx, "gRPC", info.FullMethod, duration, statusCode, err)
-	
+
 	return resp, err
 }
 
@@ -49,7 +49,7 @@ func PanicRecoveryInterceptor(ctx context.Context, req interface{}, info *grpc.U
 			err = status.Errorf(codes.Internal, "internal server error")
 		}
 	}()
-	
+
 	return handler(ctx, req)
 }
 

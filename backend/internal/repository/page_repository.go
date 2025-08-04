@@ -8,9 +8,9 @@ import (
 	"strings"
 	"time"
 
-	db "github.com/saas-startup-platform/backend/internal/database/sqlc"
-	"github.com/saas-startup-platform/backend/internal/database"
-	"github.com/saas-startup-platform/backend/internal/models"
+	"github.com/7-solutions/saas-platformbackend/internal/database"
+	db "github.com/7-solutions/saas-platformbackend/internal/database/sqlc"
+	"github.com/7-solutions/saas-platformbackend/internal/models"
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
@@ -219,7 +219,7 @@ func (r *pageRepositorySQL) Update(ctx context.Context, page *models.Page) error
 	if err != nil {
 		return fmt.Errorf("failed to update page: %w", err)
 	}
-	
+
 	page.UpdatedAt = updated.UpdatedAt.Time
 	page.CreatedAt = updated.CreatedAt.Time
 	return nil
@@ -485,6 +485,7 @@ func makePrefixTsQuery(input string) string {
 	}
 	return strings.Join(tokens, " & ")
 }
+
 // Non-conflicting local helper to choose pointer or fallback
 func pickString(ptr *string, fallback string) string {
 	if ptr != nil {
@@ -492,4 +493,3 @@ func pickString(ptr *string, fallback string) string {
 	}
 	return fallback
 }
-

@@ -7,9 +7,10 @@ import (
 	"strconv"
 	"strings"
 
-	contactv1 "github.com/saas-startup-platform/backend/gen/contact/v1"
-	"github.com/saas-startup-platform/backend/internal/models"
-	"github.com/saas-startup-platform/backend/internal/repository"
+	contactv1 "github.com/7-solutions/saas-platformbackend/gen/contact/v1"
+	"github.com/7-solutions/saas-platformbackend/internal/models"
+	ports "github.com/7-solutions/saas-platformbackend/internal/ports"
+	"github.com/7-solutions/saas-platformbackend/internal/repository"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/emptypb"
@@ -20,13 +21,33 @@ type ContactService struct {
 	contactv1.UnimplementedContactServiceServer
 	contactRepo  repository.ContactRepository
 	emailService *EmailService
+
+	// Optional future-use dependencies via ports (can be nil; not used yet)
+	contactRepoPort ports.ContactRepository
+	uow             ports.UnitOfWork
 }
 
-func NewContactService(contactRepo repository.ContactRepository, emailService *EmailService) *ContactService {
+// NewContactServiceWithPorts constructs ContactService with ports-based dependencies.
+// Adapter pattern: constructor now accepts ports for DI. Shim retained for compatibility.
+func NewContactServiceWithPorts(
+	contactRepoPort ports.ContactRepository,
+	uow ports.UnitOfWork,
+	fallbackRepo repository.ContactRepository,
+	emailService *EmailService,
+) *ContactService {
+	// Preserve existing behavior by keeping concrete repository and EmailService usage in methods.
 	return &ContactService{
-		contactRepo:  contactRepo,
-		emailService: emailService,
+		contactRepo:     fallbackRepo,
+		emailService:    emailService,
+		contactRepoPort: contactRepoPort,
+		uow:             uow,
 	}
+}
+
+// NewContactService is a backward-compatible shim that accepts existing concrete dependencies.
+// Deprecated: prefer NewContactServiceWithPorts. Shim retained for compatibility.
+func NewContactService(contactRepo repository.ContactRepository, emailService *EmailService) *ContactService {
+	return NewContactServiceWithPorts(nil, nil, contactRepo, emailService)
 }
 
 // SubmitContactForm handles contact form submissions
@@ -66,7 +87,7 @@ func (s *ContactService) SubmitContactForm(ctx context.Context, req *contactv1.S
 		if err := s.emailService.SendContactNotification(createdSubmission); err != nil {
 			fmt.Printf("Failed to send admin notification email: %v\n", err)
 		}
-		
+
 		// Send confirmation to submitter
 		if err := s.emailService.SendContactConfirmation(createdSubmission); err != nil {
 			fmt.Printf("Failed to send confirmation email: %v\n", err)
@@ -250,7 +271,7 @@ func (s *ContactService) isSpamSubmission(req *contactv1.SubmitContactFormReques
 
 	message := strings.ToLower(req.Message)
 	name := strings.ToLower(req.Name)
-	
+
 	for _, pattern := range suspiciousPatterns {
 		if strings.Contains(message, pattern) || strings.Contains(name, pattern) {
 			return true
@@ -283,16 +304,14 @@ func (s *ContactService) extractClientInfo(ctx context.Context) (string, string)
 		if ipAddress == "" {
 			ipAddress = md["remote-addr"]
 		}
-		
+
 		userAgent := md["user-agent"]
-		
+
 		return ipAddress, userAgent
 	}
 
 	return "", ""
 }
-
-
 
 // modelToProto converts a contact submission model to protobuf
 func (s *ContactService) modelToProto(submission *models.ContactSubmission) *contactv1.ContactSubmission {

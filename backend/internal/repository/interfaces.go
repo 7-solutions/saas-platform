@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/saas-startup-platform/backend/internal/models"
+	"github.com/7-solutions/saas-platformbackend/internal/models"
 )
 
 // Common repository errors

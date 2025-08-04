@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/saas-startup-platform/backend/internal/utils/logger"
+	"github.com/7-solutions/saas-platformbackend/internal/utils/logger"
 )
 
 // AlertSeverity represents the severity level of an alert
@@ -35,24 +35,24 @@ type Alert struct {
 
 // AlertWebhookPayload represents the payload sent to webhook endpoints
 type AlertWebhookPayload struct {
-	Version           string    `json:"version"`
-	GroupKey          string    `json:"groupKey"`
-	TruncatedAlerts   int       `json:"truncatedAlerts"`
-	Status            string    `json:"status"`
-	Receiver          string    `json:"receiver"`
+	Version           string            `json:"version"`
+	GroupKey          string            `json:"groupKey"`
+	TruncatedAlerts   int               `json:"truncatedAlerts"`
+	Status            string            `json:"status"`
+	Receiver          string            `json:"receiver"`
 	GroupLabels       map[string]string `json:"groupLabels"`
 	CommonLabels      map[string]string `json:"commonLabels"`
 	CommonAnnotations map[string]string `json:"commonAnnotations"`
-	ExternalURL       string    `json:"externalURL"`
-	Alerts            []Alert   `json:"alerts"`
+	ExternalURL       string            `json:"externalURL"`
+	Alerts            []Alert           `json:"alerts"`
 }
 
 // AlertingService handles alert management and delivery
 type AlertingService struct {
-	webhookURL    string
-	emailService  *EmailService
-	logger        *logger.Logger
-	alertHistory  []Alert // In production, this should be persisted
+	webhookURL   string
+	emailService *EmailService
+	logger       *logger.Logger
+	alertHistory []Alert // In production, this should be persisted
 }
 
 // NewAlertingService creates a new alerting service
@@ -68,17 +68,17 @@ func NewAlertingService(webhookURL string, emailService *EmailService) *Alerting
 // SendAlert sends an alert through configured channels
 func (s *AlertingService) SendAlert(ctx context.Context, alert Alert) error {
 	alert.Timestamp = time.Now().UTC()
-	
+
 	// Store alert in history
 	s.alertHistory = append(s.alertHistory, alert)
-	
+
 	// Log the alert
-	s.logger.WithContext(ctx).Info("Sending alert", 
+	s.logger.WithContext(ctx).Info("Sending alert",
 		"alert_id", alert.ID,
 		"severity", alert.Severity,
 		"title", alert.Title,
 	)
-	
+
 	// Send through different channels based on severity
 	switch alert.Severity {
 	case AlertSeverityCritical:
@@ -96,7 +96,7 @@ func (s *AlertingService) SendAlert(ctx context.Context, alert Alert) error {
 		// Only log info alerts
 		s.logger.WithContext(ctx).Info("Info alert", "details", alert.Details)
 	}
-	
+
 	return nil
 }
 
@@ -120,7 +120,7 @@ func (s *AlertingService) SendDatabaseConnectionAlert(ctx context.Context, err e
 			"error": err.Error(),
 		},
 	}
-	
+
 	s.SendAlert(ctx, alert)
 }
 
@@ -145,7 +145,7 @@ func (s *AlertingService) SendHighErrorRateAlert(ctx context.Context, errorRate 
 			"threshold":  0.05, // 5%
 		},
 	}
-	
+
 	s.SendAlert(ctx, alert)
 }
 
@@ -166,7 +166,7 @@ func (s *AlertingService) SendServiceDownAlert(ctx context.Context, serviceName 
 			"description": fmt.Sprintf("Service %s has been down for more than 1 minute", serviceName),
 		},
 	}
-	
+
 	s.SendAlert(ctx, alert)
 }
 
@@ -191,7 +191,7 @@ func (s *AlertingService) SendHighMemoryUsageAlert(ctx context.Context, memoryUs
 			"threshold_mb":    500,
 		},
 	}
-	
+
 	s.SendAlert(ctx, alert)
 }
 
@@ -200,42 +200,42 @@ func (s *AlertingService) sendWebhookAlert(ctx context.Context, alert Alert) err
 	if s.webhookURL == "" {
 		return fmt.Errorf("webhook URL not configured")
 	}
-	
+
 	payload := AlertWebhookPayload{
-		Version:     "4",
-		GroupKey:    alert.Labels["alertname"],
-		Status:      "firing",
-		Receiver:    "webhook",
-		GroupLabels: alert.Labels,
-		CommonLabels: alert.Labels,
+		Version:           "4",
+		GroupKey:          alert.Labels["alertname"],
+		Status:            "firing",
+		Receiver:          "webhook",
+		GroupLabels:       alert.Labels,
+		CommonLabels:      alert.Labels,
 		CommonAnnotations: alert.Annotations,
-		ExternalURL: "http://localhost:9093",
-		Alerts:      []Alert{alert},
+		ExternalURL:       "http://localhost:9093",
+		Alerts:            []Alert{alert},
 	}
-	
+
 	jsonData, err := json.Marshal(payload)
 	if err != nil {
 		return fmt.Errorf("failed to marshal webhook payload: %w", err)
 	}
-	
+
 	req, err := http.NewRequestWithContext(ctx, "POST", s.webhookURL, bytes.NewBuffer(jsonData))
 	if err != nil {
 		return fmt.Errorf("failed to create webhook request: %w", err)
 	}
-	
+
 	req.Header.Set("Content-Type", "application/json")
-	
+
 	client := &http.Client{Timeout: 10 * time.Second}
 	resp, err := client.Do(req)
 	if err != nil {
 		return fmt.Errorf("failed to send webhook: %w", err)
 	}
 	defer resp.Body.Close()
-	
+
 	if resp.StatusCode >= 400 {
 		return fmt.Errorf("webhook returned status %d", resp.StatusCode)
 	}
-	
+
 	return nil
 }
 
@@ -244,7 +244,7 @@ func (s *AlertingService) sendEmailAlert(ctx context.Context, alert Alert) error
 	if s.emailService == nil {
 		return fmt.Errorf("email service not configured")
 	}
-	
+
 	subject := fmt.Sprintf("[%s] %s", alert.Severity, alert.Title)
 	body := fmt.Sprintf(`
 Alert: %s
@@ -259,7 +259,7 @@ Labels:
 
 Annotations:
 %s
-`, 
+`,
 		alert.Title,
 		alert.Severity,
 		alert.Service,
@@ -268,7 +268,7 @@ Annotations:
 		formatMap(alert.Labels),
 		formatMap(alert.Annotations),
 	)
-	
+
 	// Send to admin email (this should be configurable)
 	return s.emailService.SendEmail(ctx, "admin@saas-platform.com", subject, body)
 }
@@ -285,15 +285,15 @@ func formatMap(m map[string]string) string {
 // HandleAlertWebhook handles incoming alert webhooks from Prometheus AlertManager
 func (s *AlertingService) HandleAlertWebhook(w http.ResponseWriter, r *http.Request) {
 	var payload AlertWebhookPayload
-	
+
 	if err := json.NewDecoder(r.Body).Decode(&payload); err != nil {
 		s.logger.Error("Failed to decode alert webhook payload", err)
 		http.Error(w, "Invalid payload", http.StatusBadRequest)
 		return
 	}
-	
+
 	ctx := r.Context()
-	
+
 	// Process each alert in the payload
 	for _, alert := range payload.Alerts {
 		s.logger.WithContext(ctx).Info("Received alert webhook",
@@ -301,14 +301,14 @@ func (s *AlertingService) HandleAlertWebhook(w http.ResponseWriter, r *http.Requ
 			"status", payload.Status,
 			"title", alert.Title,
 		)
-		
+
 		// Store alert in history
 		s.alertHistory = append(s.alertHistory, alert)
-		
+
 		// You can add custom processing logic here
 		// For example, update dashboard, send to external systems, etc.
 	}
-	
+
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("OK"))
 }
@@ -318,7 +318,7 @@ func (s *AlertingService) GetAlertHistory(limit int) []Alert {
 	if limit <= 0 || limit > len(s.alertHistory) {
 		return s.alertHistory
 	}
-	
+
 	// Return the most recent alerts
 	start := len(s.alertHistory) - limit
 	return s.alertHistory[start:]
@@ -331,14 +331,14 @@ func (s *AlertingService) GetAlertStats() map[string]interface{} {
 		"by_severity":  make(map[AlertSeverity]int),
 		"by_service":   make(map[string]int),
 	}
-	
+
 	severityStats := stats["by_severity"].(map[AlertSeverity]int)
 	serviceStats := stats["by_service"].(map[string]int)
-	
+
 	for _, alert := range s.alertHistory {
 		severityStats[alert.Severity]++
 		serviceStats[alert.Service]++
 	}
-	
+
 	return stats
 }

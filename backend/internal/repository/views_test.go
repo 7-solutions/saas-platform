@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/saas-startup-platform/backend/internal/models"
+	"github.com/7-solutions/saas-platformbackend/internal/models"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

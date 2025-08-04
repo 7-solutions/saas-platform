@@ -10,8 +10,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/saas-startup-platform/backend/internal/database"
-	"github.com/saas-startup-platform/backend/internal/models"
+	"github.com/7-solutions/saas-platformbackend/internal/database"
+	"github.com/7-solutions/saas-platformbackend/internal/models"
 )
 
 var _ = database.PostgresClient{} // compile-time import keeper; remove if unused later
@@ -346,7 +346,7 @@ func TestBlogRepository(t *testing.T) {
 func TestBlogPostModel(t *testing.T) {
 	t.Run("NewBlogPost", func(t *testing.T) {
 		post := models.NewBlogPost("Test Title", "test-slug", "test-author")
-		
+
 		assert.Equal(t, "blog:test-slug", post.ID)
 		assert.Equal(t, "blog_post", post.Type)
 		assert.Equal(t, "Test Title", post.Title)
@@ -360,19 +360,19 @@ func TestBlogPostModel(t *testing.T) {
 
 	t.Run("IsPublished", func(t *testing.T) {
 		post := models.NewBlogPost("Test", "test", "author")
-		
+
 		// Draft post should not be published
 		assert.False(t, post.IsPublished())
-		
+
 		// Published post without published_at should not be published
 		post.Status = models.PageStatusPublished
 		assert.False(t, post.IsPublished())
-		
+
 		// Published post with future published_at should not be published
 		futureTime := time.Now().Add(time.Hour)
 		post.PublishedAt = &futureTime
 		assert.False(t, post.IsPublished())
-		
+
 		// Published post with past published_at should be published
 		pastTime := time.Now().Add(-time.Hour)
 		post.PublishedAt = &pastTime
@@ -381,9 +381,9 @@ func TestBlogPostModel(t *testing.T) {
 
 	t.Run("SetPublished", func(t *testing.T) {
 		post := models.NewBlogPost("Test", "test", "author")
-		
+
 		post.SetPublished()
-		
+
 		assert.Equal(t, models.PageStatusPublished, post.Status)
 		assert.NotNil(t, post.PublishedAt)
 		assert.True(t, post.PublishedAt.Before(time.Now().Add(time.Second)))
@@ -392,13 +392,13 @@ func TestBlogPostModel(t *testing.T) {
 	t.Run("SetDraft", func(t *testing.T) {
 		post := models.NewBlogPost("Test", "test", "author")
 		post.SetPublished()
-		
+
 		// Verify it's published first
 		assert.Equal(t, models.PageStatusPublished, post.Status)
 		assert.NotNil(t, post.PublishedAt)
-		
+
 		post.SetDraft()
-		
+
 		assert.Equal(t, models.PageStatusDraft, post.Status)
 		assert.Nil(t, post.PublishedAt)
 	})

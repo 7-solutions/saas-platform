@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package media.v1;
 
-option go_package = "github.com/saas-startup-platform/backend/gen/media/v1;mediav1";
+option go_package = "github.com/7-solutions/saas-platformbackend/gen/media/v1;mediav1";
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";

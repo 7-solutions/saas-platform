@@ -46,3 +46,14 @@ UPDATE contact_submissions
 SET status = $2
 WHERE id = $1
 RETURNING *;
+
+-- TODO(run-sqlc): After adding GetContactByID and DeleteContactByID, run `sqlc generate`.
+-- name: GetContactByID :one
+SELECT id, email, name, subject, message, status, created_at, updated_at
+FROM contact_submissions
+WHERE id = $1
+LIMIT 1;
+
+-- name: DeleteContactByID :execrows
+DELETE FROM contact_submissions
+WHERE id = $1;

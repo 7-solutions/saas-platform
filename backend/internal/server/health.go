@@ -7,8 +7,8 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/saas-startup-platform/backend/internal/utils/logger"
-	"github.com/saas-startup-platform/backend/internal/utils/metrics"
+	"github.com/7-solutions/saas-platformbackend/internal/utils/logger"
+	"github.com/7-solutions/saas-platformbackend/internal/utils/metrics"
 )
 
 // HealthStatus represents the health status of a component
@@ -32,20 +32,20 @@ type HealthCheck struct {
 
 // HealthResponse represents the overall health response
 type HealthResponse struct {
-	Status      HealthStatus   `json:"status"`
-	Timestamp   time.Time      `json:"timestamp"`
-	Version     string         `json:"version"`
-	Uptime      string         `json:"uptime"`
-	Checks      []HealthCheck  `json:"checks"`
-	System      SystemInfo     `json:"system"`
+	Status    HealthStatus  `json:"status"`
+	Timestamp time.Time     `json:"timestamp"`
+	Version   string        `json:"version"`
+	Uptime    string        `json:"uptime"`
+	Checks    []HealthCheck `json:"checks"`
+	System    SystemInfo    `json:"system"`
 }
 
 // SystemInfo represents system information
 type SystemInfo struct {
-	Goroutines   int    `json:"goroutines"`
-	MemoryUsage  uint64 `json:"memory_usage_bytes"`
-	CPUCount     int    `json:"cpu_count"`
-	GoVersion    string `json:"go_version"`
+	Goroutines  int    `json:"goroutines"`
+	MemoryUsage uint64 `json:"memory_usage_bytes"`
+	CPUCount    int    `json:"cpu_count"`
+	GoVersion   string `json:"go_version"`
 }
 
 // HealthChecker manages health checks
@@ -71,13 +71,13 @@ func (hc *HealthChecker) HandleHealthCheck(w http.ResponseWriter, r *http.Reques
 
 	// Perform all health checks
 	checks := hc.performHealthChecks(ctx)
-	
+
 	// Determine overall status
 	overallStatus := hc.determineOverallStatus(checks)
-	
+
 	// Collect system information
 	systemInfo := hc.collectSystemInfo()
-	
+
 	response := HealthResponse{
 		Status:    overallStatus,
 		Timestamp: time.Now().UTC(),
@@ -97,7 +97,7 @@ func (hc *HealthChecker) HandleHealthCheck(w http.ResponseWriter, r *http.Reques
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(statusCode)
-	
+
 	if err := json.NewEncoder(w).Encode(response); err != nil {
 		logger.Error("Failed to encode health check response", err)
 	}
@@ -118,26 +118,26 @@ func (hc *HealthChecker) HandleLivenessProbe(w http.ResponseWriter, r *http.Requ
 // HandleReadinessProbe handles Kubernetes readiness probe
 func (hc *HealthChecker) HandleReadinessProbe(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	
+
 	// Check critical dependencies for readiness
 	checks := []HealthCheck{
 		hc.checkDatabase(ctx),
 	}
-	
+
 	// If any critical check fails, service is not ready
 	for _, check := range checks {
 		if check.Status == HealthStatusUnhealthy {
 			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusServiceUnavailable)
 			json.NewEncoder(w).Encode(map[string]interface{}{
-				"status": "not_ready",
-				"timestamp": time.Now().UTC().Format(time.RFC3339),
+				"status":        "not_ready",
+				"timestamp":     time.Now().UTC().Format(time.RFC3339),
 				"failed_checks": []string{check.Name},
 			})
 			return
 		}
 	}
-	
+
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(`{"status":"ready","timestamp":"` + time.Now().UTC().Format(time.RFC3339) + `"}`))
@@ -156,12 +156,12 @@ func (hc *HealthChecker) performHealthChecks(ctx context.Context) []HealthCheck 
 // checkDatabase checks database connectivity
 func (hc *HealthChecker) checkDatabase(ctx context.Context) HealthCheck {
 	start := time.Now()
-	
+
 	check := HealthCheck{
 		Name:        "database",
 		LastChecked: start,
 	}
-	
+
 	if err := hc.server.dbClient.Ping(ctx); err != nil {
 		check.Status = HealthStatusUnhealthy
 		check.Message = "Database connection failed: " + err.Error()
@@ -169,7 +169,7 @@ func (hc *HealthChecker) checkDatabase(ctx context.Context) HealthCheck {
 		check.Status = HealthStatusHealthy
 		check.Message = "Database connection successful"
 	}
-	
+
 	check.Duration = time.Since(start).String()
 	return check
 }
@@ -177,22 +177,22 @@ func (hc *HealthChecker) checkDatabase(ctx context.Context) HealthCheck {
 // checkMemoryUsage checks memory usage
 func (hc *HealthChecker) checkMemoryUsage() HealthCheck {
 	start := time.Now()
-	
+
 	var m runtime.MemStats
 	runtime.ReadMemStats(&m)
-	
+
 	check := HealthCheck{
 		Name:        "memory",
 		LastChecked: start,
 		Duration:    time.Since(start).String(),
 		Details: map[string]interface{}{
-			"alloc_mb":      m.Alloc / 1024 / 1024,
+			"alloc_mb":       m.Alloc / 1024 / 1024,
 			"total_alloc_mb": m.TotalAlloc / 1024 / 1024,
-			"sys_mb":        m.Sys / 1024 / 1024,
-			"num_gc":        m.NumGC,
+			"sys_mb":         m.Sys / 1024 / 1024,
+			"num_gc":         m.NumGC,
 		},
 	}
-	
+
 	// Consider unhealthy if using more than 1GB
 	if m.Alloc > 1024*1024*1024 {
 		check.Status = HealthStatusDegraded
@@ -201,16 +201,16 @@ func (hc *HealthChecker) checkMemoryUsage() HealthCheck {
 		check.Status = HealthStatusHealthy
 		check.Message = "Memory usage normal"
 	}
-	
+
 	return check
 }
 
 // checkGoroutines checks goroutine count
 func (hc *HealthChecker) checkGoroutines() HealthCheck {
 	start := time.Now()
-	
+
 	goroutines := runtime.NumGoroutine()
-	
+
 	check := HealthCheck{
 		Name:        "goroutines",
 		LastChecked: start,
@@ -219,7 +219,7 @@ func (hc *HealthChecker) checkGoroutines() HealthCheck {
 			"count": goroutines,
 		},
 	}
-	
+
 	// Consider degraded if more than 1000 goroutines
 	if goroutines > 1000 {
 		check.Status = HealthStatusDegraded
@@ -228,14 +228,14 @@ func (hc *HealthChecker) checkGoroutines() HealthCheck {
 		check.Status = HealthStatusHealthy
 		check.Message = "Goroutine count normal"
 	}
-	
+
 	return check
 }
 
 // checkDiskSpace checks available disk space
 func (hc *HealthChecker) checkDiskSpace() HealthCheck {
 	start := time.Now()
-	
+
 	check := HealthCheck{
 		Name:        "disk_space",
 		LastChecked: start,
@@ -246,10 +246,10 @@ func (hc *HealthChecker) checkDiskSpace() HealthCheck {
 			"note": "Disk space monitoring requires platform-specific implementation",
 		},
 	}
-	
+
 	// TODO: Implement actual disk space checking using syscalls or external library
 	// For now, just return healthy status
-	
+
 	return check
 }
 
@@ -257,7 +257,7 @@ func (hc *HealthChecker) checkDiskSpace() HealthCheck {
 func (hc *HealthChecker) determineOverallStatus(checks []HealthCheck) HealthStatus {
 	hasUnhealthy := false
 	hasDegraded := false
-	
+
 	for _, check := range checks {
 		switch check.Status {
 		case HealthStatusUnhealthy:
@@ -266,7 +266,7 @@ func (hc *HealthChecker) determineOverallStatus(checks []HealthCheck) HealthStat
 			hasDegraded = true
 		}
 	}
-	
+
 	if hasUnhealthy {
 		return HealthStatusUnhealthy
 	}
@@ -280,7 +280,7 @@ func (hc *HealthChecker) determineOverallStatus(checks []HealthCheck) HealthStat
 func (hc *HealthChecker) collectSystemInfo() SystemInfo {
 	var m runtime.MemStats
 	runtime.ReadMemStats(&m)
-	
+
 	return SystemInfo{
 		Goroutines:  runtime.NumGoroutine(),
 		MemoryUsage: m.Alloc,

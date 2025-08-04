@@ -7,14 +7,15 @@
 package mediav1
 
 import (
+	reflect "reflect"
+	sync "sync"
+	unsafe "unsafe"
+
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
-	reflect "reflect"
-	sync "sync"
-	unsafe "unsafe"
 )
 
 const (
@@ -527,7 +528,7 @@ const file_media_v1_media_proto_rawDesc = "" +
 	"DeleteFile\x12\x1b.media.v1.DeleteFileRequest\x1a\x16.google.protobuf.Empty\"\x1a\x82\xd3\xe4\x93\x02\x14*\x12/api/v1/media/{id}\x12[\n" +
 	"\tListFiles\x12\x1a.media.v1.ListFilesRequest\x1a\x1b.media.v1.ListFilesResponse\"\x15\x82\xd3\xe4\x93\x02\x0f\x12\r/api/v1/media\x12X\n" +
 	"\n" +
-	"UpdateFile\x12\x1b.media.v1.UpdateFileRequest\x1a\x0e.media.v1.File\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\x1a\x12/api/v1/media/{id}B?Z=github.com/saas-startup-platform/backend/gen/media/v1;mediav1b\x06proto3"
+	"UpdateFile\x12\x1b.media.v1.UpdateFileRequest\x1a\x0e.media.v1.File\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\x1a\x12/api/v1/media/{id}B?Z=github.com/7-solutions/saas-platformbackend/gen/media/v1;mediav1b\x06proto3"
 
 var (
 	file_media_v1_media_proto_rawDescOnce sync.Once

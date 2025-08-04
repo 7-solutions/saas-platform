@@ -5,22 +5,22 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/saas-startup-platform/backend/internal/database"
-	"github.com/saas-startup-platform/backend/internal/utils/logger"
+	"github.com/7-solutions/saas-platformbackend/internal/database"
+	"github.com/7-solutions/saas-platformbackend/internal/utils/logger"
 )
 
 // ErrorReport represents an error report from the client
 type ErrorReport struct {
-	ID            string                 `json:"id"`
-	Type          string                 `json:"type"`
-	Message       string                 `json:"message"`
-	Stack         string                 `json:"stack,omitempty"`
-	URL           string                 `json:"url"`
-	UserAgent     string                 `json:"user_agent"`
-	UserID        string                 `json:"user_id,omitempty"`
-	SessionID     string                 `json:"session_id,omitempty"`
-	Timestamp     time.Time              `json:"timestamp"`
-	Critical      bool                   `json:"critical,omitempty"`
+	ID             string                 `json:"id"`
+	Type           string                 `json:"type"`
+	Message        string                 `json:"message"`
+	Stack          string                 `json:"stack,omitempty"`
+	URL            string                 `json:"url"`
+	UserAgent      string                 `json:"user_agent"`
+	UserID         string                 `json:"user_id,omitempty"`
+	SessionID      string                 `json:"session_id,omitempty"`
+	Timestamp      time.Time              `json:"timestamp"`
+	Critical       bool                   `json:"critical,omitempty"`
 	AdditionalData map[string]interface{} `json:"additional_data,omitempty"`
 }
 
@@ -172,7 +172,7 @@ func (s *ErrorReportingService) sendNotification(ctx context.Context, report Err
 	// 3. Create tickets in issue tracking systems
 	// 4. Send push notifications to admin mobile apps
 
-	s.logger.Info("Error notification sent", 
+	s.logger.Info("Error notification sent",
 		"error_id", report.ID,
 		"error_type", report.Type,
 		"critical", report.Critical,

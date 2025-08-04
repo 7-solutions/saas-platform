@@ -10,9 +10,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	contentv1 "github.com/saas-startup-platform/backend/gen/content/v1"
-	"github.com/saas-startup-platform/backend/internal/database"
-	"github.com/saas-startup-platform/backend/internal/repository"
+	contentv1 "github.com/7-solutions/saas-platformbackend/gen/content/v1"
+	"github.com/7-solutions/saas-platformbackend/internal/database"
+	"github.com/7-solutions/saas-platformbackend/internal/repository"
 )
 
 // minimal helper mirroring repository getenvDefault to avoid import cycle
@@ -578,10 +578,10 @@ func TestContentService_ContentSanitization(t *testing.T) {
 	// Verify content is sanitized
 	assert.NotNil(t, page.Content)
 	assert.Len(t, page.Content.Blocks, 1)
-	
+
 	block := page.Content.Blocks[0]
 	content := block.Data["content"]
-	
+
 	// Should be HTML escaped
 	assert.Contains(t, content, "&lt;script&gt;")
 	assert.Contains(t, content, "&lt;/script&gt;")

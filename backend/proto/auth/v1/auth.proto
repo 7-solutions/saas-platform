@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package auth.v1;
 
-option go_package = "github.com/saas-startup-platform/backend/gen/auth/v1;authv1";
+option go_package = "github.com/7-solutions/saas-platformbackend/gen/auth/v1;authv1";
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";

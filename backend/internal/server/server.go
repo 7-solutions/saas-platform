@@ -11,31 +11,31 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 
-	authv1 "github.com/saas-startup-platform/backend/gen/auth/v1"
-	contactv1 "github.com/saas-startup-platform/backend/gen/contact/v1"
-	contentv1 "github.com/saas-startup-platform/backend/gen/content/v1"
-	mediav1 "github.com/saas-startup-platform/backend/gen/media/v1"
-	"github.com/saas-startup-platform/backend/internal/database"
-	"github.com/saas-startup-platform/backend/internal/repository"
-	"github.com/saas-startup-platform/backend/internal/services"
-	"github.com/saas-startup-platform/backend/internal/utils/logger"
-	"github.com/saas-startup-platform/backend/internal/utils/metrics"
+	authv1 "github.com/7-solutions/saas-platformbackend/gen/auth/v1"
+	contactv1 "github.com/7-solutions/saas-platformbackend/gen/contact/v1"
+	contentv1 "github.com/7-solutions/saas-platformbackend/gen/content/v1"
+	mediav1 "github.com/7-solutions/saas-platformbackend/gen/media/v1"
+	"github.com/7-solutions/saas-platformbackend/internal/database"
+	"github.com/7-solutions/saas-platformbackend/internal/repository"
+	"github.com/7-solutions/saas-platformbackend/internal/services"
+	"github.com/7-solutions/saas-platformbackend/internal/utils/logger"
+	"github.com/7-solutions/saas-platformbackend/internal/utils/metrics"
 )
 
 // Server represents the gRPC server
 type Server struct {
-	grpcServer     *grpc.Server
-	httpServer     *http.Server
-	metricsServer  *http.Server
-	dbClient       *database.Client
-	authSvc        *services.AuthService
-	contentSvc     *services.ContentService
-	mediaSvc       *services.MediaService
-	contactSvc     *services.ContactService
-	alertingSvc    *services.AlertingService
-	errorHandler   *ErrorHandler
-	healthChecker  *HealthChecker
-	metrics        *metrics.Metrics
+	grpcServer    *grpc.Server
+	httpServer    *http.Server
+	metricsServer *http.Server
+	dbClient      *database.Client
+	authSvc       *services.AuthService
+	contentSvc    *services.ContentService
+	mediaSvc      *services.MediaService
+	contactSvc    *services.ContactService
+	alertingSvc   *services.AlertingService
+	errorHandler  *ErrorHandler
+	healthChecker *HealthChecker
+	metrics       *metrics.Metrics
 }
 
 // NewServer creates a new server instance
@@ -47,7 +47,7 @@ func NewServer() (*Server, error) {
 		Password: getEnvOrDefault("COUCHDB_PASSWORD", "password"),
 		Database: getEnvOrDefault("COUCHDB_DATABASE", "saas_platform"),
 	}
-	
+
 	dbClient, err := database.NewClient(dbConfig)
 	if err != nil {
 		return nil, err
@@ -75,7 +75,7 @@ func NewServer() (*Server, error) {
 	mediaSvc := services.NewMediaService(mediaRepo)
 	contactSvc := services.NewContactService(contactRepo, emailSvc)
 	errorSvc := services.NewErrorReportingService(dbClient)
-	
+
 	// Initialize alerting service
 	webhookURL := getEnvOrDefault("ALERT_WEBHOOK_URL", "http://localhost:8080/api/v1/alerts/webhook")
 	alertingSvc := services.NewAlertingService(webhookURL, emailSvc)
@@ -119,7 +119,7 @@ func NewServer() (*Server, error) {
 
 	// Initialize error handler
 	server.errorHandler = NewErrorHandler(errorSvc)
-	
+
 	// Initialize health checker
 	version := getEnvOrDefault("APP_VERSION", "1.0.0")
 	server.healthChecker = NewHealthChecker(server, version)
@@ -178,19 +178,19 @@ func (s *Server) StartHTTP(grpcPort, httpPort string) error {
 
 	// Create HTTP mux with additional endpoints
 	httpMux := http.NewServeMux()
-	
+
 	// Add gRPC Gateway
 	httpMux.Handle("/api/v1/", mux)
-	
+
 	// Add health check endpoints
 	httpMux.HandleFunc("/health", s.healthChecker.HandleHealthCheck)
 	httpMux.HandleFunc("/health/live", s.healthChecker.HandleLivenessProbe)
 	httpMux.HandleFunc("/health/ready", s.healthChecker.HandleReadinessProbe)
-	
+
 	// Add error reporting endpoints
 	httpMux.HandleFunc("/api/v1/errors/report", s.errorHandler.HandleErrorReport)
 	httpMux.HandleFunc("/api/v1/errors/stats", s.errorHandler.HandleErrorStats)
-	
+
 	// Add alerting endpoints
 	httpMux.HandleFunc("/api/v1/alerts/webhook", s.alertingSvc.HandleAlertWebhook)
 
@@ -208,12 +208,12 @@ func (s *Server) StartHTTP(grpcPort, httpPort string) error {
 func (s *Server) StartMetrics(port string) error {
 	metricsMux := http.NewServeMux()
 	metricsMux.Handle("/metrics", s.metrics.MetricsHandler())
-	
+
 	s.metricsServer = &http.Server{
 		Addr:    ":" + port,
 		Handler: metricsMux,
 	}
-	
+
 	log.Printf("Starting metrics server on port %s", port)
 	return s.metricsServer.ListenAndServe()
 }
@@ -233,8 +233,6 @@ func (s *Server) Stop() {
 		s.dbClient.Close()
 	}
 }
-
-
 
 // getEnvOrDefault returns environment variable value or default
 func getEnvOrDefault(key, defaultValue string) string {

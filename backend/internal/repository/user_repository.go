@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/saas-startup-platform/backend/internal/database"
-	"github.com/saas-startup-platform/backend/internal/models"
+	"github.com/7-solutions/saas-platformbackend/internal/database"
+	"github.com/7-solutions/saas-platformbackend/internal/models"
 )
 
 // userRepository implements UserRepository interface

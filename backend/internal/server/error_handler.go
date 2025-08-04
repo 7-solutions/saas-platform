@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/saas-startup-platform/backend/internal/services"
-	"github.com/saas-startup-platform/backend/internal/utils/logger"
+	"github.com/7-solutions/saas-platformbackend/internal/services"
+	"github.com/7-solutions/saas-platformbackend/internal/utils/logger"
 )
 
 // ErrorHandler handles HTTP error reporting endpoints

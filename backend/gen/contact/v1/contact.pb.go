@@ -7,14 +7,15 @@
 package contactv1
 
 import (
+	reflect "reflect"
+	sync "sync"
+	unsafe "unsafe"
+
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
-	reflect "reflect"
-	sync "sync"
-	unsafe "unsafe"
 )
 
 const (
@@ -590,7 +591,7 @@ const file_contact_v1_contact_proto_rawDesc = "" +
 	"\x16ListContactSubmissions\x12).contact.v1.ListContactSubmissionsRequest\x1a*.contact.v1.ListContactSubmissionsResponse\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/api/v1/contact/submissions\x12\x88\x01\n" +
 	"\x14GetContactSubmission\x12'.contact.v1.GetContactSubmissionRequest\x1a\x1d.contact.v1.ContactSubmission\"(\x82\xd3\xe4\x93\x02\"\x12 /api/v1/contact/submissions/{id}\x12\x9e\x01\n" +
 	"\x1bMarkContactSubmissionAsRead\x12..contact.v1.MarkContactSubmissionAsReadRequest\x1a\x1d.contact.v1.ContactSubmission\"0\x82\xd3\xe4\x93\x02*:\x01*\x1a%/api/v1/contact/submissions/{id}/read\x12\x87\x01\n" +
-	"\x17DeleteContactSubmission\x12*.contact.v1.DeleteContactSubmissionRequest\x1a\x16.google.protobuf.Empty\"(\x82\xd3\xe4\x93\x02\"* /api/v1/contact/submissions/{id}BCZAgithub.com/saas-startup-platform/backend/gen/contact/v1;contactv1b\x06proto3"
+	"\x17DeleteContactSubmission\x12*.contact.v1.DeleteContactSubmissionRequest\x1a\x16.google.protobuf.Empty\"(\x82\xd3\xe4\x93\x02\"* /api/v1/contact/submissions/{id}BCZAgithub.com/7-solutions/saas-platformbackend/gen/contact/v1;contactv1b\x06proto3"
 
 var (
 	file_contact_v1_contact_proto_rawDescOnce sync.Once

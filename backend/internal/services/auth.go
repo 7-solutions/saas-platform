@@ -9,23 +9,45 @@ import (
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	authv1 "github.com/saas-startup-platform/backend/gen/auth/v1"
-	"github.com/saas-startup-platform/backend/internal/models"
-	"github.com/saas-startup-platform/backend/internal/repository"
-	"github.com/saas-startup-platform/backend/internal/utils/auth"
+	authv1 "github.com/7-solutions/saas-platformbackend/gen/auth/v1"
+	"github.com/7-solutions/saas-platformbackend/internal/models"
+	ports "github.com/7-solutions/saas-platformbackend/internal/ports"
+	"github.com/7-solutions/saas-platformbackend/internal/repository"
+	"github.com/7-solutions/saas-platformbackend/internal/utils/auth"
 )
 
 // AuthService implements the auth service
+// Adapter pattern: constructor now accepts ports for DI. Shim retained for compatibility.
 type AuthService struct {
 	authv1.UnimplementedAuthServiceServer
+
+	// Existing concrete repo retained to avoid behavior change
 	userRepo repository.UserRepository
+
+	// Optional future-use dependencies via ports (can be nil; not used yet)
+	usersRepo ports.UsersRepository
+	uow       ports.UnitOfWork
 }
 
-// NewAuthService creates a new auth service
-func NewAuthService(userRepo repository.UserRepository) *AuthService {
+// NewAuthServiceWithPorts constructs AuthService with ports-based dependencies.
+// Adapter pattern: constructor now accepts ports for DI. Shim retained for compatibility.
+func NewAuthServiceWithPorts(
+	usersRepo ports.UsersRepository,
+	uow ports.UnitOfWork,
+	fallbackUserRepo repository.UserRepository,
+) *AuthService {
+	// Preserve existing behavior by keeping concrete repository usage in methods.
 	return &AuthService{
-		userRepo: userRepo,
+		userRepo:  fallbackUserRepo,
+		usersRepo: usersRepo,
+		uow:       uow,
 	}
+}
+
+// NewAuthService creates a new auth service (backward-compatible shim).
+// Deprecated: prefer NewAuthServiceWithPorts. Shim retained for compatibility.
+func NewAuthService(userRepo repository.UserRepository) *AuthService {
+	return NewAuthServiceWithPorts(nil, nil, userRepo)
 }
 
 // Login authenticates a user

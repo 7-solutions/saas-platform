@@ -8,8 +8,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/saas-startup-platform/backend/internal/database"
-	"github.com/saas-startup-platform/backend/internal/models"
+	"github.com/7-solutions/saas-platformbackend/internal/database"
+	"github.com/7-solutions/saas-platformbackend/internal/models"
 )
 
 // contactRepository implements ContactRepository interface
@@ -57,7 +57,7 @@ func (r *contactRepository) GetContactSubmission(ctx context.Context, id string)
 // UpdateContactSubmission updates an existing contact submission
 func (r *contactRepository) UpdateContactSubmission(ctx context.Context, submission *models.ContactSubmission) (*models.ContactSubmission, error) {
 	submission.UpdatedAt = time.Now()
-	
+
 	doc, err := r.client.Put(ctx, submission.ID, submission)
 	if err != nil {
 		return nil, fmt.Errorf("failed to update contact submission: %w", err)

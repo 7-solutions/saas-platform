@@ -7,10 +7,10 @@ import (
 	"strings"
 	"time"
 
+	"github.com/7-solutions/saas-platformbackend/internal/database"
+	db "github.com/7-solutions/saas-platformbackend/internal/database/sqlc"
+	"github.com/7-solutions/saas-platformbackend/internal/models"
 	"github.com/jackc/pgx/v5/pgtype"
-	db "github.com/saas-startup-platform/backend/internal/database/sqlc"
-	"github.com/saas-startup-platform/backend/internal/database"
-	"github.com/saas-startup-platform/backend/internal/models"
 )
 
 // blogRepository implements BlogRepository interface (CouchDB - legacy)
@@ -36,7 +36,6 @@ func NewBlogRepositorySQL(c *database.PostgresClient) BlogRepository {
 		q: database.NewQueriesFromClient(c),
 	}
 }
-
 
 // Create creates a new blog post (CouchDB)
 func (r *blogRepository) Create(ctx context.Context, post *models.BlogPost) error {
@@ -76,7 +75,7 @@ func (r *blogRepositorySQL) Create(ctx context.Context, post *models.BlogPost) e
 		Content: string(contentJSON),
 		Status:  post.Status,
 		// AuthorID not represented in models; pass NULL
-		AuthorID:    pgtype.UUID{Valid: false},
+		AuthorID: pgtype.UUID{Valid: false},
 		PublishedAt: func() pgtype.Timestamptz {
 			if post.PublishedAt != nil {
 				return pgtype.Timestamptz{Time: *post.PublishedAt, Valid: true}
@@ -150,13 +149,13 @@ func (r *blogRepositorySQL) GetBySlug(ctx context.Context, slug string) (*models
 	_ = json.Unmarshal([]byte(row.Content), &content)
 
 	post := &models.BlogPost{
-		ID:      "blog:" + row.Slug,
-		Type:    "blog_post",
-		Title:   row.Title,
-		Slug:    row.Slug,
-		Excerpt: derefString(row.Excerpt),
-		Content: content,
-		Status:  string(row.Status),
+		ID:          "blog:" + row.Slug,
+		Type:        "blog_post",
+		Title:       row.Title,
+		Slug:        row.Slug,
+		Excerpt:     derefString(row.Excerpt),
+		Content:     content,
+		Status:      string(row.Status),
 		PublishedAt: nullableTimePtr(row.PublishedAt),
 		CreatedAt:   row.CreatedAt.Time,
 		UpdatedAt:   row.UpdatedAt.Time,
@@ -206,13 +205,33 @@ func (r *blogRepositorySQL) Update(ctx context.Context, post *models.BlogPost) e
 	var publishedAtPtr *time.Time = post.PublishedAt
 
 	updated, err := r.q.UpdatePost(ctx, db.UpdatePostParams{
-		ID:          row.ID,
-		Slug:        func() string { if slugPtr != nil { return *slugPtr }; return row.Slug }(),
-		Title:       func() string { if titlePtr != nil { return *titlePtr }; return row.Title }(),
-		Excerpt:     excerptPtr,
-		Content:     func() string { if contentPtr != nil { return *contentPtr }; return row.Content }(),
-		Status:      func() string { if statusPtr != nil { return *statusPtr }; return row.Status }(),
-		AuthorID:    row.AuthorID, // unchanged (models has no author), keep existing
+		ID: row.ID,
+		Slug: func() string {
+			if slugPtr != nil {
+				return *slugPtr
+			}
+			return row.Slug
+		}(),
+		Title: func() string {
+			if titlePtr != nil {
+				return *titlePtr
+			}
+			return row.Title
+		}(),
+		Excerpt: excerptPtr,
+		Content: func() string {
+			if contentPtr != nil {
+				return *contentPtr
+			}
+			return row.Content
+		}(),
+		Status: func() string {
+			if statusPtr != nil {
+				return *statusPtr
+			}
+			return row.Status
+		}(),
+		AuthorID: row.AuthorID, // unchanged (models has no author), keep existing
 		PublishedAt: func() pgtype.Timestamptz {
 			if publishedAtPtr != nil {
 				return pgtype.Timestamptz{Time: *publishedAtPtr, Valid: true}
@@ -705,7 +724,7 @@ func (r *blogRepository) GetPublishedPosts(ctx context.Context, options ListOpti
 		if err := json.Unmarshal(row.Doc, &post); err != nil {
 			continue
 		}
-		
+
 		// Double-check that the post is actually published
 		if post.IsPublished() {
 			posts = append(posts, &post)

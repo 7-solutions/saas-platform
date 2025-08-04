@@ -1,4 +1,4 @@
-module github.com/saas-startup-platform/saas-platform/shared/gen
+module github.com/7-solutions/saas-platformsaas-platform/shared/gen
 
 go 1.24
 

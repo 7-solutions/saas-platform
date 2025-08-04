@@ -8,8 +8,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	contentv1 "github.com/saas-startup-platform/backend/gen/content/v1"
-	"github.com/saas-startup-platform/backend/internal/repository"
+	contentv1 "github.com/7-solutions/saas-platformbackend/gen/content/v1"
+	"github.com/7-solutions/saas-platformbackend/internal/repository"
 )
 
 // TestContentServiceIntegration tests the content service with real database operations
@@ -268,4 +268,3 @@ func TestContentServiceIntegration(t *testing.T) {
 		}
 	})
 }
-

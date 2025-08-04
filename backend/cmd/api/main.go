@@ -7,7 +7,7 @@ import (
 	"sync"
 	"syscall"
 
-	"github.com/saas-startup-platform/backend/internal/server"
+	"github.com/7-solutions/saas-platformbackend/internal/server"
 )
 
 func main() {

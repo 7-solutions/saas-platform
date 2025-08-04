@@ -10,10 +10,10 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	authv1 "github.com/saas-startup-platform/backend/gen/auth/v1"
-	"github.com/saas-startup-platform/backend/internal/models"
-	"github.com/saas-startup-platform/backend/internal/repository"
-	"github.com/saas-startup-platform/backend/internal/utils/auth"
+	authv1 "github.com/7-solutions/saas-platformbackend/gen/auth/v1"
+	"github.com/7-solutions/saas-platformbackend/internal/models"
+	"github.com/7-solutions/saas-platformbackend/internal/repository"
+	"github.com/7-solutions/saas-platformbackend/internal/utils/auth"
 )
 
 // MockUserRepository is a mock implementation of UserRepository

@@ -7,10 +7,10 @@ import (
 	"strings"
 	"time"
 
+	"github.com/7-solutions/saas-platformbackend/internal/database"
+	db "github.com/7-solutions/saas-platformbackend/internal/database/sqlc"
+	"github.com/7-solutions/saas-platformbackend/internal/models"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/saas-startup-platform/backend/internal/database"
-	db "github.com/saas-startup-platform/backend/internal/database/sqlc"
-	"github.com/saas-startup-platform/backend/internal/models"
 )
 
 // MediaRepository defines the contract for media storage backends.
@@ -25,17 +25,17 @@ type MediaRepository interface {
 }
 
 type mediaRepository struct {
-client *database.Client
+	client *database.Client
 }
 
 func NewMediaRepository(client *database.Client) MediaRepository {
-return &mediaRepository{
-	client: client,
-}
+	return &mediaRepository{
+		client: client,
+	}
 }
 
 type mediaRepositorySQL struct {
-q *db.Queries
+	q *db.Queries
 }
 
 // Ensure SQL repo implements interface at compile time
@@ -45,9 +45,9 @@ var _ MediaRepository = (*mediaRepositorySQL)(nil)
 var _ MediaRepository = (*mediaRepository)(nil)
 
 func NewMediaRepositorySQL(c *database.PostgresClient) MediaRepository {
-return &mediaRepositorySQL{
-	q: database.NewQueriesFromClient(c),
-}
+	return &mediaRepositorySQL{
+		q: database.NewQueriesFromClient(c),
+	}
 }
 
 // Create creates a new media document (CouchDB)
@@ -70,58 +70,58 @@ func (r *mediaRepository) Create(ctx context.Context, media *models.Media) error
 }
 
 func (r *mediaRepositorySQL) Create(ctx context.Context, m *models.Media) error {
-if m.ID == "" {
-	m.ID = "media:" + m.Filename
-}
-m.Type = "media"
-
-row, err := r.q.InsertMedia(ctx, db.InsertMediaParams{
-	Filename:   m.Filename,
-	Path:       "", // not exposed in outward model
-	MimeType:   m.MimeType,
-	SizeBytes:  0, // not exposed in outward model
-	UploaderID: pgtype.UUID{Valid: false},
-})
-if err != nil {
-	lo := strings.ToLower(err.Error())
-	if strings.Contains(lo, "unique") && strings.Contains(lo, "filename") {
-		return fmt.Errorf("failed to create media: filename already exists")
+	if m.ID == "" {
+		m.ID = "media:" + m.Filename
 	}
-	return fmt.Errorf("failed to create media: %w", err)
-}
-m.CreatedAt = row.CreatedAt.Time
-return nil
+	m.Type = "media"
+
+	row, err := r.q.InsertMedia(ctx, db.InsertMediaParams{
+		Filename:   m.Filename,
+		Path:       "", // not exposed in outward model
+		MimeType:   m.MimeType,
+		SizeBytes:  0, // not exposed in outward model
+		UploaderID: pgtype.UUID{Valid: false},
+	})
+	if err != nil {
+		lo := strings.ToLower(err.Error())
+		if strings.Contains(lo, "unique") && strings.Contains(lo, "filename") {
+			return fmt.Errorf("failed to create media: filename already exists")
+		}
+		return fmt.Errorf("failed to create media: %w", err)
+	}
+	m.CreatedAt = row.CreatedAt.Time
+	return nil
 }
 
 func (r *mediaRepository) GetByID(ctx context.Context, id string) (*models.Media, error) {
-var media models.Media
-err := r.client.Get(ctx, id, &media)
-if err != nil {
-	return nil, fmt.Errorf("failed to get media: %w", err)
-}
+	var media models.Media
+	err := r.client.Get(ctx, id, &media)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get media: %w", err)
+	}
 
-return &media, nil
+	return &media, nil
 }
 
 func (r *mediaRepository) GetByFilename(ctx context.Context, filename string) (*models.Media, error) {
-result, err := r.client.Query(ctx, "media", "by_filename", map[string]interface{}{
-	"key":          filename,
-	"include_docs": true,
-})
-if err != nil {
-	return nil, fmt.Errorf("failed to query media by filename: %w", err)
-}
+	result, err := r.client.Query(ctx, "media", "by_filename", map[string]interface{}{
+		"key":          filename,
+		"include_docs": true,
+	})
+	if err != nil {
+		return nil, fmt.Errorf("failed to query media by filename: %w", err)
+	}
 
-if len(result.Rows) == 0 {
-	return nil, fmt.Errorf("media not found with filename: %s", filename)
-}
+	if len(result.Rows) == 0 {
+		return nil, fmt.Errorf("media not found with filename: %s", filename)
+	}
 
-var media models.Media
-if err := json.Unmarshal(result.Rows[0].Doc, &media); err != nil {
-	return nil, fmt.Errorf("failed to unmarshal media document: %w", err)
-}
+	var media models.Media
+	if err := json.Unmarshal(result.Rows[0].Doc, &media); err != nil {
+		return nil, fmt.Errorf("failed to unmarshal media document: %w", err)
+	}
 
-return &media, nil
+	return &media, nil
 }
 
 // GetByFilename retrieves media by filename (PostgreSQL)

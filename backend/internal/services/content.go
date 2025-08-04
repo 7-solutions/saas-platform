@@ -13,24 +13,49 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	contentv1 "github.com/saas-startup-platform/backend/gen/content/v1"
-	"github.com/saas-startup-platform/backend/internal/models"
-	"github.com/saas-startup-platform/backend/internal/repository"
+	contentv1 "github.com/7-solutions/saas-platformbackend/gen/content/v1"
+	"github.com/7-solutions/saas-platformbackend/internal/models"
+	ports "github.com/7-solutions/saas-platformbackend/internal/ports"
+	"github.com/7-solutions/saas-platformbackend/internal/repository"
 )
 
 // ContentService implements the content service
+// Note: users/contact/uow now depend on ports; page/blog remain on existing repository types until corresponding ports exist.
 type ContentService struct {
 	contentv1.UnimplementedContentServiceServer
+
+	// Existing concrete repos retained to avoid breaking unrelated code (no behavior change)
 	pageRepo repository.PageRepository
 	blogRepo repository.BlogRepository
+
+	// Optional future-use dependencies via ports (can be nil; not used yet)
+	usersRepo   ports.UsersRepository
+	contactRepo ports.ContactRepository
+	uow         ports.UnitOfWork
 }
 
-// NewContentService creates a new content service
-func NewContentService(pageRepo repository.PageRepository, blogRepo repository.BlogRepository) *ContentService {
+// NewContentServiceWithPorts constructs ContentService with ports-based dependencies.
+// Adapter pattern: ports decouple service from concrete implementations.
+func NewContentServiceWithPorts(
+	pageRepo repository.PageRepository, // keep concrete types for page/blog until ports are introduced
+	blogRepo repository.BlogRepository,
+	usersRepo ports.UsersRepository,
+	contactRepo ports.ContactRepository,
+	uow ports.UnitOfWork,
+) *ContentService {
 	return &ContentService{
-		pageRepo: pageRepo,
-		blogRepo: blogRepo,
+		pageRepo:    pageRepo,
+		blogRepo:    blogRepo,
+		usersRepo:   usersRepo,
+		contactRepo: contactRepo,
+		uow:         uow,
 	}
+}
+
+// NewContentService is a backward-compatible shim that accepts existing concrete repositories.
+// Deprecated: prefer NewContentServiceWithPorts. This shim will be removed in a future release.
+func NewContentService(pageRepo repository.PageRepository, blogRepo repository.BlogRepository) *ContentService {
+	return NewContentServiceWithPorts(pageRepo, blogRepo, nil, nil, nil)
 }
 
 // CreatePage creates a new page
@@ -266,48 +291,48 @@ func (s *ContentService) validateSlugUniqueness(ctx context.Context, slug, exclu
 func (s *ContentService) generateSlug(title string) string {
 	// Convert to lowercase
 	slug := strings.ToLower(title)
-	
+
 	// Replace spaces and special characters with hyphens
 	reg := regexp.MustCompile(`[^a-z0-9]+`)
 	slug = reg.ReplaceAllString(slug, "-")
-	
+
 	// Remove leading and trailing hyphens
 	slug = strings.Trim(slug, "-")
-	
+
 	// Limit length
 	if len(slug) > 100 {
 		slug = slug[:100]
 		slug = strings.Trim(slug, "-")
 	}
-	
+
 	// Ensure slug is not empty
 	if slug == "" {
 		slug = "page"
 	}
-	
+
 	return slug
 }
 
 func (s *ContentService) sanitizeSlug(slug string) string {
 	// Convert to lowercase
 	slug = strings.ToLower(slug)
-	
+
 	// Replace invalid characters with hyphens
 	reg := regexp.MustCompile(`[^a-z0-9-]`)
 	slug = reg.ReplaceAllString(slug, "-")
-	
+
 	// Remove multiple consecutive hyphens
 	reg = regexp.MustCompile(`-+`)
 	slug = reg.ReplaceAllString(slug, "-")
-	
+
 	// Remove leading and trailing hyphens
 	slug = strings.Trim(slug, "-")
-	
+
 	// Ensure slug is not empty
 	if slug == "" {
 		slug = "page"
 	}
-	
+
 	return slug
 }
 
@@ -954,7 +979,7 @@ func (s *ContentService) generateRSSFeed(posts []*models.BlogPost) string {
 
 	for _, post := range posts {
 		publishedDate := post.GetPublishedDate().Format(time.RFC1123Z)
-		
+
 		// Basic HTML escaping for RSS
 		title := html.EscapeString(post.Title)
 		description := html.EscapeString(post.Excerpt)
